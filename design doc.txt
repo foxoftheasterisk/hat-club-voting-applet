@@ -1,0 +1,155 @@
+T for "time-weighted votes"
+R for "ratings"
+C for "cumulative votes"
+M for "minimal change"
+
+V for "+vetoes"
+
+if R+V, would need to make various changes to be more like TCM
+
+Tables:
+
+Games
+Name
+(ID?)
+Emoji
+Minimum players
+Maximum players
+Ownership needed
+       * all
+       * one
+       * none | N/A
+Category?
+Nominated by (playerID). Blank out after nomination confirmed.
+
+TCM: historical vote count? (As a sort option)
+R: recency handicap
+
+
+Players
+Name
+(ID?)
+Password?
+
+T: Sessions (or game picks?) since last chosen game
+C: date last voted (to prevent accidental double votes) (not needed if vote table exists)
+
+
+Game-status
+Player name (or ID)
+Game name (or ID)
+Status
+        * owned
+        * not owned
+        * TCM: refuse to play ever (in R, rating of one serves same purpose)
+        * technical difficulties
+
+TMCV: last voted for (date)
+C: current vote count
+R: rating
+TCM: Historical vote count? (As a sort option)
+
+
+TMV: Vote
+Player name
+Game name
+
+TMV: Valid/current flag
+V: Type
+       *positive
+       *negative
+
+Weekly maintenance:
+
+TMV: flag all votes as invalid
+R: adjust recency handicap by +1, if negative
+T: increase all players' "sessions since game chosen" by 1 (if doing sessions, not picks)
+
+
+Access pages:
+
+Player login: username and password fields. leads to redirect page.
+
+Redirect page: if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error. otherwise, send to homepage. (R: instead send to game status)
+
+new player confirmation: asks if you want to create a new player account. Cancel->return to login. Enter password twice and confirm->creates account and logs in.
+
+all following pages redirect to login if not logged in.
+
+TCMV: Homepage: big vote button if you haven't yet this week. if you have, big choose game button. smaller buttons for edit vote, game status, nominate game/edit game data
+
+TCMV: Vote page: redirects to new game status if needed. otherwise, big table of games with vote checkmarks (V: and veto checkmarks). Javascript sortable by name, historical global votes, historical personal votes, (C: current votes); all in both directions. Starts with games voted for last week on top, with the rest sorted by historical personal followed by name. Games with status problems hidden to an openable section. checkmarks also javascript limited to the correct number (V: and not antonymical). also a column—maybe something more dramatic, like a red colored row—that shows if any player has a status issue with the game. if already voted this week, starts with votes checked. vote button at the bottom
+(C: votes for games with 0 current votes are unchangeable; this should occur only when editing votes after game played.)
+
+TCMV: vote processing: flushes old votes, then adds new ones. Redirects to homepage with confirmation message.
+
+New game status: lists each game for which you have not established a status. If nomination, checkbox to second. Dropdown to choose status. (R: rating chooser.) At bottom, confirm button; returns to vote page (R: returns to game status instead).
+
+Choose game: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
+note: will need to refresh to update vote counts.
+
+Game status: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little "correct data" button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
+
+Nominate game: provides form for you to fill out with game data, and a confirm button, which leads back to homepage. also a homepage button at top if you changed your mind (or misclicked)
+
+
+Game choosing algorithm:
+Input is the players attending
+In all cases, check basic conditions:
+        * correct number of players
+        * no refusal to play (R: 1* votes)
+Special second category for possibly fixable issues?:
+        * ownership conditions unfulfilled
+        * technical difficulties
+   if so, i think they should have the chances of appearing decreased, AND automatically pop up another choice. also say what the issue(s) is. Chances decreased by 75% for each player with issue? multiplicative (so with two, 6.25% of the base chance) (games that only the host needs to own count as one issue)
+TCM: collect votes, ignoring any older than six days.
+V: Eliminate vetoed games
+          *unless every game gets vetoed in which case... ignore first vetoes?
+after this it's all different
+
+T:
+give each game a weight:
+       * for each vote, 2 + # since last choice
+Reduce weights for games with issues (round naturally)
+Cull 0s
+           * if no non-zero games, add 1 to each weight
+Cull to top three games, plus any number tied with third
+Choose a game based on random weight.
+
+R: should possibly consult with Corey, but as a blind stab:
+calculate base weights:
+          * for each player, rating -3; add all together
+Multiply by 10, divide by #players
+add in recency handicap (which should be negative or 0)
+Reduce weights for games with issues
+Cull any games with negative or 0 weight
+          * if no games with positive weight, add 10 to all weights and try again
+Choose a game based on random weight
+
+C:
+Pull current vote counts as weights
+Reduce weights for games with issues
+Cull 0s
+Choose a game based on random weight
+
+M:
+Pull vote counts
+Reduce weights for games with issues
+Cull to highest number
+Choose at random
+
+
+accept choice algorithm:
+T:
+Set # since last choice to 0 for those that voted for this game
+Invalidate votes for chosen game
+Increase # since last choice by 1 for those present that didn't vote, if doing it by pick and not session
+
+R:
+Add -10 to recency handicap.
+
+C:
+Set current vote count to 0
+
+M:
+Invalidate votes for chosen game
