@@ -77,26 +77,35 @@
                             id="Root: A Game of Woodland Might and Right" 
                             name="😾 Root: A Game of Woodland Might and Right" 
                             value=13
-                            onclick="selectGame(this.id, this.name)">
+                            onclick="selectGame(this)">
                         😾 13
                     </button>
                     <button class="weight" 
                             id="Golf with your Friends" 
                             name="🏌️‍♀️ Golf with your Friends" 
                             value=11
-                            onclick="selectGame(this.id, this.name)">
+                            onclick="selectGame(this)">
                         🏌️‍♀️ 11
                     </button>
-                    <button class="weight issue"
+                    <button class="weight button-issue"
                             id="Minecraft (Vanilla)"
                             name="⛏ Minecraft (Vanilla)"
                             value=4
-                            onclick="selectGame(this.id, this.name)"> ⛏️ 4</button>
+                            onclick="selectGame(this)">
+                        ⛏️ 4
+                    </button>
                 </span>
             </details>
             <br />
-            <div id="Output" style="display: none">
-                
+            <div id="IssueOutput" class="choice static-issue" style="display:none;">
+                <h3 id="title" class="gametitle"></h3>
+                <br />
+                <p id="list"></p>
+                <br />
+                <button class="confirm"><!--TODO--></button>
+            </div>
+            <div id="Output" class="choice" style="display: none;">
+                <h3 id="title" class="gametitle"></h3>
             </div>
         </div>
     </body>
