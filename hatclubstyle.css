@@ -1,0 +1,88 @@
+body {
+    background-color: teal;
+    
+    font-size: 100%;
+}
+
+.main {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    font-family: "Verdana", "Georgia", sans-serif;
+}
+
+.form {
+    background-color: tomato;
+    width: auto;
+    max-width: 80%;
+    padding: 10px;
+    display: inline-block;
+    margin: min(15px, 5%);
+    
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #330800;
+}
+
+.formtitle {
+    margin: 5px;
+}
+
+.player {
+    white-space: nowrap;
+}
+
+.weightlist {
+    background-color: burlyWood;
+    width: auto;
+    max-width: 80%;
+    padding: 5px;
+    display: inline-block;
+    
+    border-style: solid;
+    border-radius: 10px;
+    border-color: #8c6026;
+}
+
+summary {
+    user-select: none;
+}
+
+.weight {
+    font-size: 1.8em;
+    
+    margin: 1px;
+    margin-top: 4px;
+    border-radius: 8px;
+    
+    background-color: darkSeaGreen;
+    border-color: #80b380;
+}
+
+.weight:hover {  
+    background-color: #9fc69f;
+    border-color: darkSeaGreen;
+}
+
+.issue {
+    background-color: fireBrick;
+    border-color: #ab2121;
+}
+.issue:hover {
+    background-color: #c12525;
+    border-color: fireBrick;
+}
+
+img {
+    max-width: min(100%, 500px);
+    height: auto;
+    margin: min(30px, 5%);
+}
+
+img.cap {
+    max-width: min(25%, 100px);
+}
+
+input {
+    margin: 1px;
+}

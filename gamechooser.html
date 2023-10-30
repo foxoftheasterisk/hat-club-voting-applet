@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Game Chooser</title>
+        
+        <!-- <?php require('header_boilerplate.html'); ?> -->
+        <!-- TODO: remove duplicate boilerplate -->
+        <link rel="icon"
+              type="image/x-icon"
+              href="fishhat.ico" />
+        <link rel="stylesheet" 
+              href="hatclubstyle.css" />
+        <meta charset="UTF-8" />
+        <meta name="robots" 
+              content="noindex, nofollow" />
+        <meta name="viewport" 
+              content="width=device-width, initial-scale=1.0" />
+              
+        <!--favicon block-->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#008080" />
+        <meta name="msapplication-TileColor" content="#00aba9" />
+        <meta name="theme-color" content="#008080" />
+        <!-- boilerplate end-->
+        
+        <script src="gamechoice.js" >
+        </script>
+        
+        <!--TODO: redirect if not logged in-->
+        
+    </head>
+    <body>
+        <div class="main">
+            <a href="homepage.html">
+                <img src="fishhat.png" alt="The Fish Hat" class="cap" />
+            </a>
+            <br />
+            <form class="form">
+                <h1 class="formtitle">
+                    Select Players
+                </h1>
+                <!--TODO: replace sample data with PHP-->
+                <span class="player">
+                    <input type="checkbox" id="Iri" name="Iri" />
+                    <label for="Iri">Iri</label>
+                </span>
+                <span class="player">
+                    <input type="checkbox" id="the Fox of the Asterisk" name="the Fox of the Asterisk" />
+                    <label for="the Fox of the Asterisk">the Fox of the Asterisk</label>
+                </span>
+                <span class="player">
+                    <input type="checkbox" id="NeedADispenserHere" name="NeedADispenserHere" />
+                    <label for="NeedADispenserHere">NeedADispenserHere</label>
+                </span>
+                <span class="player">
+                    <input type="checkbox" id="KonnorLetterBee" name="KonnorLetterBee" />
+                    <label for="KonnorLetterBee">KonnorLetterBee</label>
+                </span>
+                <span class="player">
+                    <input type="checkbox" id="ShenzoTheLost" name="ShenzoTheLost" />
+                    <label for="ShenzoTheLost">ShenzoTheLost</label>
+                </span>
+                <span class="player">
+                    <input type="checkbox" id="flame.leaf" name="flame.leaf" />
+                    <label for="flame.leaf">flame.leaf</label>
+                </span>
+            </form>
+            <br />
+            <details class="weightlist">
+                <summary>Show game weights</summary>
+                <span>
+                    <!--TODO: replace sample data with PHP-->
+                    <button class="weight" 
+                            id="Root: A Game of Woodland Might and Right" 
+                            name="😾 Root: A Game of Woodland Might and Right" 
+                            value=13
+                            onclick="selectGame(this.id, this.name)">
+                        😾 13
+                    </button>
+                    <button class="weight" 
+                            id="Golf with your Friends" 
+                            name="🏌️‍♀️ Golf with your Friends" 
+                            value=11
+                            onclick="selectGame(this.id, this.name)">
+                        🏌️‍♀️ 11
+                    </button>
+                    <button class="weight issue"
+                            id="Minecraft (Vanilla)"
+                            name="⛏ Minecraft (Vanilla)"
+                            value=4
+                            onclick="selectGame(this.id, this.name)"> ⛏️ 4</button>
+                </span>
+            </details>
+            <br />
+            <div id="Output" style="display: none">
+                
+            </div>
+        </div>
+    </body>
+</html>
