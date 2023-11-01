@@ -37,7 +37,6 @@
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <br />
             <form class="form">
                 <h1 class="formtitle">
                     Select Players
@@ -68,67 +67,72 @@
                     <label for="flame.leaf">flame.leaf</label>
                 </span>
             </form>
-            <br />
             <details class="weightlist">
                 <summary>Show game weights</summary>
-                <span>
+                <span class="flexrowrev">
                     <!--TODO: replace sample data with PHP-->
                     <button class="weight" 
                             id="Root: A Game of Woodland Might and Right" 
                             name="😾 Root: A Game of Woodland Might and Right" 
                             value=13
-                            onclick="selectGame(this)">
+                            onclick="selectGame(this)"
+                            style="order: 13">
                         😾 13
+                    </button>
+                    <button class="weight issue"
+                            id="Minecraft (Vanilla)"
+                            name="⛏️ Minecraft (Vanilla)"
+                            value=4
+                            onclick="selectGame(this)"
+                            style="order: 4">
+                        ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b><br />
+                        <b>KonnorLetterBee</b> does not own <b>Minecraft (Vanilla)</b></p>
                     </button>
                     <button class="weight" 
                             id="Golf with your Friends" 
                             name="🏌️‍♀️ Golf with your Friends" 
                             value=11
-                            onclick="selectGame(this)">
+                            onclick="selectGame(this)"
+                            style="order: 11">
                         🏌️‍♀️ 11
-                    </button>
-                    <button class="weight issue"
-                            id="Minecraft (Vanilla)"
-                            name="⛏ Minecraft (Vanilla)"
-                            value=4
-                            onclick="selectGame(this)">
-                        ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
                     </button>
                 </span>
             </details>
-            <br />
-            <form id="IssueOutput" 
-                  class="choice issue" 
-                  style="display:none;" 
-                  action="playgame.php" 
-                  method="POST">
-                <h3 id="title" class="gametitle"></h3>
-                <br />
-                <p id="issues"></p>
-                <br />
-                <button id="button" 
-                        name="game" 
-                        value="none" 
-                        class="playbutton" 
-                        type="submit" >
-                    Play!
-                </button>
-            </form>
-            <form id="Output" 
-                  class="choice" 
-                  style="display: none;"
-                  action="playgame.php" 
-                  method="POST">
-                <h3 id="title" class="gametitle"></h3>
-                <br />
-                <button id="button" 
-                        name="game" 
-                        value="none" 
-                        class="playbutton" 
-                        type="submit" >
-                    Play!
-                </button>
-            </form>
+            <div class="flexrow">
+                <form id="IssueOutput" 
+                      class="choice issue flexcolumn" 
+                      style="display:none;" 
+                      action="playgame.php" 
+                      method="POST">
+                    <h3 id="title" class="gametitle"></h3>
+                    <p id="issues" class="gameissues"></p>
+                    <button id="button" 
+                            name="game" 
+                            value="none" 
+                            class="action" 
+                            type="submit" >
+                        Play!
+                    </button>
+                </form>
+                <form id="Output" 
+                      class="choice flexcolumn" 
+                      style="display: none;"
+                      action="playgame.php" 
+                      method="POST">
+                    <h3 id="title" class="gametitle"></h3>
+                    <br />
+                    <button id="button" 
+                            name="game" 
+                            value="none" 
+                            class="action" 
+                            type="submit" >
+                        Play!
+                    </button>
+                </form>
+            </div>
+            <button class="big action" 
+                    onclick="chooseGame()"
+                    style="display:inline-block">Choose a game!</button>
         </div>
     </body>
 </html>

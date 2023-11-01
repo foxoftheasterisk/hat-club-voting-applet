@@ -1,26 +1,43 @@
 
-/* common elements
-   ((almost) all pages) 
-   */
+/* universal elements 
+   (well, almost) */
 
 body {
     background-color: teal;
-    
     font-size: 100%;
 }
 
 .main {
-    width: 80%;
+    max-width: 95%;
+    width: max(80%, 800px);
     margin: auto;
     text-align: center;
     font-family: "Verdana", "Georgia", sans-serif;
+    
+    flex-direction: column;
 }
 
 img.cap {
     max-width: min(25%, 100px);
+    margin: 5px;
 }
 
-/* reusables */
+/* reusables 
+   (elements, then classes) */
+
+button {
+    margin: 1px;
+    margin-top: 4px;
+    border-radius: 8px;
+}
+
+input {
+    margin: 1px;
+}
+
+summary {
+    user-select: none;
+}
 
 img.splash {
     max-width: min(100%, 500px);
@@ -28,21 +45,52 @@ img.splash {
     margin: min(30px, 5%);
 }
 
+button.action {
+    font-size: 1.2em;
+    
+    color: #330000;
+    background-color: lightCyan;
+    border-color: #ccffff;
+}
+
+button.big {
+    font-size: 1.8em;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.toplevel, button.big, .form, .weightlist, .choice {
+    margin: 5px;
+    width: max-content;
+    max-width: 100%;
+}
+
+.main, .flexrow, .flexcolumn, .flexrowrev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.flexrow {
+    flex-flow: row wrap;
+}
+
+.flexrowrev {
+    flex-flow: row-reverse wrap;
+}
+
+.flexcolumn {
+    flex-flow: column nowrap;
+}
+
 .form {
     background-color: tomato;
-    width: auto;
-    max-width: 80%;
     padding: 10px;
-    display: inline-block;
-    margin: min(15px, 5%);
     
     border-style: solid;
     border-radius: 5px;
     border-color: #330800;
-}
-
-input {
-    margin: 1px;
 }
 
 .formtitle {
@@ -53,19 +101,23 @@ input {
     white-space: nowrap;
 }
 
-summary {
-    user-select: none;
+.gametitle {
+    margin: 5px;
 }
+
+.gameissues {
+    font-size: 0.8em;
+    margin: 1px;
+    color: navy;
+} 
 
 /* game chooser page */
 
 .weightlist {
     background-color: burlyWood;
-    width: auto;
-    max-width: 80%;
+    width: max-content;
+    max-width: 100%;
     padding: 5px;
-    margin: 10px;
-    display: inline-block;
     
     border-style: solid;
     border-radius: 10px;
@@ -73,7 +125,6 @@ summary {
 }
 
 .choice {
-    margin:5px;
     padding:5px;
     
     background-color: darkSeaGreen;
@@ -86,10 +137,6 @@ summary {
 .weight {
     font-size: 1.8em;
     
-    margin: 1px;
-    margin-top: 4px;
-    border-radius: 8px;
-    
     background-color: darkSeaGreen;
     border-color: #80b380;
 }
@@ -99,12 +146,8 @@ summary {
     border-color: darkSeaGreen;
 }
 
-.gametitle {
-    margin: 5px;
-}  /* might be a reusable? */
 
-/*issue coloration at end,
-  so it overrides other coloration */
+/* overriding classes */
 
 .issue {
     background-color: fireBrick;

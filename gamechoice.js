@@ -13,10 +13,10 @@ function selectGame(game, output) {
         }
     }
     
-    selectGameNonBlocking(game, output);
+    selectGameNonExclusive(game, output);
 }
 
-function selectGameNonBlocking(game, output) {
+function selectGameNonExclusive(game, output) {
     if(output === undefined) {
         if(game.classList.contains("issue")) {
             output = document.getElementById("IssueOutput");
@@ -26,11 +26,15 @@ function selectGameNonBlocking(game, output) {
         }
     }
     
-    output.style.display = "inline-block";
+    output.style.display = "flex";
     output.children.namedItem("title").innerHTML = game.name;
     output.children.namedItem("button").value = game.id;
     
     if(game.classList.contains("issue")) {
         output.children.namedItem("issues").innerHTML = game.children.namedItem("issues").innerHTML;
     }
+}
+
+function chooseGame() {
+    
 }
