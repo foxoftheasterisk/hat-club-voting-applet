@@ -1,3 +1,8 @@
+
+/* common elements
+   ((almost) all pages) 
+   */
+
 body {
     background-color: teal;
     
@@ -9,6 +14,18 @@ body {
     margin: auto;
     text-align: center;
     font-family: "Verdana", "Georgia", sans-serif;
+}
+
+img.cap {
+    max-width: min(25%, 100px);
+}
+
+/* reusables */
+
+img.splash {
+    max-width: min(100%, 500px);
+    height: auto;
+    margin: min(30px, 5%);
 }
 
 .form {
@@ -24,6 +41,10 @@ body {
     border-color: #330800;
 }
 
+input {
+    margin: 1px;
+}
+
 .formtitle {
     margin: 5px;
 }
@@ -31,6 +52,12 @@ body {
 .player {
     white-space: nowrap;
 }
+
+summary {
+    user-select: none;
+}
+
+/* game chooser page */
 
 .weightlist {
     background-color: burlyWood;
@@ -45,8 +72,15 @@ body {
     border-color: #8c6026;
 }
 
-summary {
-    user-select: none;
+.choice {
+    margin:5px;
+    padding:5px;
+    
+    background-color: darkSeaGreen;
+    
+    border-style: solid;
+    border-color: darkSlateGrey;
+    border-radius: 10px;
 }
 
 .weight {
@@ -65,45 +99,19 @@ summary {
     border-color: darkSeaGreen;
 }
 
-.button-issue {
-    background-color: fireBrick;
-    border-color: #811818;
-}
-.button-issue:hover {
-    background-color: #c12525;
-    border-color: fireBrick;
-}
-
-.choice {
-    margin:5px;
-    padding:5px;
-    
-    background-color: darkSeaGreen;
-    
-    border-style: solid;
-    border-color: darkSlateGrey;
-    border-radius: 10px;
-}
-
-.static-issue {
-    background-color: fireBrick;
-    border-color: #811818;
-}
-
 .gametitle {
     margin: 5px;
+}  /* might be a reusable? */
+
+/*issue coloration at end,
+  so it overrides other coloration */
+
+.issue {
+    background-color: fireBrick;
+    border-color: #811818;
 }
 
-img {
-    max-width: min(100%, 500px);
-    height: auto;
-    margin: min(30px, 5%);
-}
-
-img.cap {
-    max-width: min(25%, 100px);
-}
-
-input {
-    margin: 1px;
+.weight.issue:hover {
+    background-color: #c12525;
+    border-color: fireBrick;
 }

@@ -87,26 +87,48 @@
                             onclick="selectGame(this)">
                         🏌️‍♀️ 11
                     </button>
-                    <button class="weight button-issue"
+                    <button class="weight issue"
                             id="Minecraft (Vanilla)"
                             name="⛏ Minecraft (Vanilla)"
                             value=4
                             onclick="selectGame(this)">
-                        ⛏️ 4
+                        ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
                     </button>
                 </span>
             </details>
             <br />
-            <div id="IssueOutput" class="choice static-issue" style="display:none;">
+            <form id="IssueOutput" 
+                  class="choice issue" 
+                  style="display:none;" 
+                  action="playgame.php" 
+                  method="POST">
                 <h3 id="title" class="gametitle"></h3>
                 <br />
-                <p id="list"></p>
+                <p id="issues"></p>
                 <br />
-                <button class="confirm"><!--TODO--></button>
-            </div>
-            <div id="Output" class="choice" style="display: none;">
+                <button id="button" 
+                        name="game" 
+                        value="none" 
+                        class="playbutton" 
+                        type="submit" >
+                    Play!
+                </button>
+            </form>
+            <form id="Output" 
+                  class="choice" 
+                  style="display: none;"
+                  action="playgame.php" 
+                  method="POST">
                 <h3 id="title" class="gametitle"></h3>
-            </div>
+                <br />
+                <button id="button" 
+                        name="game" 
+                        value="none" 
+                        class="playbutton" 
+                        type="submit" >
+                    Play!
+                </button>
+            </form>
         </div>
     </body>
 </html>
