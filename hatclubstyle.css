@@ -125,7 +125,7 @@ button.big {
 }
 
 .choice {
-    padding:5px;
+    padding: 5px;
     
     background-color: darkSeaGreen;
     
@@ -136,6 +136,8 @@ button.big {
 
 .weight {
     font-size: 1.8em;
+    
+    margin: 2px;
     
     background-color: darkSeaGreen;
     border-color: #80b380;
