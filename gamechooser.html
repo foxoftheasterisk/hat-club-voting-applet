@@ -37,7 +37,7 @@
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <form class="form">
+            <form class="toplevel primary">
                 <h1 class="formtitle">
                     Select Players
                 </h1>
@@ -67,11 +67,11 @@
                     <label for="flame.leaf">flame.leaf</label>
                 </span>
             </form>
-            <details class="weightlist">
+            <details class="toplevel secondary">
                 <summary>Show game weights</summary>
                 <span id="weightsBox" class="flexrowrev">
                     <!--TODO: replace sample data with PHP-->
-                    <button class="weight" 
+                    <button class="game weight" 
                             id="Root: A Game of Woodland Might and Right" 
                             name="😾 Root: A Game of Woodland Might and Right" 
                             value=13
@@ -79,7 +79,7 @@
                             style="order: 13">
                         😾 13
                     </button>
-                    <button class="weight issue"
+                    <button class="issue weight"
                             id="Minecraft (Vanilla)"
                             name="⛏️ Minecraft (Vanilla)"
                             value=4
@@ -87,7 +87,7 @@
                             style="order: 4">
                         ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
                     </button>
-                    <button class="weight" 
+                    <button class="game weight" 
                             id="Golf with your Friends" 
                             name="🏌️‍♀️ Golf with your Friends" 
                             value=11
@@ -99,7 +99,7 @@
             </details>
             <div class="flexrow">
                 <form id="IssueOutput" 
-                      class="choice issue flexcolumn" 
+                      class="toplevel issue flexcolumn" 
                       style="display:none;" 
                       action="playgame.php" 
                       method="POST">
@@ -114,7 +114,7 @@
                     </button>
                 </form>
                 <form id="Output" 
-                      class="choice flexcolumn" 
+                      class="toplevel game flexcolumn" 
                       style="display: none;"
                       action="playgame.php" 
                       method="POST">
