@@ -151,6 +151,46 @@ button.big {
     flex-flow: column nowrap;
 }
 
+/* short/long versions */
+
+/* large screens: */
+@media screen and (min-width: 800px) {
+    .short {
+        display: none;
+    }
+}
+
+/* small screens: */
+@media screen and (max-width: 800px) {
+    .shrinkable {
+        position: relative;
+        border-bottom: 1px dotted black;
+    }
+    
+    .long {
+        visibility: hidden;
+        position: absolute;
+        display: inline-block;
+        
+        background-color: rgba(224, 255, 255, .95);
+
+        padding: 5px;
+        
+        font-size: 0.9em;
+        
+        border-radius: 10px;
+        
+        left: 50%;
+        top: 120%;
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+    
+    .shrinkable:hover .long {
+        visibility: visible;
+    }
+}
+
 /* color schemes */
 
 .primary {
