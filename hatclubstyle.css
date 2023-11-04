@@ -163,7 +163,7 @@ button.big {
 /* small screens: */
 @media screen and (max-width: 800px) {
     .long {
-        visibility: hidden;
+        display: none;
     }
 }
 
