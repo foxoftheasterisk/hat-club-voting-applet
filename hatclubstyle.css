@@ -151,6 +151,22 @@ button.big {
     flex-flow: column nowrap;
 }
 
+/* short/long versions */
+
+/* large screens: */
+@media screen and (min-width: 800px) {
+    .short {
+        display: none;
+    }
+}
+
+/* small screens: */
+@media screen and (max-width: 800px) {
+    .long {
+        visibility: hidden;
+    }
+}
+
 /* color schemes */
 
 .primary {

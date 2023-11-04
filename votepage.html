@@ -34,21 +34,44 @@
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <div class="toplevel secondary tight">
+            <main class="toplevel secondary tight">
                 <table>
                     <tr class="primary header">
-                        <th></th>
                         <th class="sortable">Name</th>
-                        <th class="sortable">Current Votes</th>
-                        <th class="sortable">Last Voted</th>
-                        <th class="sortable">Your Votes</th>
-                        <th class="sortable">Total Votes</th>
+                        <th class="sortable">
+                            <span class="shrinkable">
+                                <span class="long">Current Votes</span>
+                                <span class="short">CV</span>
+                            </span>
+                        </th>
+                        <th class="sortable">
+                            <span class="shrinkable">
+                                <span class="long">Last Voted</span>
+                                <span class="short">LV</span>
+                            </span>
+                        </th>
+                        <th class="sortable">
+                            <span class="shrinkable">
+                                <span class="long">Your Votes</span>
+                                <span class="short">YV</span>
+                            </span>
+                        </th>
+                        <th class="sortable">
+                            <span class="shrinkable">
+                                <span class="long">Total Votes</span>
+                                <span class="short">T</span>
+                            </span>
+                        </th>
                         <th>Vote!</th>
                     </tr>
                     <!-- TODO: replace sample data with PHP -->
                     <tr class="game">
-                        <td>😾</td>
-                        <td>Root: A Game of Woodland Might and Right</td>
+                        <td>
+                            <span class="shrinkable">
+                                <span class="long">😾 Root: A Game of Woodland Might and Right</span>
+                                <span class="short">😾</span>
+                            </span>
+                        </td>
                         <td>13</td>
                         <td>10/25/23</td>
                         <td>25</td>
@@ -56,8 +79,12 @@
                         <td><input type="checkbox" \></td>
                     </tr>
                     <tr class="issue">
-                        <td>⛏️</td>
-                        <td>Minecraft (Vanilla)</td>
+                        <td>
+                            <span class="shrinkable">
+                                <span class="long">⛏️ Minecraft (Vanilla)</span>
+                                <span class="short">⛏️</span>
+                            </span>
+                        </td>
                         <td>16</td>
                         <td>10/25/23</td>
                         <td>20</td>
@@ -92,7 +119,7 @@
                         <td><input type="checkbox" \></td>
                     </tr>
                 </table>
-            </div>
+            </main>
         </div>
     </body>
 </html>
