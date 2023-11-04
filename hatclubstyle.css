@@ -36,8 +36,37 @@ input {
     margin: 1px;
 }
 
-summary {
+summary, .sortable {
     user-select: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    padding: 5px;
+    
+    font-size: 1.5em;
+    
+    width: min-content;
+}
+
+td {
+    padding: 3px;
+}
+
+th, td { 
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
+
+th:first-child, td:first-child {
+    border-left: 0px;
+}
+
+th:last-child, td:last-child {
+    border-right: 0px;
 }
 
 img.splash {
@@ -85,6 +114,12 @@ button.big {
     color: navy;
 }
 
+.tight {
+    padding: 0px;
+    overflow: hidden;
+    overflow-x: auto;
+}
+
 /* flex arrangement */
 
 .main, .flexrow, .flexcolumn, .flexrowrev {
@@ -106,12 +141,19 @@ button.big {
     flex-flow: column nowrap;
 }
 
-
 /* color schemes */
 
 .primary {
     background-color: tomato;   
     border-color: #330800;
+}
+
+tr.primary th, tr.primary td {
+    border-color: #330800;
+}
+
+.primary .sortable:hover {
+    background-color:#ff7d66;
 }
 
 .secondary {
@@ -129,6 +171,14 @@ button.game:hover {
     border-color: darkSeaGreen;
 }
 
+tr.game td, tr.game th {
+    border-color: #609f60
+}
+
+tr.game:nth-child(odd) {
+    background-color: #afcfaf;
+}
+
 .issue {
     background-color: fireBrick;
     border-color: #811818;
@@ -137,6 +187,14 @@ button.game:hover {
 button.issue:hover {
     background-color: #c12525;
     border-color: fireBrick;
+}
+
+tr.issue td, tr.issue th {
+    border-color: #811818
+}
+
+tr.issue:nth-child(odd) {
+    background-color: #d62929;
 }
 
 
