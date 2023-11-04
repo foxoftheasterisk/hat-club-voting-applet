@@ -84,7 +84,6 @@ button.action {
 }
 
 button.big {
-    font-size: 1.8em;
     padding: 6px;
     border-radius: 8px;
 }
@@ -100,7 +99,11 @@ button.big {
     border-radius: 10px;
 }
 
-.formtitle, .gametitle {
+.big {
+    font-size: 1.8em;
+}
+
+.title {
     margin: 5px;
 }
 
