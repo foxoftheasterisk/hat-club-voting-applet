@@ -131,6 +131,7 @@ button.big {
     position: sticky;
     top: 0;
     background-color: inherit;
+    z-index: 1;
 }
 
 /* flex arrangement */
@@ -182,11 +183,25 @@ button.big {
         font-size: 0.9em;
         
         border-radius: 10px;
-        
+    }
+    
+    .down .long {
         left: 50%;
         top: 120%;
         transform: translateX(-50%);
         z-index: 1;
+        
+        width: min-content;
+    }
+    
+    .right .long {
+        left: 110%;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        
+        width: max-content;
+        max-width: 200px;
     }
     
     .shrinkable:hover .long {
