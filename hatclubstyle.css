@@ -108,7 +108,7 @@ button.big {
     white-space: nowrap;
 }
 
-.gameissues {
+.text {
     font-size: 0.8em;
     margin: 1px;
     color: navy;
@@ -116,8 +116,18 @@ button.big {
 
 .tight {
     padding: 0px;
-    overflow: hidden;
-    overflow-x: auto;
+    overflow: clip;
+    /* overflow-x: auto; */
+    /* unfortunately we can't horizontally scroll while having a sticky element on the page's vertical scroll 
+       so instead we'll have to control width and hope it doesn't get too fat 
+       luckily, i was already planning on that! or, at least, the first half. */
+}
+
+.header th, .header td {
+    position: -webkit-sticky; /* required to work on Safari for some stupid reason */
+    position: sticky;
+    top: 0;
+    background-color: inherit;
 }
 
 /* flex arrangement */
@@ -148,10 +158,6 @@ button.big {
     border-color: #330800;
 }
 
-tr.primary th, tr.primary td {
-    border-color: #330800;
-}
-
 .primary .sortable:hover {
     background-color:#ff7d66;
 }
@@ -171,10 +177,6 @@ button.game:hover {
     border-color: darkSeaGreen;
 }
 
-tr.game td, tr.game th {
-    border-color: #609f60
-}
-
 tr.game:nth-child(odd) {
     background-color: #afcfaf;
 }
@@ -189,12 +191,12 @@ button.issue:hover {
     border-color: fireBrick;
 }
 
-tr.issue td, tr.issue th {
-    border-color: #811818
-}
-
 tr.issue:nth-child(odd) {
     background-color: #d62929;
+}
+
+td, th {
+    border-color: inherit;
 }
 
 
