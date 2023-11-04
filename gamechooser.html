@@ -26,7 +26,7 @@
         <meta name="theme-color" content="#008080" />
         <!-- boilerplate end-->
         
-        <script src="gamechoice.js" >
+        <script src="gamechooser.js" >
         </script>
         
         <!--TODO: redirect if not logged in-->
@@ -69,7 +69,7 @@
             </form>
             <details class="weightlist">
                 <summary>Show game weights</summary>
-                <span class="flexrowrev">
+                <span id="weightsBox" class="flexrowrev">
                     <!--TODO: replace sample data with PHP-->
                     <button class="weight" 
                             id="Root: A Game of Woodland Might and Right" 
@@ -85,8 +85,7 @@
                             value=4
                             onclick="selectGame(this)"
                             style="order: 4">
-                        ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b><br />
-                        <b>KonnorLetterBee</b> does not own <b>Minecraft (Vanilla)</b></p>
+                        ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
                     </button>
                     <button class="weight" 
                             id="Golf with your Friends" 
@@ -133,6 +132,7 @@
             <button class="big action" 
                     onclick="chooseGame()"
                     style="display:inline-block">Choose a game!</button>
+            <div id="logbox"></div>
         </div>
     </body>
 </html>
