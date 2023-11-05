@@ -26,7 +26,7 @@
         <meta name="theme-color" content="#008080">
         <!-- boilerplate end-->
         
-        <!-- <script src="SortAndVoteUtil.js" /> -->
+        <script src="sortutil.js" />
         
     </head>
     <body>
@@ -126,6 +126,12 @@
                         <td><input type="checkbox" \></td>
                     </tr>
                 </table>
+                <form id="vote" 
+                      action="vote.php" 
+                      method="post" 
+                      class="primary footer">
+                    <button class="big action" type="submit">Vote!</button>
+                </form>
             </main>
         </div>
     </body>

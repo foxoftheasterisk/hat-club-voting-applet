@@ -126,12 +126,22 @@ button.big {
        luckily, i was already planning on that! or, at least, the first half. */
 }
 
-.header th, .header td {
+.header, .header th, .header td {
     position: -webkit-sticky; /* required to work on Safari for some stupid reason */
     position: sticky;
     top: 0;
-    background-color: inherit;
     z-index: 1;
+}
+
+.footer, .footer th, .footer td {
+    position: -webkit-sticky; /* required to work on Safari for some stupid reason */
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+}
+
+.header th, .header td, .footer th, .footer td {
+    background-color: inherit;
 }
 
 /* flex arrangement */
