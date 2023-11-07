@@ -206,7 +206,7 @@ button.big {
     
     .right .long {
         left: 110%;
-        top: 50%;
+        top: 30%; /* when the short is one line of text, this is somehow closer to center than 50% */
         transform: translateY(-50%);
         z-index: 1;
         
