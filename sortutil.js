@@ -10,6 +10,7 @@
         {
             //it's already sorted by this column, we just want to switch it between asc and desc
             flipTable(table);
+            return;
         }
         lastSort = header;
         
@@ -147,6 +148,12 @@
 
     function flipTable(table)
     {
+        //again making the simple assumption that 0 is headers and should not be moved
+        let lastRow = table.rows.length - 1;
+        for (let i = 1; i < lastRow; i++)
+        {
+            table.insertBefore(table.rows[lastRow], table.rows[i]);
+        }
         
     }
 }
