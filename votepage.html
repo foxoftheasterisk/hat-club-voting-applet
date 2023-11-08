@@ -29,7 +29,7 @@
         <script src="sortutil.js" ></script>
         
     </head>
-    <body>
+    <body onload="makeSortablesSortable()">
         <div class="main">
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
@@ -37,26 +37,26 @@
             <main class="toplevel secondary tight">
                 <table>
                     <tr class="primary header">
-                        <th class="sortable">Game</th>
-                        <th class="sortable">
+                        <th class="sortable" data-sorttype="text">Game</th>
+                        <th class="sortable" data-sorttype="numberDesc">
                             <span class="shrinkable down">
                                 <span class="long">Current Votes</span>
                                 <span class="short">Votes</span>
                             </span>
                         </th>
-                        <th class="sortable">
+                        <th class="sortable" data-sorttype="numberDesc">
                             <span class="shrinkable down">
                                 <span class="long">Last Voted</span>
                                 <span class="short">Last</span>
                             </span>
                         </th>
-                        <th class="sortable">
+                        <th class="sortable" data-sorttype="numberDesc">
                             <span class="shrinkable down">
                                 <span class="long">Your Votes</span>
                                 <span class="short">You</span>
                             </span>
                         </th>
-                        <th class="sortable">
+                        <th class="sortable" data-sorttype="numberDesc">
                             <span class="shrinkable down">
                                 <span class="long">Total Votes</span>
                                 <span class="short">All</span>
@@ -66,61 +66,61 @@
                     </tr>
                     <!-- TODO: replace sample data with PHP -->
                     <tr class="issue">
-                        <td>
+                        <td data-sortvalue="Minecraft (Vanilla)">
                             <span class="shrinkable right">
                                 <span class="big">⛏️</span><span class="long">Minecraft (Vanilla)</span>
                             </span>
                         </td>
                         <td>16</td>
-                        <td>10/25/23</td>
+                        <td data-sortvalue="20231025">10/25/23</td> <!-- this will actually be a timestamp, probably, but it should work the same either way-->
                         <td>8</td>
                         <td>20</td>
                         <td><input type="checkbox" \></td>
                     </tr>
                     <tr class="issue">
-                        <td>
+                        <td data-sortvalue="Barony">
                             <span class="shrinkable right">
                                 <span class="big">🧌</span><span class="long">Barony</span>
                             </span>
                         </td>
                         <td>8</td>
-                        <td>10/18/23</td>
+                        <td data-sortvalue="20231018">10/18/23</td>
                         <td>4</td>
                         <td>8</td>
                         <td><input type="checkbox" \></td>
                     </tr>
                     <tr class="game">
-                        <td>
+                        <td data-sortvalue="Golf with your Friends">
                             <span class="shrinkable right">
                                 <span class="big">🏌️‍♀️</span><span class="long">Golf with your Friends</span>
                             </span>
                         ️</td>
                         <td>11</td>
-                        <td>10/18/23</td>
+                        <td data-sortvalue="20231018">10/18/23</td>
                         <td>4</td>
                         <td>50</td>
                         <td><input type="checkbox" \></td>
                     </tr>
                     <tr class="game">
-                        <td>
+                        <td data-sortvalue="Duck Game">
                             <span class="shrinkable right">
                                 <span class="big">🦆</span><span class="long">Duck Game</span>
                             </span>
                         </td>
                         <td>7</td>
-                        <td>10/4/23</td>
+                        <td data-sortvalue="20231004">10/4/23</td>
                         <td>2</td>
                         <td>40</td>
                         <td><input type="checkbox" \></td>
                     </tr>
                     <tr class="game">
-                        <td>
+                        <td data-sortvalue="Root: A Game of Woodland Might and Right">
                             <span class="shrinkable right">
                                 <span class="big">😾</span><span class="long">Root: A Game of Woodland Might and Right</span>
                             </span>
                         </td>
                         <td>13</td>
-                        <td>10/25/23</td>
+                        <td data-sortvalue="20231025">10/25/23</td>
                         <td>5</td>
                         <td>25</td>
                         <td><input type="checkbox" \></td>
