@@ -37,7 +37,9 @@
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <main class="flexcolumn">
+            <main class="main"> <!--this seems like it should restrict the width by 80% then 80%,
+                                    but it uses the total window width instead of the container width
+                                    and i don't know why. -->
                 <form class="toplevel primary">
                     <h1 class="title">
                         Select Players
@@ -45,27 +47,45 @@
                     <!--TODO: replace sample data with PHP-->
                     <span class="player">
                         <input type="checkbox" id="Iri" name="Iri" />
-                        <label for="Iri">Iri</label>
+                        <label for="Iri" class="shrinkable down">
+                            <span class="short">Iri</span>
+                            <span class="long">Iri</span>
+                        </label>
                     </span>
                     <span class="player">
                         <input type="checkbox" id="the Fox of the Asterisk" name="the Fox of the Asterisk" />
-                        <label for="the Fox of the Asterisk">the Fox of the Asterisk</label>
+                        <label for="the Fox of the Asterisk" class="shrinkable down">
+                            <span class="short">*Fox</span>
+                            <span class="long">the Fox of the Asterisk</span>
+                        </label>
                     </span>
                     <span class="player">
                         <input type="checkbox" id="NeedADispenserHere" name="NeedADispenserHere" />
-                        <label for="NeedADispenserHere">NeedADispenserHere</label>
+                        <label for="NeedADispenserHere" class="shrinkable down">
+                            <span class="short">🐟🧢</span>
+                            <span class="long">NeedADispenserHere</span>
+                        </label>
                     </span>
                     <span class="player">
                         <input type="checkbox" id="KonnorLetterBee" name="KonnorLetterBee" />
-                        <label for="KonnorLetterBee">KonnorLetterBee</label>
+                        <label for="KonnorLetterBee" class="shrinkable down">
+                            <span class="short">Corey</span>
+                            <span class="long">KonnorLetterBee</span>
+                        </label>
                     </span>
                     <span class="player">
                         <input type="checkbox" id="ShenzoTheLost" name="ShenzoTheLost" />
-                        <label for="ShenzoTheLost">ShenzoTheLost</label>
+                        <label for="ShenzoTheLost" class="shrinkable down">
+                            <span class="short">💀</span>
+                            <span class="long">ShenzoTheLost</span>
+                        </label>
                     </span>
                     <span class="player">
                         <input type="checkbox" id="flame.leaf" name="flame.leaf" />
-                        <label for="flame.leaf">flame.leaf</label>
+                        <label for="flame.leaf" class="shrinkable down">
+                            <span class="short">🔥.🍁</span>
+                            <span class="long">flame.leaf</span>
+                        </label>
                     </span>
                 </form>
                 <details class="toplevel secondary">
