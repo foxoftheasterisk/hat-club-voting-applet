@@ -165,6 +165,10 @@ button.big {
     flex-flow: column nowrap;
 }
 
+.tight {
+    align-items: stretch;
+}
+
 /* short/long versions */
 
 /* large screens: */
@@ -234,6 +238,15 @@ button.big {
     background-color: burlyWood;
     border-color: #8c6026;
 } 
+
+.tertiary {
+    background-color: lightCoral;
+    border-color: #ef7676;
+}
+
+.tertiary .sortable:hover {
+    background-color: #f28d8d;
+}
 
 .game {
     background-color: darkSeaGreen;

@@ -34,7 +34,7 @@
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <main class="toplevel secondary tight">
+            <main class="toplevel secondary tight flexcolumn">
                 <table>
                     <tr class="primary header">
                         <th class="sortable" data-sorttype="text">Game</th>
@@ -126,6 +126,64 @@
                         <td><input type="checkbox" \></td>
                     </tr>
                 </table>
+                <details class="tight flexcolumn">
+                    <summary class="title">Show games with personal issues</summary>
+                    <table style="width: 100%;">
+                        <tr class="tertiary header">
+                            <th class="sortable" data-sorttype="text">Game</th>
+                            <th class="sortable" data-sorttype="numberDesc">
+                                <span class="shrinkable down">
+                                    <span class="long">Current Votes</span>
+                                    <span class="short">Votes</span>
+                                </span>
+                            </th>
+                            <th class="sortable" data-sorttype="numberDesc">
+                                <span class="shrinkable down">
+                                    <span class="long">Last Voted</span>
+                                    <span class="short">Last</span>
+                                </span>
+                            </th>
+                            <th class="sortable" data-sorttype="numberDesc">
+                                <span class="shrinkable down">
+                                    <span class="long">Your Votes</span>
+                                    <span class="short">You</span>
+                                </span>
+                            </th>
+                            <th class="sortable" data-sorttype="numberDesc">
+                                <span class="shrinkable down">
+                                    <span class="long">Total Votes</span>
+                                    <span class="short">All</span>
+                                </span>
+                            </th>
+                            <th>Vote!</th>
+                        </tr>
+                        <!-- TODO: replace sample data with PHP -->
+                        <tr class="issue">
+                            <td data-sortvalue="Skullgirls">
+                                <span class="shrinkable right">
+                                    <span class="big">💀</span><span class="long">Skullgirls</span>
+                                </span>
+                            </td>
+                            <td>8</td>
+                            <td data-sortvalue="0">Never</td> 
+                            <td>0</td>
+                            <td>16</td>
+                            <td><input type="checkbox" \></td>
+                        </tr>
+                        <tr class="issue">
+                            <td data-sortvalue="Pummel Party">
+                                <span class="shrinkable right">
+                                    <span class="big">🤛</span><span class="long">Pummel Party</span>
+                                </span>
+                            </td>
+                            <td>6</td>
+                            <td data-sortvalue="20231018">10/18/23</td>
+                            <td>4</td>
+                            <td>14</td>
+                            <td><input type="checkbox" \></td>
+                        </tr>
+                    </table>
+                </details>
                 <form id="vote" 
                       action="vote.php" 
                       method="post" 
