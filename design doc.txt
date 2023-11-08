@@ -6,10 +6,11 @@ M for "minimal change"
 V for "+vetoes"
 
 if R+V, would need to make various changes to be more like TCM
+currently assuming we're using system C (since i brought it up in vc and no one objected... or expressed any opinion whatsoever...)
 
 Tables:
 
-Games
+-Games-
 Name
 (ID?)
 Emoji
@@ -26,7 +27,7 @@ TCM: historical vote count? (As a sort option)
 R: recency handicap
 
 
-Players
+-Players-
 Name
 (ID?)
 Password?
@@ -35,7 +36,7 @@ T: Sessions (or game picks?) since last chosen game
 C: date last voted (to prevent accidental double votes) (not needed if vote table exists)
 
 
-Game-status
+-Game-status-
 Player name (or ID)
 Game name (or ID)
 Status
@@ -50,7 +51,7 @@ R: rating
 TCM: Historical vote count? (As a sort option)
 
 
-TMV: Vote
+-TMV: Vote-
 Player name
 Game name
 
