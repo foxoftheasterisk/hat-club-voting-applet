@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Game roster</title>
+        
+        <!-- <?php require('header_boilerplate.html'); ?> -->
+        <!-- TODO: remove duplicate boilerplate -->
+        <link rel="icon"
+              type="image/x-icon"
+              href="fishhat.ico" />
+        <link rel="stylesheet" 
+              href="hatclubstyle.css" />
+        <meta charset="UTF-8" />
+        <meta name="robots" 
+              content="noindex, nofollow" />
+        <meta name="viewport" 
+              content="width=device-width, initial-scale=1.0">
+              
+        <!--favicon block-->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#008080">
+        <meta name="msapplication-TileColor" content="#00aba9">
+        <meta name="theme-color" content="#008080">
+        <!-- boilerplate end-->
+        
+        <script src="sortutil.js" ></script>
+        
+    </head>
+    <body onload="makeSortablesSortable()">
+        <div class="main">
+            <a href="homepage.html">
+                <img src="fishhat.png" alt="The Fish Hat" class="cap" />
+            </a>
+            <main class="toplevel secondary tight flexcolumn">
+                <table>
+                    <tr class="primary header">
+                        <th class="sortable" data-sorttype="text">Game</th>
+                        <th class="sortable" data-sorttype="numberdesc">
+                            <span class="shrinkable down">
+                                <span class="short">Pl#</span>
+                                <span class="long">Player count</span>
+                            </span>
+                        </th>
+                        <th class="sortable" data-sorttype="text">
+                            <span class="shrinkable down">
+                                <span class="short">Type</span>
+                                <span class="long">Category<wbr />/Genre</span>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="shrinkable down">
+                                <span class="short">Own?</span>
+                                <span class="long">Owned</span>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="shrinkable down">
+                                <span class="short">Play?</span>
+                                <span class="long">Will Play</span>
+                            </span>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    <!-- TODO: replace sample data with PHP -->
+                    <tr class="game">
+                        <td data-sortvalue="Minecraft (Vanilla)">
+                            <span class="shrinkable right">
+                                <span class="big">⛏️</span><span class="long">Minecraft (Vanilla)</span>
+                            </span>
+                        </td>
+                        <td data-sortvalue="9999">1-∞</td>
+                        <td>Sandbox</td>
+                        <td>✔️</td>
+                        <td>✔️</td>
+                        <td>
+                            <a href="editstatus.html?Minecraft (Vanilla)">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="game">
+                        <td data-sortvalue="Barony">
+                            <span class="shrinkable right">
+                                <span class="big">🧌</span><span class="long">Barony</span>
+                            </span>
+                        </td>
+                        <td data-sortvalue="4">1-4</td>
+                        <td>Roguelike</td>
+                        <td>✔️</td>
+                        <td>✔️</td>
+                        <td>
+                            <a href="editstatus.html?Barony">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="game">
+                        <td data-sortvalue="Golf with your Friends">
+                            <span class="shrinkable right">
+                                <span class="big">🏌️‍♀️</span><span class="long">Golf with your Friends</span>
+                            </span>
+                        ️</td>
+                        <td data-sortvalue="12">1-12</td>
+                        <td>Misc</td>
+                        <td>✔️</td>
+                        <td>✔️</td>
+                        <td>
+                            <a href="editstatus.html?Golf With Your Friends">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="game">
+                        <td data-sortvalue="Duck Game">
+                            <span class="shrinkable right">
+                                <span class="big">🦆</span><span class="long">Duck Game</span>
+                            </span>
+                        </td>
+                        <td data-sortvalue="8">2-8</td>
+                        <td>Brawl</td>
+                        <td>✔️</td>
+                        <td>✔️</td>
+                        <td>
+                            <a href="editstatus.html?Duck Game">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="game">
+                        <td data-sortvalue="Root: A Game of Woodland Might and Right">
+                            <span class="shrinkable right">
+                                <span class="big">😾</span><span class="long">Root: A Game of Woodland Might and Right</span>
+                            </span>
+                        </td>
+                        <td data-sortvalue="6">2-6</td>
+                        <td>Board</td>
+                        <td>✔️</td>
+                        <td>✔️</td>
+                        <td>
+                            <a href="editstatus.html?Root: A Game of Woodland Might and Right">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="issue">
+                        <td data-sortvalue="Skullgirls">
+                            <span class="shrinkable right">
+                                <span class="big">💀</span><span class="long">Skullgirls</span>
+                            </span>
+                        </td>
+                        <td data-sortvalue="16">2-16</td>
+                        <td>Fighter</td> 
+                        <td>✔️</td>
+                        <td>❌</td>
+                        <td>
+                            <a href="editstatus.html?Skullgirls">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="issue">
+                        <td data-sortvalue="Pummel Party">
+                            <span class="shrinkable right">
+                                <span class="big">🤛</span><span class="long">Pummel Party</span>
+                            </span>
+                        </td>
+                        <td data-sortvalue="8">2-8</td>
+                        <td>Board</td>
+                        <td>✔️</td>
+                        <td>❗</td>
+                        <td>
+                            <a href="editstatus.html?Minecraft (Vanilla)">
+                                <button type="button" class="medium action">Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+                <details class="tight flexcolumn">
+                    <summary class="title">Show nominated games</summary>
+                    <table style="width: 100%;">
+                        <tr class="tertiary header">
+                            <th class="sortable" data-sorttype="text">Game</th>
+                            <th class="sortable" data-sorttype="number">
+                                <span class="shrinkable down wide"> <!--we want wide ONLY if there is only one row -->
+                                    <span class="short">Pl#</span>
+                                    <span class="long">Player count</span>
+                                </span>
+                            </th>
+                            <th class="sortable" data-sorttype="text">
+                                <span class="shrinkable down wide">
+                                    <span class="short">Type</span>
+                                    <span class="long">Category<wbr />/Genre</span>
+                                </span>
+                            </th>
+                            <th>
+                                <span class="shrinkable down wide">
+                                    <span class="short">Own?</span>
+                                    <span class="long">Owned</span>
+                                </span>
+                            </th>
+                            <th>
+                                <span class="shrinkable down wide">
+                                    <span class="short">Play?</span>
+                                    <span class="long">Will Play</span>
+                                </span>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                                <span class="shrinkable left">
+                                    <span class="short">2</span>
+                                    <span class="long">Second</span>
+                                </span>
+                            </th>
+                        </tr>
+                        <!-- TODO: replace sample data with PHP -->
+                        <tr class="game">
+                            <td data-sortvalue="Terraria">
+                                <span class="shrinkable right">
+                                    <span class="big">🌳</span><span class="long">Terraria</span>
+                                </span>
+                            </td>
+                            <td data-sortvalue="9999">1-∞</td>
+                            <td>Sandbox</td>
+                            <td>✔️</td>
+                            <td>✔️</td>
+                            <td>
+                                <a href="editstatus.html?Terraria">
+                                    <button type="button" class="medium action">Edit</button>
+                                </a>
+                            </td>
+                            <td><input type="checkbox" disabled \>
+                            </td>
+                        </tr>
+                        <tr class="game">
+                            <td data-sortvalue="Space Engineers">
+                                <span class="shrinkable right">
+                                    <span class="big">👩‍🚀</span><span class="long">Space Engineers</span>
+                                </span>
+                            </td>
+                            <td data-sortvalue="9999">1-∞</td>
+                            <td>Sandbox</td>
+                            <td>✔️</td>
+                            <td>✔️</td>
+                            <td>
+                                <a href="editstatus.html?Space Engineers">
+                                    <button type="button" class="medium action">Edit</button>
+                                </a>
+                            </td>
+                            <td><input type="checkbox" \>
+                            </td>
+                        </tr>
+                        <tr class="issue">
+                            <td data-sortvalue="Civ VI Pirates">
+                                <span class="shrinkable right">
+                                    <span class="big">🏴‍☠️</span><span class="long">Civ VI Pirates</span>
+                                </span>
+                            </td>
+                            <td data-sortvalue="4">2-4</td>
+                            <td>Board</td>
+                            <td>✔️</td>
+                            <td>❌</td>
+                            <td>
+                                <a href="editstatus.html?Civ VI Pirates">
+                                    <button type="button" class="medium action">Edit</button>
+                                </a>
+                            </td>
+                            <td><input type="checkbox" \>
+                            </td>
+                        </tr>
+                        <tr class="game">
+                            <td data-sortvalue="Jackbox">
+                                <span class="shrinkable right">
+                                    <span class="big">💩</span><span class="long">Jackbox</span>
+                                </span>
+                            </td>
+                            <td data-sortvalue="16">1-16</td>
+                            <td>Party</td>
+                            <td>⭕</td>
+                            <td>✔️</td>
+                            <td>
+                                <a href="editstatus.html?Jackbox">
+                                    <button type="button" class="medium action">Edit</button>
+                                </a>
+                            </td>
+                            <td><input type="checkbox" \>
+                            </td>
+                        </tr>
+                        <tr class="game">
+                            <td data-sortvalue="Codenames">
+                                <span class="shrinkable right">
+                                    <span class="big">🕵️</span><span class="long">Codenames</span>
+                                </span>
+                            </td>
+                            <td data-sortvalue="9999">2-∞</td>
+                            <td>Board</td>
+                            <td>➖</td>
+                            <td>✔️</td>
+                            <td>
+                                <a href="editstatus.html?Codenames">
+                                    <button type="button" class="medium action">Edit</button>
+                                </a>
+                            </td>
+                            <td><input type="checkbox" \>
+                            </td>
+                        </tr>
+                    </table>
+                    <form id="second" 
+                          action="second.php" 
+                          method="post" 
+                          class="primary footer">
+                        <button class="big action" type="submit">Second selected</button>
+                    </form>
+                </details>
+
+            </main>
+        </div>
+    </body>
+</html>

@@ -198,24 +198,44 @@ button.big {
         border-radius: 10px;
     }
     
-    .down .long {
+    .down .long, .up .long {
         left: 50%;
-        top: 120%;
         transform: translateX(-50%);
         z-index: 1;
         
         width: min-content;
     }
     
-    .right .long {
-        left: 110%;
-        top: 30%; /* when the short is one line of text, this is somehow closer to center than 50% */
+    .wide .long{
+        width: max-content;
+        max-width: 200px;
+    }
+    
+    .up .long {
+        bottom: 120%;
+    }
+    
+    .down .long {
+        top: 120%;
+    }
+    
+    .right .long, .left .long {
+        top: 40%; /* when the short is one line of text, this is somehow closer to center than 50% */
         transform: translateY(-50%);
         z-index: 1;
         
         width: max-content;
         max-width: 200px;
     }
+    
+    .right .long {
+        left: 110%;
+    }
+    
+    .left .long {
+        right: 110%;
+    }
+    
     
     .shrinkable:hover .long {
         visibility: visible;
