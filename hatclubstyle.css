@@ -75,7 +75,7 @@ img.splash {
     margin: min(30px, 5%);
 }
 
-button.action, button.medium {
+button.medium {
     font-size: 1.2em;
 }
 
