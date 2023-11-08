@@ -75,7 +75,7 @@ img.splash {
     margin: min(30px, 5%);
 }
 
-button.action {
+button.action, button.medium {
     font-size: 1.2em;
 }
 
@@ -226,17 +226,23 @@ button.big {
 
 .primary {
     background-color: tomato;   
-    border-color: #330800;
+    border-color: #991700;
 }
 
-.primary .sortable:hover {
+.primary .sortable:hover, button.primary:hover {
     background-color:#ff7d66;
+    border-color: #e62200;
 }
 
 .secondary {
     background-color: burlyWood;
     border-color: #8c6026;
-} 
+}
+
+button.secondary:hover {
+    background-color: #e4c49b;
+    border-color: #a06e2c;
+}
 
 .tertiary {
     background-color: lightCoral;
