@@ -77,10 +77,6 @@ img.splash {
 
 button.action {
     font-size: 1.2em;
-    
-    color: #330000;
-    background-color: lightCyan;
-    border-color: #ccffff;
 }
 
 button.big {
@@ -95,8 +91,11 @@ button.big {
     width: max-content;
     max-width: 100%;
     
-    border-style: solid;
     border-radius: 10px;
+}
+
+.toplevel {
+    border-style: solid;
 }
 
 .big {
@@ -280,6 +279,16 @@ td, th {
     border-color: inherit;
 }
 
+.action { 
+    color: #330000;
+    background-color: lightCyan;
+    border-color: #ccffff;
+}
+
+.action:hover {
+    background-color: #ccffff;
+    border-color: #99ffff;
+}
 
 /* game chooser page */
 

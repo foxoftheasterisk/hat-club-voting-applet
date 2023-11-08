@@ -37,102 +37,104 @@
             <a href="homepage.html">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <form class="toplevel primary">
-                <h1 class="title">
-                    Select Players
-                </h1>
-                <!--TODO: replace sample data with PHP-->
-                <span class="player">
-                    <input type="checkbox" id="Iri" name="Iri" />
-                    <label for="Iri">Iri</label>
-                </span>
-                <span class="player">
-                    <input type="checkbox" id="the Fox of the Asterisk" name="the Fox of the Asterisk" />
-                    <label for="the Fox of the Asterisk">the Fox of the Asterisk</label>
-                </span>
-                <span class="player">
-                    <input type="checkbox" id="NeedADispenserHere" name="NeedADispenserHere" />
-                    <label for="NeedADispenserHere">NeedADispenserHere</label>
-                </span>
-                <span class="player">
-                    <input type="checkbox" id="KonnorLetterBee" name="KonnorLetterBee" />
-                    <label for="KonnorLetterBee">KonnorLetterBee</label>
-                </span>
-                <span class="player">
-                    <input type="checkbox" id="ShenzoTheLost" name="ShenzoTheLost" />
-                    <label for="ShenzoTheLost">ShenzoTheLost</label>
-                </span>
-                <span class="player">
-                    <input type="checkbox" id="flame.leaf" name="flame.leaf" />
-                    <label for="flame.leaf">flame.leaf</label>
-                </span>
-            </form>
-            <details class="toplevel secondary">
-                <summary>Show game weights</summary>
-                <span id="weightsBox" class="flexrowrev">
+            <main class="flexcolumn">
+                <form class="toplevel primary">
+                    <h1 class="title">
+                        Select Players
+                    </h1>
                     <!--TODO: replace sample data with PHP-->
-                    <button class="game weight" 
-                            id="Root: A Game of Woodland Might and Right" 
-                            name="😾 Root: A Game of Woodland Might and Right" 
-                            value=13
-                            onclick="selectGame(this)"
-                            style="order: 13">
-                        😾 13
-                    </button>
-                    <button class="issue weight"
-                            id="Minecraft (Vanilla)"
-                            name="⛏️ Minecraft (Vanilla)"
-                            value=4
-                            onclick="selectGame(this)"
-                            style="order: 4">
-                        ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
-                    </button>
-                    <button class="game weight" 
-                            id="Golf with your Friends" 
-                            name="🏌️‍♀️ Golf with your Friends" 
-                            value=11
-                            onclick="selectGame(this)"
-                            style="order: 11">
-                        🏌️‍♀️ 11
-                    </button>
-                </span>
-            </details>
-            <div class="flexrow">
-                <form id="IssueOutput" 
-                      class="toplevel issue flexcolumn" 
-                      style="display:none;" 
-                      action="playgame.php" 
-                      method="POST">
-                    <h3 id="title" class="title"></h3>
-                    <p id="issues" class="text"></p>
-                    <button id="button" 
-                            name="game" 
-                            value="none" 
-                            class="action" 
-                            type="submit" >
-                        Play!
-                    </button>
+                    <span class="player">
+                        <input type="checkbox" id="Iri" name="Iri" />
+                        <label for="Iri">Iri</label>
+                    </span>
+                    <span class="player">
+                        <input type="checkbox" id="the Fox of the Asterisk" name="the Fox of the Asterisk" />
+                        <label for="the Fox of the Asterisk">the Fox of the Asterisk</label>
+                    </span>
+                    <span class="player">
+                        <input type="checkbox" id="NeedADispenserHere" name="NeedADispenserHere" />
+                        <label for="NeedADispenserHere">NeedADispenserHere</label>
+                    </span>
+                    <span class="player">
+                        <input type="checkbox" id="KonnorLetterBee" name="KonnorLetterBee" />
+                        <label for="KonnorLetterBee">KonnorLetterBee</label>
+                    </span>
+                    <span class="player">
+                        <input type="checkbox" id="ShenzoTheLost" name="ShenzoTheLost" />
+                        <label for="ShenzoTheLost">ShenzoTheLost</label>
+                    </span>
+                    <span class="player">
+                        <input type="checkbox" id="flame.leaf" name="flame.leaf" />
+                        <label for="flame.leaf">flame.leaf</label>
+                    </span>
                 </form>
-                <form id="Output" 
-                      class="toplevel game flexcolumn" 
-                      style="display: none;"
-                      action="playgame.php" 
-                      method="POST">
-                    <h3 id="title" class="title"></h3>
-                    <br />
-                    <button id="button" 
-                            name="game" 
-                            value="none" 
-                            class="action" 
-                            type="submit" >
-                        Play!
-                    </button>
-                </form>
-            </div>
-            <button class="big action" 
-                    onclick="chooseGame()"
-                    style="display:inline-block">Choose a game!</button>
-            <div id="logbox"></div>
+                <details class="toplevel secondary">
+                    <summary>Show game weights</summary>
+                    <span id="weightsBox" class="flexrowrev">
+                        <!--TODO: replace sample data with PHP-->
+                        <button class="game weight" 
+                                id="Root: A Game of Woodland Might and Right" 
+                                name="😾 Root: A Game of Woodland Might and Right" 
+                                value=13
+                                onclick="selectGame(this)"
+                                style="order: 13">
+                            😾 13
+                        </button>
+                        <button class="issue weight"
+                                id="Minecraft (Vanilla)"
+                                name="⛏️ Minecraft (Vanilla)"
+                                value=4
+                                onclick="selectGame(this)"
+                                style="order: 4">
+                            ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
+                        </button>
+                        <button class="game weight" 
+                                id="Golf with your Friends" 
+                                name="🏌️‍♀️ Golf with your Friends" 
+                                value=11
+                                onclick="selectGame(this)"
+                                style="order: 11">
+                            🏌️‍♀️ 11
+                        </button>
+                    </span>
+                </details>
+                <div class="flexrow">
+                    <form id="IssueOutput" 
+                          class="toplevel issue flexcolumn" 
+                          style="display:none;" 
+                          action="playgame.php" 
+                          method="POST">
+                        <h3 id="title" class="title"></h3>
+                        <p id="issues" class="text"></p>
+                        <button id="button" 
+                                name="game" 
+                                value="none" 
+                                class="action" 
+                                type="submit" >
+                            Play!
+                        </button>
+                    </form>
+                    <form id="Output" 
+                          class="toplevel game flexcolumn" 
+                          style="display: none;"
+                          action="playgame.php" 
+                          method="POST">
+                        <h3 id="title" class="title"></h3>
+                        <br />
+                        <button id="button" 
+                                name="game" 
+                                value="none" 
+                                class="action" 
+                                type="submit" >
+                            Play!
+                        </button>
+                    </form>
+                </div>
+                <button class="big action" 
+                        onclick="chooseGame()"
+                        style="display:inline-block">Choose a game!</button>
+                <div id="logbox"></div>
+            </main>
         </div>
     </body>
 </html>
