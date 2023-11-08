@@ -40,11 +40,11 @@ C: date last voted (to prevent accidental double votes) (not needed if vote tabl
 -Game-status-
 Player name (or ID)
 Game name (or ID)
+Owned (bool)
 Status
-        * owned
-        * not owned
-        * TCM: refuse to play ever (in R, rating of one serves same purpose)
-        * technical difficulties
+    * normal
+    * TCM: refuse to play ever (in R, rating of one serves same purpose)
+    * technical difficulties
 
 TMCV: last voted for (date)
 C: current vote count

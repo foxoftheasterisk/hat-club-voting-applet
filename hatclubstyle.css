@@ -171,7 +171,7 @@ button.big {
 /* short/long versions */
 
 /* large screens: */
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 801px) {
     .short {
         display: none;
     }
