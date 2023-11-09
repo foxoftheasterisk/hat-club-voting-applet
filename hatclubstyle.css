@@ -98,6 +98,11 @@ button.big {
     border-style: solid;
 }
 
+.midlevel {
+    margin: 2px;
+    padding: 1px;
+}
+
 .big {
     font-size: 1.8em;
 }
@@ -207,7 +212,6 @@ button.big {
     }
     
     .wide .long{
-        width: max-content;
         max-width: 200px;
     }
     
@@ -241,6 +245,17 @@ button.big {
         visibility: visible;
     }
 }
+
+/* overrides */
+
+.wide {
+    width: max-content;
+}
+
+.narrow {
+    width: min-content;
+}
+/* recommend setting a max-width for these (and maybe a min-width?) */
 
 /* color schemes */
 
@@ -314,6 +329,12 @@ td, th {
 .action:hover {
     background-color: #ccffff;
     border-color: #99ffff;
+}
+
+.action:disabled {
+    background-color: #e6e6e6;
+    border-color: gainsboro;
+    color: #999999;
 }
 
 /* game chooser page */

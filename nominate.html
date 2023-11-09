@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Game Chooser</title>
+        
+        <!-- <?php require('header_boilerplate.html'); ?> -->
+        <!-- TODO: remove duplicate boilerplate -->
+        <link rel="icon"
+              type="image/x-icon"
+              href="fishhat.ico" />
+        <link rel="stylesheet" 
+              href="hatclubstyle.css" />
+        <meta charset="UTF-8" />
+        <meta name="robots" 
+              content="noindex, nofollow" />
+        <meta name="viewport" 
+              content="width=device-width, initial-scale=1.0" />
+              
+        <!--favicon block-->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#008080" />
+        <meta name="msapplication-TileColor" content="#00aba9" />
+        <meta name="theme-color" content="#008080" />
+        <!-- boilerplate end-->
+        
+        <!--TODO: redirect if not logged in-->
+        
+    </head>
+    <body>
+        <div class="main">
+            <a href="homepage.html">
+                <img src="fishhat.png" alt="The Fish Hat" class="cap" />
+            </a>
+            <main class="main"> <!--this seems like it should restrict the width by 80% then 80%,
+                                    but it uses the total window width instead of the container width
+                                    and i don't know why. (maybe because it's a <main>?) -->
+                <form class="toplevel primary"
+                      action="nominate.php"
+                      method="GET"
+                      autocomplete="off"> <!--TODO: change to POST; GET is only for debug-->
+                    <h1 class="title">Nominate a game!</h1>
+                    <input type="hidden" name="nominator" value="the Fox of the Asterisk"> 
+                    <!-- TODO: make this fill name with PHP -->
+                    <div class="flexrow">
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="gameName">Game Title:</label>
+                            <input type="text" class="action" id="gameName" name="name" required />
+                        </div>
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="emoji">Emoji:</label>
+                            <input type="text" class="action" id="emoji" name="emoji" size="1" maxlength="4" required/>
+                        </div>
+                        
+                        <div class="midlevel flexcolumn">
+                            <label>Players:</label>
+                            <span><input type="number" class="action" id="minPlay" name="minimumplayers" size="3" required />–<input type="number" class="action" id="maxPlay" name="maximumplayers" size="3" /></span>
+                            <label for="infPlay">(<input type="checkbox" class="action" id="infPlay" name="maximumPlayers" value="∞" onchange="swapMaxPlay(this)" />Unlimited)</label>
+                            
+                            <script>
+                                function swapMaxPlay(infBox)
+                                {
+                                    let playerCounter = document.getElementById("maxPlay");
+                                    if(infBox.checked)
+                                        playerCounter.disabled=true;
+                                    else
+                                        playerCounter.disabled=false;
+                                }
+                            </script>
+                        </div>
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="own" class="narrow">Ownership required:</label>
+                            <select id="own" class="action" name="own" required>
+                                <option></option>
+                                <option value="all">Everyone</option>
+                                <option value="host">Host only</option>
+                                <option value="none">Free</option>
+                            </select>
+                        </div>
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="genre" class="narrow">Genre/Category:</label>
+                            <select id="genre" class="action" name="genre" onchange="showHideNewGenre(this)" required>
+                                <option></option>
+                                <!--TODO: populate with PHP rather than sample values-->
+                                <option value="Roguelike">Roguelike</option>
+                                <option value="Board">Board</option>
+                                <option value="Party">Party</option>
+                                <option value="Sandbox">Sandbox</option>
+                                <option value="Brawl">Brawl</option>
+                                <option value="Fighter">Fighter</option>
+                                <option value="New">New...</option>
+                            </select>
+                            <span id="newgenrecont" class="flexcolumn" style="display: none;" >
+                                <label for="newgenre">New genre:</label>
+                                <input type="text" class="action" id="newgenre" name="newgenre" />
+                            </span>
+                            
+                            <script>
+                                function showHideNewGenre(genreSelector)
+                                {
+                                    let newGenreBox = document.getElementById("newgenrecont");
+                                    if(genreSelector.value == "New")
+                                        newGenreBox.style.display = "flex";
+                                    else
+                                        newGenreBox.style.display = "none";
+                                }
+                            </script>
+                        </div>
+                        
+                    </div>
+                    
+                    <button class="medium action" type="submit">Nominate!</submit> 
+                </form>
+            </main>
+        </div>
+    </body>
+</html>

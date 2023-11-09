@@ -91,9 +91,11 @@ New game status: lists each game for which you have not established a status. If
 ⌚ Choose game: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
 note: will need to refresh to update vote counts.
 
-Game status: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little "correct data" button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
+⌚ Game status: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little "correct data" button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
 
-Nominate game: provides form for you to fill out with game data, and a confirm button, which leads back to homepage. also a homepage button at top if you changed your mind (or misclicked)
+⌚ Nominate game: provides form for you to fill out with game data, and a confirm button, which leads back to homepage. also a homepage button at top if you changed your mind (or misclicked)
+
+Nominate processing page: redirects to new game status page
 
 
 Game choosing algorithm:
