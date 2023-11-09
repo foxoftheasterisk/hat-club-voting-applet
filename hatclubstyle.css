@@ -70,7 +70,7 @@ th:last-child, td:last-child {
 }
 
 img.splash {
-    max-width: min(100%, 500px);
+    max-width: min(70%, 500px);
     height: auto;
     margin: min(30px, 5%);
 }
