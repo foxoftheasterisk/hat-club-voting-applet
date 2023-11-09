@@ -58,17 +58,41 @@
                         
                         <div class="midlevel flexcolumn">
                             <label>Players:</label>
-                            <span><input type="number" class="action" id="minPlay" name="minimumplayers" size="3" required />–<input type="number" class="action" id="maxPlay" name="maximumplayers" size="3" /></span>
-                            <label for="infPlay">(<input type="checkbox" class="action" id="infPlay" name="maximumPlayers" value="∞" onchange="swapMaxPlay(this)" />Unlimited)</label>
+                            <span>
+                                <input type="number" 
+                                       class="action" 
+                                       id="minPlay" 
+                                       name="minimumplayers" 
+                                       size="3" 
+                                       required 
+                              />–<input type="number" 
+                                        class="action" 
+                                        id="maxPlay" 
+                                        name="maximumplayers" 
+                                        size="3"
+                                        required />
+                            </span>
+                            <label for="infPlay">(<input type="checkbox" 
+                                                         class="action" 
+                                                         id="infPlay" 
+                                                         name="maximumPlayers" 
+                                                         value="∞" 
+                                                         onchange="swapMaxPlay(this)" 
+                                                         />Unlimited)</label>
                             
                             <script>
                                 function swapMaxPlay(infBox)
                                 {
                                     let playerCounter = document.getElementById("maxPlay");
-                                    if(infBox.checked)
+                                    if(infBox.checked) {
                                         playerCounter.disabled=true;
+                                        playerCounter.required=false;
+                                    }
                                     else
+                                    {
                                         playerCounter.disabled=false;
+                                        playerCounter.required=true;
+                                    }
                                 }
                             </script>
                         </div>
@@ -98,17 +122,24 @@
                             </select>
                             <span id="newgenrecont" class="flexcolumn" style="display: none;" >
                                 <label for="newgenre">New genre:</label>
-                                <input type="text" class="action" id="newgenre" name="newgenre" />
+                                <input type="text" class="action" id="newgenre" name="newgenre" disabled />
                             </span>
                             
                             <script>
                                 function showHideNewGenre(genreSelector)
                                 {
                                     let newGenreBox = document.getElementById("newgenrecont");
-                                    if(genreSelector.value == "New")
+                                    let newGenreInput = document.getElementById("newgenre");
+                                    if(genreSelector.value == "New") {
                                         newGenreBox.style.display = "flex";
-                                    else
+                                        newGenreInput.disabled = false;
+                                        newGenreInput.required = true;
+                                    }
+                                    else {
                                         newGenreBox.style.display = "none";
+                                        newGenreInput.disabled = true;
+                                        newGenreInput.required = false;
+                                    }
                                 }
                             </script>
                         </div>
