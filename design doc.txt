@@ -8,59 +8,37 @@ V for "+vetoes"
 if R+V, would need to make various changes to be more like TCM
 currently assuming we're using system C (since i brought it up in vc and no one objected... or expressed any opinion whatsoever...)
 
-Tables:
+current tables:
 
 -Games-
-Name
-(ID?)
-Emoji
-Minimum players
-Maximum players
-Ownership needed
-       * all
-       * one
-       * none | N/A
-Category?
-Nominated by (playerID). Blank out after nomination confirmed.
-
-TCM: historical vote count? (As a sort option)
-R: recency handicap
+id              int(10)
+name            varchar(128)
+emoji           text  -> varchar(5)
+min_players     smallint(6)
+max_players     smallint(6)
+ownership       enum('all', 'one', 'free')
+category        varchar(128)        Nullable
+nominated_by    int(10)
 
 
 -Players-
-Name
-ShortName
-(ID?)
-Password?
-
-T: Sessions (or game picks?) since last chosen game
+id              int(10)
+name            varchar(128)
+short_name      varchar(5)
+password_hash   varchar(2056)
 
 
 -Game-status-
-Player name (or ID)
-Game name (or ID)
-Owned (bool)
-Status
-    * normal
-    * TCM: refuse to play ever (in R, rating of one serves same purpose)
-    * technical difficulties
-
-TMCV: last voted for (date)
+player_id       int(10)
+game_id         int(10)
+owned           tinyint(1)
+status          enum('good', 'veto', 'tech')
+last_voted_for  date                 Nullable
+    special values:
     0: never
-    1: unknown (if most recent edited away)
-C: current vote count
-R: rating
-TCM: Historical vote count? (As a sort option)
-
-
--TMV: Vote-
-Player name
-Game name
-
-TMV: Valid/current flag
-V: Type
-       *positive
-       *negative
+    1: unknown
+current_vote    int(11)
+historical_vote int(11)
 
 
 Weekly maintenance:
