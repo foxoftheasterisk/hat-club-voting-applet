@@ -34,7 +34,6 @@ ShortName
 Password?
 
 T: Sessions (or game picks?) since last chosen game
-C: date last voted (to prevent accidental double votes) (not needed if vote table exists)
 
 
 -Game-status-
@@ -47,6 +46,8 @@ Status
     * technical difficulties
 
 TMCV: last voted for (date)
+    0: never
+    1: unknown (if most recent edited away)
 C: current vote count
 R: rating
 TCM: Historical vote count? (As a sort option)
