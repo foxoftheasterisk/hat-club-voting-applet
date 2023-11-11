@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>Game Chooser</title>
+        
+        <!-- <?php require('header_boilerplate.html'); ?> -->
+        <!-- TODO: remove duplicate boilerplate -->
+        <link rel="icon"
+              type="image/x-icon"
+              href="fishhat.ico" />
+        <link rel="stylesheet" 
+              href="hatclubstyle.css" />
+        <meta charset="UTF-8" />
+        <meta name="robots" 
+              content="noindex, nofollow" />
+        <meta name="viewport" 
+              content="width=device-width, initial-scale=1.0" />
+              
+        <!--favicon block-->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
+        <link rel="manifest" href="favicon/site.webmanifest" />
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#008080" />
+        <meta name="msapplication-TileColor" content="#00aba9" />
+        <meta name="theme-color" content="#008080" />
+        <!-- boilerplate end-->
+        
+    </head>
+    <body>
+        <div class="main">
+            <img src="fishhat.png" alt="The Fish Hat" class="cap" />
+            <main class="main"> <!--this seems like it should restrict the width by 80% then 80%,
+                                    but it uses the total window width instead of the container width
+                                    and i don't know why. (maybe because it's a <main>?) -->
+                <form class="toplevel primary"
+                      action="newplayer.php"
+                      method="HEAD"
+                      autocomplete="off"> <!--TODO: change to PUT; HEAD is only here for debug-->
+                    <h1 class="title">Create new player account?</h1>
+
+                    <div class="flexrow">
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="playerName">Name:</label>
+                            <input type="text" class="action" id="playerName" name="name" required value="The Thing You Typed" /> <!--TODO: use PHP to make it actually populate -->
+                        </div>
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="shortname" class="shrinkable up">Short version: <br /><span class="long">5 characters or less.<br />Emoji recommended.</span></label>
+                            <input type="text" class="action" id="shortname" name="shortname" size="5" maxlength="5" required />
+                        </div>
+                        
+                        <div class="midlevel flexcolumn">
+                            <label for="password" class="shrinkable up">Password: <br /><span class="long">Group password</span></label>
+                            <input type="password" class="action" id="password" name="password" required />
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <div class="flexrow">
+                        <button class="medium action" type="submit">Confirm</button> 
+                        
+                        <a href="login.html">
+                            <button class="medium action" type="button">Cancel</button>
+                        </a>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </body>
+</html>
