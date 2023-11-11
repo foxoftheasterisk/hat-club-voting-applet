@@ -106,7 +106,7 @@ In all cases, check basic conditions:
 Special second category for possibly fixable issues?:
         * ownership conditions unfulfilled
         * technical difficulties
-   if so, i think they should have the chances of appearing decreased, AND automatically pop up another choice. also say what the issue(s) is. Chances decreased by 75% for each player with issue? multiplicative (so with two, 6.25% of the base chance) (games that only the host needs to own count as one issue)
+   if so, i think they should have the chances of appearing decreased, AND automatically pop up another choice. also say what the issue(s) is. Chances decreased by 75% for each player with issue? multiplicative (so with two, 6.25% of the base chance. round... down?) (games that only the host needs to own count as one issue)
 TCM: collect votes, ignoring any older than six days.
 V: Eliminate vetoed games
           *unless every game gets vetoed in which case... ignore first vetoes?
