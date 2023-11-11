@@ -76,7 +76,7 @@ Access pages:
 
 Redirect page: if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error. otherwise, send to homepage. (R: instead send to game status)
 
-new player confirmation: asks if you want to create a new player account. Cancel->return to login. Enter password twice and confirm->creates account and logs in.
+⌚ new player confirmation: asks if you want to create a new player account. Cancel->return to login. Enter password twice and confirm->creates account and logs in.
 
 all following pages redirect to login if not logged in.
 
@@ -96,7 +96,7 @@ note: will need to refresh to update vote counts.
 
 ⌚ Nominate game: provides form for you to fill out with game data, and a confirm button, which leads back to homepage. also a homepage button at top if you changed your mind (or misclicked)
 
-Nominate processing page: redirects to new game status page
+Nominate processing / edit game page: redirects to new game status page, if necessary; otherwise, homepage
 
 
 Game choosing algorithm:
