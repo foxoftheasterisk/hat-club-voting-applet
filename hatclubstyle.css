@@ -91,6 +91,7 @@ button.big {
     width: max-content;
     max-width: 100%;
     
+    border-width: 3px;
     border-radius: 10px;
 }
 
@@ -100,7 +101,17 @@ button.big {
 
 .midlevel {
     margin: 2px;
+    padding: 5px;
+    
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 2px;
+}
+
+.lowlevel {
+    margin: 2px;
     padding: 1px;
+    border-style: none;
 }
 
 .big {

@@ -20,22 +20,22 @@
 
                     <div class="flexrow">
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="playerName">Name:</label>
                             <input type="text" class="action" id="playerName" name="name" required value="The Thing You Typed" /> <!--TODO: use PHP to make it actually populate -->
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="shortname" class="hastip up">Short version: <span class="tip">5 characters or less.<br />Emoji recommended.</span></label>
                             <input type="text" class="action" id="shortname" name="shortname" size="5" maxlength="5" required />
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="password">Password: </label>
                             <input type="password" class="action" id="password" name="password" required />
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="password2">Confirm password: </label>
                             <input type="password" class="action" id="password2" name="password2" required />
                         </div>
