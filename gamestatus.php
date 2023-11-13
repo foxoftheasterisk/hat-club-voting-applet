@@ -3,28 +3,7 @@
     <head>
         <title>Game roster</title>
         
-        <!-- <?php require('header_boilerplate.html'); ?> -->
-        <!-- TODO: remove duplicate boilerplate -->
-        <link rel="icon"
-              type="image/x-icon"
-              href="fishhat.ico" />
-        <link rel="stylesheet" 
-              href="hatclubstyle.css" />
-        <meta charset="UTF-8" />
-        <meta name="robots" 
-              content="noindex, nofollow" />
-        <meta name="viewport" 
-              content="width=device-width, initial-scale=1.0">
-              
-        <!--favicon block-->
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-        <link rel="manifest" href="favicon/site.webmanifest">
-        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#008080">
-        <meta name="msapplication-TileColor" content="#00aba9">
-        <meta name="theme-color" content="#008080">
-        <!-- boilerplate end-->
+        <?php require('header_boilerplate.html'); ?>
         
         <!--TODO: redirect if not logged in-->
         
@@ -33,7 +12,7 @@
     </head>
     <body onload="makeSortablesSortable()">
         <div class="main">
-            <a href="homepage.html">
+            <a href="homepage.php">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
             <main class="toplevel secondary tight flexcolumn">
@@ -79,7 +58,7 @@
                         <td>✔️</td>
                         <td>✔️</td>
                         <td>
-                            <a href="editstatus.html?Minecraft (Vanilla)">
+                            <a href="editstatus.php?Minecraft (Vanilla)">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -95,7 +74,7 @@
                         <td>✔️</td>
                         <td>✔️</td>
                         <td>
-                            <a href="editstatus.html?Barony">
+                            <a href="editstatus.php?Barony">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -111,7 +90,7 @@
                         <td>✔️</td>
                         <td>✔️</td>
                         <td>
-                            <a href="editstatus.html?Golf With Your Friends">
+                            <a href="editstatus.php?Golf With Your Friends">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -127,7 +106,7 @@
                         <td>✔️</td>
                         <td>✔️</td>
                         <td>
-                            <a href="editstatus.html?Duck Game">
+                            <a href="editstatus.php?Duck Game">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -143,7 +122,7 @@
                         <td>✔️</td>
                         <td>✔️</td>
                         <td>
-                            <a href="editstatus.html?Root: A Game of Woodland Might and Right">
+                            <a href="editstatus.php?Root: A Game of Woodland Might and Right">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -159,7 +138,7 @@
                         <td>✔️</td>
                         <td>❌</td>
                         <td>
-                            <a href="editstatus.html?Skullgirls">
+                            <a href="editstatus.php?Skullgirls">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -175,7 +154,7 @@
                         <td>✔️</td>
                         <td>❗</td>
                         <td>
-                            <a href="editstatus.html?Minecraft (Vanilla)">
+                            <a href="editstatus.php?Minecraft (Vanilla)">
                                 <button type="button" class="medium action">Edit</button>
                             </a>
                         </td>
@@ -231,7 +210,7 @@
                             <td>✔️</td>
                             <td>✔️</td>
                             <td>
-                                <a href="editstatus.html?Terraria">
+                                <a href="editstatus.php?Terraria">
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
@@ -249,7 +228,7 @@
                             <td>✔️</td>
                             <td>✔️</td>
                             <td>
-                                <a href="editstatus.html?Space Engineers">
+                                <a href="editstatus.php?Space Engineers">
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
@@ -267,7 +246,7 @@
                             <td>✔️</td>
                             <td>❌</td>
                             <td>
-                                <a href="editstatus.html?Civ VI Pirates">
+                                <a href="editstatus.php?Civ VI Pirates">
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
@@ -285,7 +264,7 @@
                             <td>⭕</td>
                             <td>✔️</td>
                             <td>
-                                <a href="editstatus.html?Jackbox">
+                                <a href="editstatus.php?Jackbox">
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
@@ -303,7 +282,7 @@
                             <td>➖</td>
                             <td>✔️</td>
                             <td>
-                                <a href="editstatus.html?Codenames">
+                                <a href="editstatus.php?Codenames">
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>

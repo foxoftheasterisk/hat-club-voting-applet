@@ -25,21 +25,24 @@
         <meta name="theme-color" content="#008080">
         <!--End boilerplate-->
         
+        <!--TODO: redirect to login if no username cookie-->
+        
     </head>
     <body>
         <div class="main">
+            <!-- TODO: show different options if not yet voted -->
             <img src="fishhat.png" alt="The Fish Hat" class="splash">
             <main class="flexcolumn">
-                <a href="gamechooser.html">
+                <a href="gamechooser.php">
                     <button type="button" class="big primary">Choose a game!</button>
                 </a>
-                <a href="votepage.html">
+                <a href="votepage.php">
                     <button type="button" class="medium secondary">View/edit votes</button>
                 </a>
-                <a href="gamestatus.html">
+                <a href="gamestatus.php">
                     <button type="button" class="medium secondary">View/edit game status</button>
                 </a>
-                <a href="nominate.html">
+                <a href="nominate.php">
                     <button type="button" class="medium secondary">Nominate game</button>
                 </a>
             </main>
