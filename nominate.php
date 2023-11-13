@@ -25,17 +25,17 @@
                     <!-- TODO: make this fill name with PHP -->
                     <div class="flexrow">
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="gameName">Game Title:</label>
                             <input type="text" class="action" id="gameName" name="name" required />
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="emoji">Emoji:</label>
                             <input type="text" class="action" id="emoji" name="emoji" size="1" maxlength="4" required/>
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label>Players:</label>
                             <span>
                                 <input type="number" 
@@ -76,7 +76,7 @@
                             </script>
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="own" class="narrow">Ownership required:</label>
                             <select id="own" class="action" name="own" required>
                                 <option></option>
@@ -86,7 +86,7 @@
                             </select>
                         </div>
                         
-                        <div class="midlevel flexcolumn">
+                        <div class="lowlevel flexcolumn">
                             <label for="genre" class="narrow">Genre/Category:</label>
                             <select id="genre" class="action" name="genre" onchange="showHideNewGenre(this)" required>
                                 <option></option>
