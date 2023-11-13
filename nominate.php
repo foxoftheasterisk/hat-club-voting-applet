@@ -18,7 +18,7 @@
                                     and i don't know why. (maybe because it's a <main>?) -->
                 <form class="toplevel primary"
                       action="editgame.php"
-                      method="PUT"
+                      method="POST"
                       autocomplete="off">
                     <h1 class="title">Nominate a game!</h1>
                     <input type="hidden" name="nominator" value="the Fox of the Asterisk"> 

@@ -7,6 +7,9 @@
         
         <!-- TODO: redirect if not logged in -->
         
+        <script src="multiformsubmit.js" >
+        </script>
+        
     </head>
     <body>
         <div class="main">
@@ -22,10 +25,8 @@
                         <!--TODO: populate with PHP -->
                         <form class="midlevel secondary flexcolumn"
                               action="editgamestatus.php"
-                              target="_blank"
-                              method="HEAD"
-                              autocomplete="off"> <!--TODO: once again HEAD is only for debug purposes
-                                                            also _blank--> 
+                              method="POST"
+                              autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Terraria" />
                             <h4 class="title">🌳 Terraria</h4>
@@ -42,10 +43,8 @@
                         
                         <form class="midlevel secondary flexcolumn"
                               action="editgamestatus.php"
-                              target="_blank"
-                              method="HEAD"
-                              autocomplete="off"> <!--TODO: once again HEAD is only for debug purposes
-                                                            also _blank--> 
+                              method="POST"
+                              autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Jackbox" />
                             <h4 class="title">💩 Jackbox</h4>
@@ -65,10 +64,8 @@
                         
                         <form class="midlevel secondary flexcolumn"
                               action="editgamestatus.php"
-                              target="_blank"
-                              method="HEAD"
-                              autocomplete="off"> <!--TODO: once again HEAD is only for debug purposes
-                                                            also _blank--> 
+                              method="POST"
+                              autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Codenames" />
                             <h4 class="title">🕵️ Codenames</h4>
@@ -83,13 +80,28 @@
                             </select>
                         </form>
                         
-                        <!-- alright. the plan is:
-                             have a bunch of forms, one for each game that needs a status update
-                             use js fetch to send them all without loading a new page
-                             (verify this in some way? need to figure that out)
-                             after doing all fetches, redirects to homepage -->
+                        <form class="midlevel secondary flexcolumn"
+                              action="editgamestatus.php"
+                              method="POST"
+                              autocomplete="off"> 
+                            <input type="hidden" name="player" value="the Fox of the Asterisk" />
+                            <input type="hidden" name="game" value="Root: A Game of Woodland Might and Right" />
+                            <h4 class="title">😾 Root: A Game of Woodland Might and Right</h4>
+                            <span class="lowlevel">
+                                <input type="checkbox" id="😾 second" name="second" value="yes" /><label for="😾 second" class="text">Second nomination</label>
+                            </span>
+                            <select id="😾 willing" class="action" name="willing" required>
+                                <option></option>
+                                <option value="good">Will Play</option>
+                                <option value="veto">Veto</option>
+                                <option value="tech">Technical Difficulty</option>
+                            </select>
+                            <span class="lowlevel">
+                                <input type="checkbox" id="😾 owned" name="owned" value="yes" /><label for="😾 owned" class="text">Owned</label>
+                            </span>
+                        </form>
                      </div>
-                     <button class="big action" type="submit">Submit all</button>
+                     <button class="big action" type="submit" onclick="submitAllForms(this)">Submit all</button>
                 </div>
             </main>
         </div>

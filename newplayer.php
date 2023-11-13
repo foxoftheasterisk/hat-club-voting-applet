@@ -14,7 +14,7 @@
                                     and i don't know why. (maybe because it's a <main>?) -->
                 <form class="toplevel primary"
                       action="createplayer.php"
-                      method="PUT"
+                      method="POST"
                       autocomplete="off">
                     <h1 class="title">Create new player account?</h1>
 
