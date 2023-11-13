@@ -26,15 +26,19 @@
                         </div>
                         
                         <div class="midlevel flexcolumn">
-                            <label for="shortname" class="shrinkable up">Short version: <br /><span class="long">5 characters or less.<br />Emoji recommended.</span></label>
+                            <label for="shortname" class="hastip up">Short version: <span class="tip">5 characters or less.<br />Emoji recommended.</span></label>
                             <input type="text" class="action" id="shortname" name="shortname" size="5" maxlength="5" required />
                         </div>
                         
                         <div class="midlevel flexcolumn">
-                            <label for="password" class="shrinkable up">Password: <br /><span class="long">Group password</span></label>
+                            <label for="password">Password: </label>
                             <input type="password" class="action" id="password" name="password" required />
                         </div>
                         
+                        <div class="midlevel flexcolumn">
+                            <label for="password2">Confirm password: </label>
+                            <input type="password" class="action" id="password2" name="password2" required />
+                        </div>
                         
                     </div>
                     

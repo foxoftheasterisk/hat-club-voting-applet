@@ -173,7 +173,71 @@ button.big {
     align-items: stretch;
 }
 
-/* short/long versions */
+/* tooltips */
+
+.hastip {
+    position: relative;
+    border-bottom: 1px dotted black;
+}
+
+.tip {
+    visibility: hidden;
+    position: absolute;
+    display: inline-block;
+    
+    background-color: rgba(224, 255, 255, .95);
+
+    padding: 5px;
+    
+    font-size: 0.9em;
+    
+    border-radius: 10px;
+}
+
+.down .tip, .up .tip {
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    
+    width: min-content;
+}
+
+.wide .tip{
+    max-width: 200px;
+}
+
+.up .tip {
+    bottom: 120%;
+}
+
+.down .tip {
+    top: 120%;
+}
+
+.right .tip, .left .tip {
+    top: 40%; /* when the host is one line of text, this is somehow closer to center than 50% */
+    transform: translateY(-50%);
+    z-index: 1;
+    
+    width: max-content;
+    max-width: 200px;
+}
+
+.right .tip {
+    left: 110%;
+}
+
+.left .tip {
+    right: 110%;
+}
+
+
+.hastip:hover .tip {
+    visibility: visible;
+}
+
+/* auto-tooltips for small screens */
+/* unfortunately due to the conditional nature they can't share code with manual tooltips */
 
 /* large screens: */
 @media screen and (min-width: 801px) {
