@@ -17,7 +17,7 @@
                                     but it uses the total window width instead of the container width
                                     and i don't know why. (maybe because it's a <main>?) -->
                 <form class="toplevel primary"
-                      action="editgame.php"
+                      action="savegame.php"
                       method="POST"
                       autocomplete="off">
                     <h1 class="title">Nominate a game!</h1>

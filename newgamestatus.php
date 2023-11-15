@@ -24,7 +24,7 @@
                     <div class="flexrow">
                         <!--TODO: populate with PHP -->
                         <form class="midlevel secondary flexcolumn"
-                              action="editgamestatus.php"
+                              action="savegamestatus.php"
                               method="POST"
                               autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
@@ -43,7 +43,7 @@
                         </form>
                         
                         <form class="midlevel secondary flexcolumn"
-                              action="editgamestatus.php"
+                              action="savegamestatus.php"
                               method="POST"
                               autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
@@ -70,7 +70,7 @@
                         </form>
                         
                         <form class="midlevel secondary flexcolumn"
-                              action="editgamestatus.php"
+                              action="savegamestatus.php"
                               method="POST"
                               autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
@@ -94,7 +94,7 @@
                         </form>
                         
                         <form class="midlevel secondary flexcolumn"
-                              action="editgamestatus.php"
+                              action="savegamestatus.php"
                               method="POST"
                               autocomplete="off"> 
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
