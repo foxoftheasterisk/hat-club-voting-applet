@@ -10,7 +10,7 @@ currently assuming we're using system C (since i brought it up in vc and no one 
 
 current tables:
 
--Games-
+-games-
 id              int(10)
 name            varchar(128)
 emoji           text  -> varchar(5)
@@ -21,14 +21,14 @@ category        varchar(128)        Nullable
 nominated_by    int(10)
 
 
--Players-
+-players-
 id              int(10)
 name            varchar(128)
 short_name      varchar(5)
 password_hash   varchar(2056)
 
 
--Game-status-
+-game-status-
 player_id       int(10)
 game_id         int(10)
 owned           tinyint(1)
@@ -52,7 +52,9 @@ Access pages:
 
 ✔️ login.html: username and password fields. leads to redirect page.
 
-login.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error. (R: instead send to game status)
+login.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error.
+
+logout.php: removes cookie & redirects to login
 
 ⌚ newplayer.php: asks if you want to create a new player account. Cancel->return to login. Enter password twice and confirm->creates account and logs in.
 
