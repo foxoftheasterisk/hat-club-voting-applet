@@ -72,8 +72,6 @@ vote.php: if most recent vote more recent than last saturday, removes those vote
 
 second.php: specialized page that just seconds nominations.
 
-savegamestatus.php: commits game status data sent to it to database, including seconding. Redirects to homepage.
-
 ⌚ gamechooser.php: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
 note: will need to refresh to update vote counts.
 
@@ -87,7 +85,13 @@ editgame.php: similar to nominate, but for an existing game. Starts filled. send
 
 ⌚ nominate.php: provides form for you to fill out with game data, and a confirm button, which leads to newgamestatus. also a homepage button at top if you changed your mind (or misclicked)
 
-savegame.php: commits global game data (including nominator) to database. 
+savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
+
+savegame.php: updates global game data in database. Redirects to gamestatus.
+
+creategamestatus.php: commits game status data sent to it to database, including seconding. No redirect needed.
+
+creategame.php: commits global game data (including nominator) to database. Redirects to newgamestatus.
 
 
 Game choosing algorithm:

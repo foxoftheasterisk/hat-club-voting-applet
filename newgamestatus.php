@@ -65,7 +65,7 @@
                                 <option value="tech">Technical Difficulty</option>
                             </select>
                             <span class="lowlevel">
-                                <input type="checkbox" id="💩 owned" name="owned" value="yes" /><label for="💩 owned" class="text">Owned</label>
+                                <input type="checkbox" id="💩 owned" name="owned" value="yes" /><label for="💩 owned" class="text">Can host</label>
                             </span>
                         </form>
                         
@@ -108,7 +108,7 @@
                                 <option value="tech">Technical Difficulty</option>
                             </select>
                             <span class="lowlevel">
-                                <input type="checkbox" id="😾 owned" name="owned" value="yes" /><label for="😾 owned" class="text">Owned</label>
+                                <input type="checkbox" id="😾 owned" name="owned" value="yes" /><label for="😾 owned" class="text">Can host</label>
                             </span>
                         </form>
                      </div>
