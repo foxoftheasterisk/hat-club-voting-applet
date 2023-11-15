@@ -55,7 +55,6 @@ async function submitAllForms(submitButton) {
             errorDisplay.innerHTML = "Error " + response.status + " " + response.statusText;
             submission.form.appendChild(errorDisplay);
             isError = true;
-            //TODO: decomment at test end
         }
     }
     

@@ -103,6 +103,8 @@ button.big {
     margin: 2px;
     padding: 5px;
     
+    max-width: 45%;
+    
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;

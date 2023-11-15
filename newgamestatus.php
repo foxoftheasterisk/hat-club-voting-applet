@@ -30,6 +30,7 @@
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Terraria" />
                             <h4 class="title">🌳 Terraria</h4>
+                            <span>Nominated by: You</span>
                             <select id="🌳 willing" class="action" name="willing" required>
                                 <option></option>
                                 <option value="good">Will Play</option>
@@ -48,6 +49,12 @@
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Jackbox" />
                             <h4 class="title">💩 Jackbox</h4>
+                            <span>Nominated by: 
+                                <span class="shrinkable down">
+                                    <span class="short">💀</span>
+                                    <span class="long">ShenzoTheLost</span>
+                                </span>
+                            </span>
                             <span class="lowlevel">
                                 <input type="checkbox" id="💩 second" name="second" value="yes" /><label for="💩 second" class="text">Second nomination</label>
                             </span>
@@ -69,6 +76,12 @@
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Codenames" />
                             <h4 class="title">🕵️ Codenames</h4>
+                            <span>Nominated by: 
+                                <span class="shrinkable down">
+                                    <span class="short">💀</span>
+                                    <span class="long">ShenzoTheLost</span>
+                                </span>
+                            </span>
                             <span class="lowlevel">
                                 <input type="checkbox" id="🕵️ second" name="second" value="yes" /><label for="🕵️ second" class="text">Second nomination</label>
                             </span>
@@ -87,9 +100,7 @@
                             <input type="hidden" name="player" value="the Fox of the Asterisk" />
                             <input type="hidden" name="game" value="Root: A Game of Woodland Might and Right" />
                             <h4 class="title">😾 Root: A Game of Woodland Might and Right</h4>
-                            <span class="lowlevel">
-                                <input type="checkbox" id="😾 second" name="second" value="yes" /><label for="😾 second" class="text">Second nomination</label>
-                            </span>
+                            <span>Newly accepted</span>
                             <select id="😾 willing" class="action" name="willing" required>
                                 <option></option>
                                 <option value="good">Will Play</option>
