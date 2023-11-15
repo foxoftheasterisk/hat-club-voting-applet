@@ -1,3 +1,19 @@
+<?php
+
+//if cookie is set, redirect to homepage
+if(isset($_COOKIE["user"]))
+{
+    $resp_code = 400;
+    //400: Bad request
+    //if you're logged in, you must be already a user, 
+    //and therefore, should not be creating a new account
+    //(should it be 403 Forbidden?)
+    
+    header("Location: homepage.php", true, $resp_code);
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -9,9 +25,7 @@
     <body>
         <div class="main">
             <img src="fishhat.png" alt="The Fish Hat" class="cap" />
-            <main class="main"> <!--this seems like it should restrict the width by 80% then 80%,
-                                    but it uses the total window width instead of the container width
-                                    and i don't know why. (maybe because it's a <main>?) -->
+            <main class="main"> 
                 <form class="toplevel primary"
                       action="createplayer.php"
                       method="POST"
@@ -22,7 +36,15 @@
                         
                         <div class="lowlevel flexcolumn">
                             <label for="playerName">Name:</label>
-                            <input type="text" class="action" id="playerName" name="name" required value="The Thing You Typed" /> <!--TODO: use PHP to make it actually populate -->
+                            <input type="text" 
+                                   class="action" 
+                                   id="playerName" 
+                                   name="name" 
+                                   required 
+                                   <?php 
+                                        $name= $_POST['username'];
+                                        echo("value=\"{$name}\"");?> 
+                                   /> 
                         </div>
                         
                         <div class="lowlevel flexcolumn">
