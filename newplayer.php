@@ -26,7 +26,7 @@
                         </div>
                         
                         <div class="lowlevel flexcolumn">
-                            <label for="shortname" class="hastip up">Short version: <span class="tip">5 characters or less.<br />Emoji recommended.</span></label>
+                            <label for="shortname" class="hastip up">Short version: <span class="tip">5 characters or less.<br />Emoji encouraged.</span></label>
                             <input type="text" class="action" id="shortname" name="shortname" size="5" maxlength="5" required />
                         </div>
                         
