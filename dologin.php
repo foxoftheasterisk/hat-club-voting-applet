@@ -19,7 +19,7 @@ $password = $_POST['password'];
 
 //right. input sanitization. glad i was reminded in a non-destructive way.
 $username = $db->real_escape_string($username);
-$result = $db->query("SELECT password_hash FROM players WHERE name='{$username}'");
+$result = $db->query("SELECT password_hash, id FROM players WHERE name='{$username}';");
 
 if($result->num_rows == 0)
 {
@@ -51,12 +51,13 @@ if($result->num_rows == 0)
 else if($result->num_rows == 1)
 {
     //the normal case! we've found a user by that name
-    $hash = $result->fetch_array()[0];
+    $row = $result->fetch_array();
+    $hash = $row[0];
     
     if(password_verify($password, $hash))
     {
         $duration = 30 * 84600; //84600 = 1 day of seconds, times 30 days
-        setcookie("user", $username, time() + $duration);
+        setcookie("user", $row[1], time() + $duration);
         
         redirect("homepage.php");
     }
