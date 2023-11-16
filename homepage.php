@@ -3,13 +3,21 @@
     <head>
         <title>Hatclub Games Voting Site</title>
         
-        <?php require('header_boilerplate.html'); ?>
-        
+        <?php 
+        require('header_boilerplate.html');
+        require('databaseconnect.php');
+        ?>
         <!--TODO: redirect to login if no username cookie-->
         
     </head>
     <body>
         <div class="main">
+            <?php 
+            
+            $db = connectToDB();
+            
+            ?>
+        
             <!-- TODO: show different options if not yet voted -->
             <img src="fishhat.png" alt="The Fish Hat" class="splash">
             <main class="flexcolumn">
@@ -25,6 +33,8 @@
                 <a href="nominate.php">
                     <button type="button" class="medium secondary">Nominate game</button>
                 </a>
+                
+                <!--TODO: add logout button-->
             </main>
         </div>
     </body>

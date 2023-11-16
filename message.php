@@ -11,7 +11,7 @@
         
             <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             
-            <div class="toplevel issue">
+            <div class="toplevel <?php echo($_COOKIE["message-class"]); ?>">
                 <?php echo($_COOKIE["message-body"]); ?>
             </div>
         </div>
