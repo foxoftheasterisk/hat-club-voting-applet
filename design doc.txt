@@ -50,13 +50,13 @@ T: increase all players' "sessions since game chosen" by 1 (if doing sessions, n
 
 Access pages:
 
-✔️ login.html: username and password fields. leads to redirect page.
+🔧 login.php: username and password fields. leads to redirect page.
 
-🔧 login.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error.
+✔️ dologin.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error.
 
 logout.php: removes cookie & redirects to login
 
-🔧 newplayer.php: asks if you want to create a new player account. Cancel->return to login.html Enter password twice and confirm->creates account and logs in.
+🔧 newplayer.php: asks if you want to create a new player account. Cancel->return to login.php Enter password twice and confirm->creates account and logs in.
 
 ✔️ createplayer.php: creates player using POST data. redirects to login.php
 

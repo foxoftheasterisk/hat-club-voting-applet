@@ -30,8 +30,8 @@ if($password != $_POST['password2'])
                     Passwords do not match!
                 </p>
                 <div class="flexrow">
-                    <a href="login.html"><button class="medium action">Return to login</button></a>
-                    <a href="newplayer.html"><button class="medium action">Try again</button></a>
+                    <a href="login.php"><button class="medium action">Return to login</button></a>
+                    <a href="newplayer.php"><button class="medium action">Try again</button></a>
                 </div> ';
                 
     setcookie("message-title", "Account creation failed");
@@ -50,7 +50,7 @@ if($result->num_rows != 0)
                     User already exists by the name ' . $username . '!
                 </p>
                 <div class="flexrow">
-                    <a href="login.html"><button class="medium action">Return to login</button></a>
+                    <a href="login.php"><button class="medium action">Return to login</button></a>
                     <a href="newplayer.php"><button class="medium action">Choose different username</button></a>
                 </div> ';
     
@@ -72,7 +72,7 @@ if($result->num_rows != 0)
                     User already exists with the nickname ' . $shortun . '!
                 </p>
                 <div class="flexrow">
-                    <a href="login.html"><button class="medium action">Return to login</button></a>
+                    <a href="login.php"><button class="medium action">Return to login</button></a>
                     <a href="newplayer.php"><button class="medium action">Choose different nickname</button></a>
                 </div> ';
     
@@ -99,7 +99,7 @@ if($result === TRUE)
     $message = '<p>
                     Account created!
                 </p>
-                <a href="login.html"><button class="medium action">Return to login</button></a>';
+                <a href="login.php"><button class="medium action">Return to login</button></a>';
                 
     $statuscode = 200;
     //200 = OK

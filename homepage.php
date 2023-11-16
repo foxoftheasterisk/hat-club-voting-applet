@@ -1,12 +1,19 @@
+<?php
+
+require('utils.php');
+
+if(!isset($_COOKIE['user']))
+{
+    redirect("login.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
         <title>Hatclub Games Voting Site</title>
         
-        <?php 
-        require('header_boilerplate.html');
-        require('utils.php');
-        ?>
+        <?php require('header_boilerplate.html'); ?>
         <!--TODO: redirect to login if no username cookie-->
         
     </head>

@@ -69,7 +69,7 @@ if(isset($_COOKIE["user"]))
                         <button class="medium action" type="submit">Confirm</button> 
                         <!--TODO: javascript check password match-->
                         
-                        <a href="login.html">
+                        <a href="login.php">
                             <button class="medium action" type="button">Cancel</button>
                         </a>
                     </div>
