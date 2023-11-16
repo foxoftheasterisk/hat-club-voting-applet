@@ -61,10 +61,11 @@ $db = connectToDB();
                                         min="1"
                                         required />
                             </span>
+                            <!--TODO: javascript verify that max >= min before submit-->
                             <label for="infPlay">(<input type="checkbox" 
                                                          class="action" 
                                                          id="infPlay" 
-                                                         name="maximumPlayers" 
+                                                         name="maximumplayers" 
                                                          value="∞" 
                                                          onchange="swapMaxPlay(this)" 
                                                          />Unlimited)</label>
@@ -76,11 +77,13 @@ $db = connectToDB();
                                     if(infBox.checked) {
                                         playerCounter.disabled=true;
                                         playerCounter.required=false;
+                                        //infBox.name = "maximumplayers";
                                     }
                                     else
                                     {
                                         playerCounter.disabled=false;
                                         playerCounter.required=true;
+                                        //infBox.name = "infiniteplayers";
                                     }
                                 }
                             </script>
@@ -91,8 +94,8 @@ $db = connectToDB();
                             <select id="own" class="action" name="own" required>
                                 <option></option>
                                 <option value="all">Everyone</option>
-                                <option value="host">Host only</option>
-                                <option value="none">Free</option>
+                                <option value="one">Host only</option>
+                                <option value="free">Free</option>
                             </select>
                         </div>
                         

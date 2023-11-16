@@ -50,6 +50,12 @@ T: increase all players' "sessions since game chosen" by 1 (if doing sessions, n
 
 Access pages:
 
+(
+✔️ done
+🔧 working, but there's improvements to make
+⌚ waiting on another feature (less relevant now that we have database access)
+)
+
 ✔️ login.php: username and password fields. leads to redirect page.
 
 ✔️ dologin.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error.
@@ -62,7 +68,7 @@ Access pages:
 
 ✔️ message.php: simple page to display error messages for php processing pages. has only whatever links are passed in.
 
-all following pages redirect to login if not logged in.
+( all following pages redirect to login if not logged in. )
 
 ⌚ homepage.php: redirects to newgamestatus if needed. big vote button if you haven't yet this week. if you have, big choose game button. smaller buttons for edit vote, game status, nominate game/edit game data
     (or should gamestatus and votepage redirect, instead?)
@@ -87,7 +93,7 @@ editgamestatus.php: form similar to newgamestatus, but only for one game. also p
 
 editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
 
-✔️ nominate.php: provides form for you to fill out with game data, and a confirm button, which sends to creategame.php. also a homepage button at top if you changed your mind (or misclicked)
+🔧 nominate.php: provides form for you to fill out with game data, and a confirm button, which sends to creategame.php. also a homepage button at top if you changed your mind (or misclicked)
 
 savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
 
@@ -95,7 +101,7 @@ savegame.php: updates global game data in database. Redirects to gamestatus.
 
 creategamestatus.php: commits game status data sent to it to database, including seconding. No redirect needed.
 
-creategame.php: commits global game data (including nominator) to database. Redirects to newgamestatus.
+✔️ creategame.php: commits global game data (including nominator) to database. Redirects to newgamestatus.
 
 
 Game choosing algorithm:

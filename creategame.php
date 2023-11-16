@@ -12,10 +12,12 @@ if(!isset($_COOKIE['user']))
 
 $db = connectToDB();
 
+//this sanitization would only matter if the cookie's been tampered with
+//still, doesn't hurt to have.
 $user = $_COOKIE['user'];
 $user = $db->real_escape_string($user);
 
-$result = $db->query("SELECT COUNT(*) FROM players WHERE name='{$user}';");
+$result = $db->query("SELECT COUNT(*) FROM players WHERE id='{$user}';");
 $row = $result->fetch_array();
 if($row[0] == 0)
 {
@@ -42,8 +44,8 @@ if(!isset($_POST['name']))
 }
 
 //check game does not already exist
-$game = $_POST['name'];
-$game = $db->real_escape_string($game);
+$name = $_POST['name'];
+$game = $db->real_escape_string($name);
 
 $result = $db->query("SELECT * FROM games WHERE name='{$game}';");
 if($result->num_rows != 0)
@@ -157,7 +159,156 @@ if($result->num_rows != 0)
     displayMessage("Nomination failed!", $message);
 }
 
+if(!(isset($_POST['minimumplayers']) && isset($_POST['maximumplayers'])) )
+{
+    $message = "<p>
+                    Player count(s) not submitted.
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
 
+$min = $_POST['minimumplayers'];
+$max = $_POST['maximumplayers'];
 
-echo("Congrats, it reached the end.");
+if($max == "∞")
+{
+    $max = "9999";
+}
+
+if(!(is_numeric($min) && is_numeric($max)))
+{
+    $message = "<p>
+                    One or both player counts is not a number!
+                    min: {$min} - max: {$max}
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
+
+if($min > $max)
+{
+    $message = "<p>
+                    Impossible player counts - min({$min}) cannot be higher than max ({$max})!
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
+
+//i don't think these should need escaping - they're guaranteed to be numeric
+//still, it doesn't hurt.
+$max = $db->real_escape_string($max);
+$min = $db->real_escape_string($min);
+
+if(!isset($_POST['own']))
+{
+    $message = "<p>
+                    Ownership requirement not submitted.
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
+
+$own = $_POST['own'];
+
+if(!($own == "all" || $own == "one" || $own == "free"))
+{
+    $message = "<p>
+                    {$own} is not a valid ownership requirement!
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
+
+//ok this REALLY shouldn't need escaping
+//im still doing it though
+$own = $db->real_escape_string($own);
+
+if(!isset($_POST['genre']))
+{
+    $message = "<p>
+                    Genre/category not submitted.
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
+
+$cat = $_POST['genre'];
+
+if($cat == "New")
+{
+    if(!isset($_POST['newgenre']))
+    {
+        $message = "<p>
+                        Genre set to \"New\", but no new genre submitted!
+                    </p>
+                    <div class='flexrow'>
+                        <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                        <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                    </div>";
+        
+        displayMessage("Nomination failed!", $message);
+    }
+    
+    $cat = $_POST['newgenre'];
+}
+
+$cat = $db->real_escape_string($cat);
+
+//all checks done!! now to do the thing!
+
+$query = "INSERT INTO games (name, emoji, min_players, max_players, ownership, category, nominated_by)
+          VALUES ('{$game}', '{$emoji}', '{$min}', '{$max}', '{$own}', '{$cat}', '{$user}')";
+
+$result = $db->query($query);
+
+if($result === TRUE)
+{
+    $message = "<p>
+                    Successfully nominated {$emoji} {$name}!
+                </p>
+                <div class='flexrow'>
+                    <a href='newgamestatus.php'><button class='medium action'>Continue to status</button></a>
+                </div>";
+    
+    displayMessage("Game nominated!", $message, "primary");
+}
+else
+{
+    $message = "<p>
+                    Submission failed at database. Contact your administrator.
+                </p>
+                <div class='flexrow'>
+                    <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
+                    <a href='nominate.php'><button class='medium action'>Try again</button></a>
+                </div>";
+    
+    displayMessage("Nomination failed!", $message);
+}
+
+echo("This shouldn't possibly appear. Contact your admin.");
 ?>
