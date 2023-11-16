@@ -5,7 +5,7 @@
         
         <?php 
         require('header_boilerplate.html');
-        require('databaseconnect.php');
+        require('utils.php');
         ?>
         <!--TODO: redirect to login if no username cookie-->
         

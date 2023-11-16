@@ -12,7 +12,6 @@ if(isset($_COOKIE["user"]))
     redirect("homepage.php");
 }
 
-require('databaseconnect.php');
 $db = connectToDB();
 
 $username = $_POST['username'];
