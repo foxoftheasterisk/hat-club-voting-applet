@@ -56,7 +56,9 @@ Access pages:
 
 logout.php: removes cookie & redirects to login
 
-⌚ newplayer.php: asks if you want to create a new player account. Cancel->return to login. Enter password twice and confirm->creates account and logs in.
+🔧 newplayer.php: asks if you want to create a new player account. Cancel->return to login.html Enter password twice and confirm->creates account and logs in.
+
+createplayer.php: creates player using POST data. redirects to login.html
 
 ✔️ index.html: redirect to homepage.php
 

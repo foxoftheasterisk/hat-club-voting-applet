@@ -48,9 +48,10 @@ if(isset($_COOKIE["user"]))
                         </div>
                         
                         <div class="lowlevel flexcolumn">
-                            <label for="shortname" class="hastip up">Short version: <span class="tip">5 characters or less.<br />Emoji encouraged.</span></label>
+                            <label for="shortname" class="hastip up">Short version: <span class="tip">5 characters or less.<br />Emoji welcome.</span></label>
                             <input type="text" class="action" id="shortname" name="shortname" size="5" maxlength="5" required />
                         </div>
+                        <!--TODO: disable if username is 5 or less characters-->
                         
                         <div class="lowlevel flexcolumn">
                             <label for="password">Password: </label>
@@ -66,6 +67,7 @@ if(isset($_COOKIE["user"]))
                     
                     <div class="flexrow">
                         <button class="medium action" type="submit">Confirm</button> 
+                        <!--TODO: javascript check password match-->
                         
                         <a href="login.html">
                             <button class="medium action" type="button">Cancel</button>
