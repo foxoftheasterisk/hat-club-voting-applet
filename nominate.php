@@ -1,3 +1,18 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require('utils.php');
+if(!isset($_COOKIE['user']))
+{
+    redirect("login.php");
+}
+
+$db = connectToDB();
+
+?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -5,24 +20,20 @@
         
         <?php require('header_boilerplate.html'); ?>
         
-        <!--TODO: redirect if not logged in-->
-        
     </head>
     <body>
         <div class="main">
             <a href="homepage.php">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             </a>
-            <main class="main"> <!--this seems like it should restrict the width by 80% then 80%,
-                                    but it uses the total window width instead of the container width
-                                    and i don't know why. (maybe because it's a <main>?) -->
+            <main class="main">
                 <form class="toplevel primary"
-                      action="savegame.php"
+                      action="creategame.php"
                       method="POST"
                       autocomplete="off">
                     <h1 class="title">Nominate a game!</h1>
-                    <input type="hidden" name="nominator" value="the Fox of the Asterisk"> 
-                    <!-- TODO: make this fill name with PHP -->
+                    <input type="hidden" name="nominator" value="<?php echo($_COOKIE['user']); ?>"> 
+                    <!--TODO: may need a str_replace() there-->
                     <div class="flexrow">
                         
                         <div class="lowlevel flexcolumn">
@@ -90,13 +101,22 @@
                             <label for="genre" class="narrow">Genre/Category:</label>
                             <select id="genre" class="action" name="genre" onchange="showHideNewGenre(this)" required>
                                 <option></option>
-                                <!--TODO: populate with PHP rather than sample values-->
-                                <option value="Roguelike">Roguelike</option>
-                                <option value="Board">Board</option>
-                                <option value="Party">Party</option>
-                                <option value="Sandbox">Sandbox</option>
-                                <option value="Brawl">Brawl</option>
-                                <option value="Fighter">Fighter</option>
+                                <?php
+
+$query = "SELECT DISTINCT category FROM games";
+$result = $db->query($query);
+$row = $result->fetch_array();
+
+while($row != null)
+{
+    $cat = str_replace("'", "&apos;", $row[0]);
+    
+    echo("                      <option value='{$cat}'>{$cat}</option>");
+    
+    $row = $result->fetch_array();
+}
+
+                                ?>
                                 <option value="New">New...</option>
                             </select>
                             <span id="newgenrecont" class="flexcolumn" style="display: none;" >

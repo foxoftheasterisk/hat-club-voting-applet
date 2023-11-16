@@ -60,7 +60,7 @@ Access pages:
 
 ✔️ index.html: redirect to homepage.php
 
-message.php: simple page to display error messages for php processing pages. has only whatever links are passed in.
+✔️ message.php: simple page to display error messages for php processing pages. has only whatever links are passed in.
 
 all following pages redirect to login if not logged in.
 
@@ -87,7 +87,7 @@ editgamestatus.php: form similar to newgamestatus, but only for one game. also p
 
 editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
 
-⌚ nominate.php: provides form for you to fill out with game data, and a confirm button, which leads to newgamestatus. also a homepage button at top if you changed your mind (or misclicked)
+⌚ nominate.php: provides form for you to fill out with game data, and a confirm button, which sends to creategame.php. also a homepage button at top if you changed your mind (or misclicked)
 
 savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
 
