@@ -32,8 +32,6 @@ $db = connectToDB();
                       method="POST"
                       autocomplete="off">
                     <h1 class="title">Nominate a game!</h1>
-                    <input type="hidden" name="nominator" value="<?php echo($_COOKIE['user']); ?>"> 
-                    <!--TODO: may need a str_replace() there-->
                     <div class="flexrow">
                         
                         <div class="lowlevel flexcolumn">
@@ -54,12 +52,14 @@ $db = connectToDB();
                                        id="minPlay" 
                                        name="minimumplayers" 
                                        size="3" 
+                                       min="1"
                                        required 
                               />–<input type="number" 
                                         class="action" 
                                         id="maxPlay" 
                                         name="maximumplayers" 
                                         size="3"
+                                        min="1"
                                         required />
                             </span>
                             <label for="infPlay">(<input type="checkbox" 
