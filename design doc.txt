@@ -52,13 +52,15 @@ Access pages:
 
 ✔️ login.html: username and password fields. leads to redirect page.
 
-login.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error.
+🔧 login.php: if correct password, grant cookie & send to homepage. if password wrong, boots to login with error. if new username and password 1234, sends to new player confirmation; if new username without pass 1234, returns to login with error.
 
 logout.php: removes cookie & redirects to login
 
 ⌚ newplayer.php: asks if you want to create a new player account. Cancel->return to login. Enter password twice and confirm->creates account and logs in.
 
 ✔️ index.html: redirect to homepage.php
+
+message.php: simple page to display error messages for php processing pages. has only whatever links are passed in.
 
 all following pages redirect to login if not logged in.
 

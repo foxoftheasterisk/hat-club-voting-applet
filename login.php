@@ -16,7 +16,6 @@ if(isset($_COOKIE["user"]))
 }
 
 require('databaseconnect.php');
-
 $db = connectToDB();
 
 $username = $_POST['username'];
@@ -38,7 +37,27 @@ if($result->num_rows == 0)
         exit();
         
     }
-    //if it isn't, we fall out and display the error.
+    else
+    {
+        $resp_code = 400;
+        //400 = bad request
+        //logging in to an account that doesn't exist = bad!
+        
+        $setcookie("message-title", "Login failed!");
+        $setcookie("message-body", '<p>
+                    Incorrect username or password!<br />
+                    (To create new user, use our lobby password.)
+                </p>
+                <a href="login.html"><button class="medium action">Return to login</button></a>');
+        //(yes, we know that this is an incorrect username, not incorrect password,
+        //but it's bad form to let people know that, because then they could trawl for existent usernames.
+        //not that i expect any sort of attack on this site, but, best practices.)
+        
+        //although, technically, this is an incorrect password, in a way.
+        
+        header("Location: message.php", true, $resp_code);
+        exit();
+    }
 }
 else if($result->num_rows == 1)
 {
@@ -59,38 +78,45 @@ else if($result->num_rows == 1)
         header("Location: homepage.php", true, $resp_code);
         exit();
     }
-    //if the password doesn't match, then we fall out and display the error.
-    
+    else
+    {
+        $resp_code = 400;
+        //400 = bad request
+        //incorrect password is less bad than some...
+        //...well, maybe not, as it might indicate an attempt to break in!
+        
+        $setcookie("message-title", "Login failed!");
+        $setcookie("message-body", '<p>
+                    Incorrect username or password!<br />
+                    (To create new user, use our lobby password.)
+                </p>
+                <a href="login.html"><button class="medium action">Return to login</button></a>');
+        //exactly the same message as for incorrect username
+        
+        header("Location: message.php", true, $resp_code);
+        exit();
+    }
 }
 else
 {
+    $resp_code = 500;
+    //500 = internal server error
+    //having a duplicate user certainly would qualify
+    
+    $setcookie("message-title", "Login failed!");
+    $setcookie("message-body", '<p>
+                This shouldn\'t be possible, but there\'s more than one user with that username.<br />
+                Contact the administrator.
+            </p>
+            <a href="login.html"><button class="medium action">Return to login</button></a>');
+    //if this ever happens... well.
+    
+    header("Location: message.php", true, $resp_code);
+    exit();
+    
     echo("This shouldn't be possible, but there's more than one user with that username.");
 }
 
 
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en-US">
-    <head>
-        <title>Login failed</title>
-        
-        <?php require('header_boilerplate.html'); ?>
-        
-    </head>
-    <body>
-        <div class="main">
-        
-            <img src="fishhat.png" alt="The Fish Hat" class="cap" />
-            
-            <div class="toplevel issue">
-                <p>
-                    Incorrect username or password!<br />
-                    (To create new user, use our lobby password.)
-                </p>
-                <a href="login.html"><button class="medium action">Return to login</button></a>
-            </div>
-        </div>
-    </body>
-</html>
