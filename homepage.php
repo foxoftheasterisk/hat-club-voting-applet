@@ -33,8 +33,6 @@
                 <a href="nominate.php">
                     <button type="button" class="medium secondary">Nominate game</button>
                 </a>
-                
-                <!--TODO: add logout button-->
             </main>
         </div>
     </body>

@@ -51,7 +51,7 @@ if($result->num_rows != 0)
                 </p>
                 <div class="flexrow">
                     <a href="login.html"><button class="medium action">Return to login</button></a>
-                    <a href="newplayer.html"><button class="medium action">Choose different username</button></a>
+                    <a href="newplayer.php"><button class="medium action">Choose different username</button></a>
                 </div> ';
     
     setcookie("message-title", "Account creation failed");
@@ -73,7 +73,7 @@ if($result->num_rows != 0)
                 </p>
                 <div class="flexrow">
                     <a href="login.html"><button class="medium action">Return to login</button></a>
-                    <a href="newplayer.html"><button class="medium action">Choose different nickname</button></a>
+                    <a href="newplayer.php"><button class="medium action">Choose different nickname</button></a>
                 </div> ';
     
     setcookie("message-title", "Account creation failed");

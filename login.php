@@ -56,7 +56,7 @@ else if($result->num_rows == 1)
     if(password_verify($password, $hash))
     {
         $duration = 30 * 84600; //84600 = 1 day of seconds, times 30 days
-        setcookie("user", $username, $duration);
+        setcookie("user", $username, time() + $duration);
         
         redirect("homepage.php");
     }

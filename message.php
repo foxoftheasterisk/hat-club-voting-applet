@@ -24,5 +24,6 @@
 //which is super weird and kinda annoying, but whatever.
 setcookie("message-title", null, time()-30);
 setcookie("message-body", null, time()-30);
+setcookie("message-class", null, time()-30);
 
 ?>

@@ -75,13 +75,18 @@ img.splash {
     margin: min(30px, 5%);
 }
 
+button.big {
+    padding: 6px;
+    border-radius: 8px;
+}
+
 button.medium {
     font-size: 1.2em;
 }
 
-button.big {
-    padding: 6px;
-    border-radius: 8px;
+button.small {
+    font-size: 0.8em;
+    border-radius: 5px;
 }
 
 .toplevel, button.big {
@@ -358,7 +363,7 @@ button.secondary:hover {
 
 .tertiary {
     background-color: lightCoral;
-    border-color: #ef7676;
+    border-color: #ea4848;
 }
 
 .tertiary .sortable:hover {
