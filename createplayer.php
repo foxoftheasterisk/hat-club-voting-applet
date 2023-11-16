@@ -101,9 +101,10 @@ if($result === TRUE)
                 </p>
                 <a href="login.html"><button class="medium action">Return to login</button></a>';
                 
-    $statuscode = 204;
-    //204 = No Content
-    //server processed the request, but is not returning any (relevant) content.
+    $statuscode = 200;
+    //200 = OK
+    //i thought 204 might work but no, it just doesn't redirect.
+    //i guess because it's "no content".
     
     displayMessage("Account creation success!", $message, "primary", $statuscode);
 }
