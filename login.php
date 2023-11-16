@@ -1,29 +1,20 @@
+<?php
+
+require(utils.php);
+
+if(isset($_COOKIE['name']))
+{
+    redirect("homepage.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
         <title>Login to Hatclub</title>
         
-        <!-- boilerplate without include, because it's not worth changing to .php -->
-        <link rel="icon"
-              type="image/x-icon"
-              href="fishhat.ico" />
-        <link rel="stylesheet" 
-              href="hatclubstyle.css" />
-        <meta charset="UTF-8" />
-        <meta name="robots" 
-              content="noindex, nofollow" />
-        <meta name="viewport" 
-              content="width=device-width, initial-scale=1.0">
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-        <link rel="manifest" href="favicon/site.webmanifest">
-        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#008080">
-        <meta name="msapplication-TileColor" content="#00aba9">
-        <meta name="theme-color" content="#008080">
-        <!--End boilerplate-->
-        
-        <!--TODO: JS redirect if cookie already set-->
+        <?php require("header_boilerplate.html"); ?>
         
     </head>
     <body>
