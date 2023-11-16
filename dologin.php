@@ -37,7 +37,7 @@ if($result->num_rows == 0)
                         Incorrect username or password!<br />
                         (To create new user, use our lobby password.)
                     </p>
-                    <a href="login.html"><button class="medium action">Return to login</button></a>';
+                    <a href="login.php"><button class="medium action">Return to login</button></a>';
         //(yes, we know that this is an incorrect username, not incorrect password,
         //but it's bad form to let people know that, because then they could trawl for existent usernames.
         //not that i expect any sort of attack on this site, but, best practices.)
@@ -67,7 +67,7 @@ else if($result->num_rows == 1)
                         Incorrect username or password!<br />
                         (To create new user, use our lobby password.)
                     </p>
-                    <a href="login.html"><button class="medium action">Return to login</button></a>';
+                    <a href="login.php"><button class="medium action">Return to login</button></a>';
         //exactly the same message as for incorrect username
         
         displayMessage("Login failed!", $message);
@@ -79,7 +79,7 @@ else
                     This shouldn\'t be possible, but there\'s more than one user with that username.<br />
                     Contact the administrator.
                 </p>
-                <a href="login.html"><button class="medium action">Return to login</button></a>';
+                <a href="login.php"><button class="medium action">Return to login</button></a>';
     //if this ever happens... well.
     
     displayMessage("Login failed!?", $message);
