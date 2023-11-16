@@ -17,9 +17,10 @@ function connectToDB(string $filename = '/run/secrets/sql-credentials.ini') : my
 
 function displayMessage(string $messageTitle, string $messageBody, string $messageClass = "issue", $resp_code = 307)
 {
-    setcookie("message-title", $messageTitle);
-    setcookie("message-body", $messageBody);
-    setcookie("message-class", $messageClass);
+    $options = ['samesite' => 'strict'];
+    setcookie("message-title", $messageTitle, $options);
+    setcookie("message-body", $messageBody, $options);
+    setcookie("message-class", $messageClass, $options);
     
     redirect("message.php", $resp_code);
 }
