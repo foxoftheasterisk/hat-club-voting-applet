@@ -1,8 +1,8 @@
 <?php
 
-require(utils.php);
+require("utils.php");
 
-if(isset($_COOKIE['name']))
+if(isset($_COOKIE['user']))
 {
     redirect("homepage.php");
 }
