@@ -1,3 +1,13 @@
+<?php
+
+require("utils.php");
+
+if(!isset($_COOKIE["message-body"]))
+{
+    redirect("homepage.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -11,7 +21,7 @@
         
             <img src="fishhat.png" alt="The Fish Hat" class="cap" />
             
-            <div class="toplevel <?php echo($_COOKIE["message-class"]); ?>">
+            <div class="toplevel flexcolumn <?php echo($_COOKIE["message-class"]); ?>">
                 <?php echo($_COOKIE["message-body"]); ?>
             </div>
         </div>

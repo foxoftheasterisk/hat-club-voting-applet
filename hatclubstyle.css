@@ -108,7 +108,7 @@ button.small {
     margin: 2px;
     padding: 5px;
     
-    max-width: 45%;
+    max-width: max-content;
     
     border-style: solid;
     border-radius: 5px;

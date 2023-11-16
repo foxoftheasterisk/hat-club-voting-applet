@@ -33,7 +33,6 @@ $db = connectToDB();
                       autocomplete="off">
                     <h1 class="title">Nominate a game!</h1>
                     <div class="flexrow">
-                        
                         <div class="lowlevel flexcolumn">
                             <label for="gameName">Game Title:</label>
                             <input type="text" class="action" id="gameName" name="name" required />
