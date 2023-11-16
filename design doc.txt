@@ -28,7 +28,7 @@ short_name      varchar(5)
 password_hash   varchar(2056)
 
 
--game-status-
+-game_status-
 player_id       int(10)
 game_id         int(10)
 owned           tinyint(1)

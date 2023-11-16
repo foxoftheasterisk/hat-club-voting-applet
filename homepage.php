@@ -1,7 +1,6 @@
 <?php
 
 require('utils.php');
-
 if(!isset($_COOKIE['user']))
 {
     redirect("login.php");

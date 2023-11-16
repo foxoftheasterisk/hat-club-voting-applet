@@ -1,3 +1,18 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require('utils.php');
+if(!isset($_COOKIE['user']))
+{
+    redirect("login.php");
+}
+
+$db = connectToDB();
+
+?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
@@ -8,8 +23,6 @@
         <script src="gamechooser.js" >
         </script>
         
-        <!--TODO: redirect if not logged in-->
-        
     </head>
     <body>
         <div class="main">
@@ -19,53 +32,68 @@
             <main class="main"> <!--this seems like it should restrict the width by 80% then 80%,
                                     but it uses the total window width instead of the container width
                                     and i don't know why. -->
-                <form class="toplevel primary">
+                <form class="toplevel primary"
+                      action="gamechooser.php"
+                      method="GET"
+                      id="playerform">
                     <h1 class="title">
                         Select Players
                     </h1>
-                    <!--TODO: replace sample data with PHP-->
-                    <span class="player">
-                        <input type="checkbox" id="Iri" name="Iri" />
-                        <label for="Iri" class="shrinkable down">
-                            <span class="short">Iri</span>
-                            <span class="long">Iri</span>
+                    <?php
+
+$selected = array();
+
+$query = "SELECT players.name, players.short_name, MIN(DATEDIFF(NOW(), game_status.last_voted_for)) AS time_since_vote
+          FROM players LEFT JOIN game_status ON players.id = game_status.player_id
+          GROUP BY players.id";
+
+$result = $db->query($query);
+
+$row = $result->fetch_assoc();
+
+while($row != null)
+{
+    $user = $row['name'];
+    $short = $row['short_name'];
+    $days = $row['time_since_vote'];
+    
+    //the whitespace on the final page might be weird
+    //but i'm matching it in file, ok?
+    
+    //escaping... well, this is why i made that test user.
+    $user = str_replace("'", "&apos;", $user);
+    $short = str_replace("'", "&apos;", $short);
+    
+    echo("          <span class='player'>
+                        <input type='checkbox' id='{$short}' name='{$user}' onchange='getNewWeights()'");
+    
+    if(empty($_GET))
+    {
+        if($days != null && $days < 7)
+        {
+            echo("checked ");
+            array_push($selected, $user);
+        }
+    }
+    else
+    {
+        if(isset($_GET[$row['name']]))
+        {
+            echo("checked ");
+            array_push($selected, $user);
+        }
+    }
+    echo ("/>
+                        <label for='{$short}' class='shrinkable down'>
+                            <span class='short'>{$short}</span>
+                            <span class='long'>{$user}</span>
                         </label>
-                    </span>
-                    <span class="player">
-                        <input type="checkbox" id="the Fox of the Asterisk" name="the Fox of the Asterisk" />
-                        <label for="the Fox of the Asterisk" class="shrinkable down">
-                            <span class="short">*Fox</span>
-                            <span class="long">the Fox of the Asterisk</span>
-                        </label>
-                    </span>
-                    <span class="player">
-                        <input type="checkbox" id="NeedADispenserHere" name="NeedADispenserHere" />
-                        <label for="NeedADispenserHere" class="shrinkable down">
-                            <span class="short">🐟🧢</span>
-                            <span class="long">NeedADispenserHere</span>
-                        </label>
-                    </span>
-                    <span class="player">
-                        <input type="checkbox" id="KonnorLetterBee" name="KonnorLetterBee" />
-                        <label for="KonnorLetterBee" class="shrinkable down">
-                            <span class="short">Corey</span>
-                            <span class="long">KonnorLetterBee</span>
-                        </label>
-                    </span>
-                    <span class="player">
-                        <input type="checkbox" id="ShenzoTheLost" name="ShenzoTheLost" />
-                        <label for="ShenzoTheLost" class="shrinkable down">
-                            <span class="short">💀</span>
-                            <span class="long">ShenzoTheLost</span>
-                        </label>
-                    </span>
-                    <span class="player">
-                        <input type="checkbox" id="flame.leaf" name="flame.leaf" />
-                        <label for="flame.leaf" class="shrinkable down">
-                            <span class="short">🔥.🍁</span>
-                            <span class="long">flame.leaf</span>
-                        </label>
-                    </span>
+                    </span>");
+    
+    $row = $result->fetch_assoc();
+}
+
+                    ?>
                 </form>
                 <details class="toplevel secondary">
                     <summary>Show game weights</summary>

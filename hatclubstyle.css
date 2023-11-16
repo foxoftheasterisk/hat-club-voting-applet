@@ -129,7 +129,7 @@ button.small {
     margin: 5px;
 }
 
-.player {
+.nowrap {
     white-space: nowrap;
 }
 
