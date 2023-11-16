@@ -15,23 +15,21 @@ function connectToDB(string $filename = '/run/secrets/sql-credentials.ini') : my
     return $connection;
 }
 
-function displayMessage(string $messageTitle, string $messageBody, string $messageClass = "issue")
+function displayMessage(string $messageTitle, string $messageBody, string $messageClass = "issue", $resp_code = 307)
 {
-    $resp_code = 307;
-    
     setcookie("message-title", $messageTitle);
     setcookie("message-body", $messageBody);
     setcookie("message-class", $messageClass);
     
-    redirect("message.php");
+    redirect("message.php", $resp_code);
 }
 
 function redirect(string $location, $resp_code = 307)
 {
     //307 pretty much always works, for my purposes.
-    //i was trying to get fancy with 4xx and 2xx codes but...
+    //i was trying to get fancy with 4xx  codes but...
     //they don't work as redirects.
-    //so.
+    //200s do though, it turns out! so i should use that on success.
     
     header("Location: {$location}", true, $resp_code);
     exit();
