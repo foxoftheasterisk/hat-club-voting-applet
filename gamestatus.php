@@ -31,13 +31,13 @@
                                 <span class="long">Category<wbr />/Genre</span>
                             </span>
                         </th>
-                        <th>
+                        <th class="sortable" data-sorttype="numberdesc">
                             <span class="shrinkable down">
                                 <span class="short">Own?</span>
                                 <span class="long">Owned</span>
                             </span>
                         </th>
-                        <th>
+                        <th class="sortable" data-sorttype="numberdesc">
                             <span class="shrinkable down">
                                 <span class="short">Play?</span>
                                 <span class="long">Will Play</span>
@@ -55,8 +55,8 @@
                         </td>
                         <td data-sortvalue="9999">1-∞</td>
                         <td>Sandbox</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
+                        <td data-sortvalue="1">✔️</td>
+                        <td data-sortvalue="1">✔️</td>
                         <td>
                             <a href="editstatus.php?Minecraft (Vanilla)">
                                 <button type="button" class="medium action">Edit</button>
@@ -71,8 +71,8 @@
                         </td>
                         <td data-sortvalue="4">1-4</td>
                         <td>Roguelike</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
+                        <td data-sortvalue="1">✔️</td>
+                        <td data-sortvalue="1">✔️</td>
                         <td>
                             <a href="editstatus.php?Barony">
                                 <button type="button" class="medium action">Edit</button>
@@ -135,8 +135,8 @@
                         </td>
                         <td data-sortvalue="16">2-16</td>
                         <td>Fighter</td> 
-                        <td>✔️</td>
-                        <td>
+                        <td data-sortvalue="1">✔️</td>
+                        <td data-sortvalue="0">
                             <span class="hastip left">❌
                                 <span class="tip">You refuse to play Skullgirls.</span>
                             </span>
@@ -155,8 +155,8 @@
                         </td>
                         <td data-sortvalue="8">2-8</td>
                         <td>Board</td>
-                        <td>✔️</td>
-                        <td>
+                        <td data-sortvalue="1">✔️</td>
+                        <td data-sortvalue="0.25">
                             <span class="hastip left">❗
                                 <span class="tip">You have had technical difficulty with Pummel Party.</span>
                             </span>
@@ -219,10 +219,15 @@
                             <td>✔️</td>
                             <td>
                                 <a href="editstatus.php?Terraria">
-                                    <button type="button" class="medium action hastip">Edit<span class="tip">You cannot second your own nomination.</span></button>
+                                    <button type="button" class="medium action">Edit</button>
+                                        
                                 </a>
                             </td>
-                            <td><input type="checkbox" form="second" name="Terraria" disabled \>
+                            <td>
+                                <span class="hastip left">
+                                    <input type="checkbox" form="second" name="second" value="Terraria" disabled \>
+                                    <span class="tip">You cannot second your own nomination.</span>
+                                </span>
                             </td>
                         </tr>
                         <tr class="game">
@@ -240,7 +245,7 @@
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
-                            <td><input type="checkbox" form="second" name="Space Engineers" \>
+                            <td><input type="checkbox" form="second" name="second" value="Space Engineers" \>
                             </td>
                         </tr>
                         <tr class="issue">
@@ -262,7 +267,7 @@
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
-                            <td><input type="checkbox" form="second" name="Civ VI Pirates" \>
+                            <td><input type="checkbox" form="second" name="second" value="Civ VI Pirates" \>
                             </td>
                         </tr>
                         <tr class="game">
@@ -273,7 +278,7 @@
                             </td>
                             <td data-sortvalue="16">1-16</td>
                             <td>Party</td>
-                            <td>
+                            <td data-sortvalue="0.75">
                                 <span class="hastip left">⭕
                                     <span class="tip">You do not own Jackbox, but only the host needs it.</span>
                                 </span>
@@ -284,7 +289,7 @@
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
-                            <td><input type="checkbox" form="second" name="Jackbox" \>
+                            <td><input type="checkbox" form="second" name="second" value="Jackbox" \>
                             </td>
                         </tr>
                         <tr class="game">
@@ -295,7 +300,7 @@
                             </td>
                             <td data-sortvalue="9999">2-∞</td>
                             <td>Board</td>
-                            <td>
+                            <td data-sortvalue="1">
                                 <span class="hastip left">➖
                                     <span class="tip">Ownership is not required for Codenames.</span>
                                 </span>
@@ -306,7 +311,7 @@
                                     <button type="button" class="medium action">Edit</button>
                                 </a>
                             </td>
-                            <td><input type="checkbox" form="second" name="Codenames" \>
+                            <td><input type="checkbox" form="second" name="second" value="Codenames" \>
                             </td>
                         </tr>
                     </table>
