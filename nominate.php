@@ -40,7 +40,7 @@ $db = connectToDB();
                         
                         <div class="lowlevel flexcolumn">
                             <label for="emoji">Emoji:</label>
-                            <input type="text" class="action" id="emoji" name="emoji" size="1" maxlength="4" required/>
+                            <input type="text" class="action" id="emoji" name="emoji" size="2" maxlength="5" required/>
                         </div>
                         
                         <div class="lowlevel flexcolumn">
