@@ -18,7 +18,7 @@ min_players     smallint(6)
 max_players     smallint(6)
 ownership       enum('all', 'one', 'free')
 category        varchar(128)        Nullable
-nominated_by    int(10)
+nominated_by    int(10)             Nullable
 
 
 -players-
@@ -51,9 +51,10 @@ T: increase all players' "sessions since game chosen" by 1 (if doing sessions, n
 Access pages:
 
 (
+legend:
 ✔️ done
 🔧 working, but there's improvements to make
-⌚ waiting on another feature (less relevant now that we have database access)
+⌚ partially completed
 )
 
 ✔️ login.php: username and password fields. leads to redirect page.
@@ -68,7 +69,7 @@ Access pages:
 
 ✔️ message.php: simple page to display error messages for php processing pages. has only whatever links are passed in.
 
-( all following pages redirect to login if not logged in. )
+   all following pages redirect to login if not logged in:
 
 ⌚ homepage.php: redirects to newgamestatus if needed. big vote button if you haven't yet this week. if you have, big choose game button. smaller buttons for edit vote, game status, nominate game/edit game data
     (or should gamestatus and votepage redirect, instead?)
@@ -78,9 +79,9 @@ Access pages:
 
 vote.php: if most recent vote more recent than last saturday, removes those votes; then adds new ones. Redirects to homepage with confirmation message.
 
-⌚ newgamestatus.php: lists each game for which you have not established a status. If nomination, checkbox to second. Dropdown to choose status. (R: rating chooser.) At bottom, confirm button; submits all and returns to homepage (R: returns to game status instead).
+✔️ newgamestatus.php: lists each game for which you have not established a status. If nomination, checkbox to second. Dropdown to choose status. (R: rating chooser.) At bottom, confirm button; submits all and returns to homepage (R: returns to game status instead).
 
-second.php: specialized page that just seconds nominations.
+creategamestatus.php: commits game status data sent to it to database, including seconding. No redirect needed.
 
 ⌚ gamechooser.php: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
 note: will need to refresh to update vote counts.
@@ -88,6 +89,8 @@ note: will need to refresh to update vote counts.
 playgame.php: sets current votes for current players for that game to 0.
 
 ⌚ gamestatus.php: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little edit button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
+
+second.php: specialized page that just seconds nominations.
 
 editgamestatus.php: form similar to newgamestatus, but only for one game. also provides link to edit game *data* for that game.
 
@@ -98,8 +101,6 @@ editgame.php: similar to nominate, but for an existing game. Starts filled. send
 savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
 
 savegame.php: updates global game data in database. Redirects to gamestatus.
-
-creategamestatus.php: commits game status data sent to it to database, including seconding. No redirect needed.
 
 ✔️ creategame.php: commits global game data (including nominator) to database. Redirects to newgamestatus.
 
