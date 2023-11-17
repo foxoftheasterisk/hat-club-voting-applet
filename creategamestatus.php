@@ -58,6 +58,7 @@ if($gamedata->num_rows != 1)
     }
     die();
 }
+$gamedata = $gamedata->fetch_assoc();
 
 $result = $db->query("SELECT COUNT(*) FROM game_status WHERE game_id='{$gameid}' AND player_id='{$user}';");
 
@@ -77,7 +78,7 @@ if(isset($_POST['second']))
     }
 }
 
-if($second && $gamedata["nominated_by"] == $user)
+if($second && ($gamedata["nominated_by"] == $user))
 {
     http_response_code(400);
     die();
