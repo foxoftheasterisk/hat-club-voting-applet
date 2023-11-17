@@ -33,7 +33,6 @@ $db = connectToDB();
                 <div class="toplevel primary">
                     <h3 class="title">New/nominated games require status:</h3>
                     <div class="flexrow">
-                        <!--TODO: populate with PHP -->
                         <?php
 
 $user = $_COOKIE['user'];
@@ -61,14 +60,14 @@ $game = $result->fetch_assoc();
 while($game != null)
 {
     echo("              <form class='midlevel secondary flexcolumn'
-                              action='savegamestatus.php'
+                              action='creategamestatus.php'
                               method='POST'
                               autocomplete='off'> 
                             <input type='hidden' name='game' value='{$game["id"]}' />
                             <h4 class='title'>{$game["emoji"]} {$game["name"]}</h4>");
     
     //nomination block
-if($game["nominated_by"] != null)
+    if($game["nominated_by"] != null)
     {
         if($game["nominated_by"]== $user)
         {
@@ -76,7 +75,7 @@ if($game["nominated_by"] != null)
         }
         else
         {
-            $subresult = $db->query("SELECT name, short_name FROM players WHERE id='{$game["id"]}'");
+            $subresult = $db->query("SELECT name, short_name FROM players WHERE id='{$game["nominated_by"]}'");
             if($subresult->num_rows != 1)
             {
                 echo("Error: nominator rows != 1! Contact admin.");

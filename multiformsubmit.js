@@ -46,7 +46,7 @@ async function submitAllForms(submitButton) {
         {
             let placeholder = document.createElement("div");
             placeholder.className = submission.form.className;
-            placeholder.innerHTML = "Submitted!"
+            placeholder.innerHTML = "Submitted!";
             submission.form.parentNode.replaceChild(placeholder, submission.form);
         }
         else
@@ -65,6 +65,6 @@ async function submitAllForms(submitButton) {
     }
     else
     {
-        window.location.href = "homepage.html";
+        setTimeout(function() {window.location.href = "homepage.php";}, 2000);
     }
 }
