@@ -1,11 +1,139 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require('utils.php');
+if(!isset($_COOKIE['user']))
+{
+    redirect("login.php");
+}
+
+$db = connectToDB();
+
+$user = $db->real_escape_string($_COOKIE['user']);
+
+//redirect to newgamestatus if there are unfilled gamestatuses
+$query = "SELECT IF( EXISTS( SELECT id 
+                             FROM games 
+                             EXCEPT
+                             SELECT games.id
+                             FROM games JOIN game_status ON games.id = game_status.game_id
+                             WHERE game_status.player_id = '{$user}' ) , 1, 0);";
+
+$result = $db->query($query);
+
+if($result->fetch_array()[0] != 0)
+{
+    redirect("newgamestatus.php");
+    //welp this is the only recourse for debug, so: let it be
+}
+
+function buildRow($game, $isNominated = false, $user = null)
+{
+    
+    //TODO: change class to issue when issues
+    echo("          <tr class='game'>
+                        <td data-sortvalue='{$game["name"]}'>
+                            <span class='shrinkable right'>
+                                <span class='big'>{$game["emoji"]}</span><span class='long'>{$game["name"]}</span>
+                            </span>
+                        </td>");
+    
+    $max = $game["max"];
+    if($max == 9999)
+    {
+        $max = "∞";
+        //we want to change the display (but NOT the sort value) to ∞ if the number is 9999
+    }
+    echo("              <td data-sortvalue='{$game["max"]}'>{$game["min"]}-{$max}</td>
+                        <td>{$game["genre"]}</td>");
+    
+    if($game["owned"])
+    {
+        echo("          <td data-sortvalue='1'>✔️</td>");
+    }
+    else
+    {
+        switch($game["ownership"])
+        {
+            case "all":
+                echo("  <td data-sortvalue='0'>❌</td>");
+                break;
+            case "one":
+                echo("  <td data-sortvalue='0.5'>
+                            <span class='hastip left'>⭕
+                                <span class='tip'>You do not own {$game["name"]}, but only the host needs it.</span>
+                            </span>
+                        </td>");
+                break;
+            case "free":
+                echo("  <td data-sortvalue='1'>
+                            <span class='hastip left'>➖
+                                <span class='tip'>{$game["name"]} is a free game.</span>
+                            </span>
+                        </td>");
+                break;
+        }
+    }
+    
+    switch ($game["willing"])
+    {
+        case "good":
+            echo("      <td data-sortvalue='1'>✔️</td>");
+            break;
+        case "tech":
+            echo("      <td data-sortvalue='0.5'>
+                            <span class='hastip left'>❗
+                                <span class='tip'>You have had technical difficulty with {$game["name"]}.</span>
+                            </span>
+                        </td>");
+            break;
+        case "veto":
+            echo("      <td data-sortvalue='0'>
+                            <span class='hastip left'>❌
+                                <span class='tip'>You refuse to play {$game["name"]}.</span>
+                            </span>
+                        </td>");
+            break;
+    }
+    
+    echo("              <td>
+                            <a href='editstatus.php?{$game["name"]}'>
+                                <button type='button' class='medium action'>Edit</button>
+                            </a>
+                        </td>");
+    
+    if($isNominated)
+    {
+        if($game["nominator"] == $user)
+        {
+            echo("      <td>
+                            <span class='hastip left'>
+                                <input type='checkbox' form='second' name='second' value='{$game["name"]}' disabled \>
+                                <span class='tip'>You cannot second your own nomination!</span>
+                            </span>
+                        </td>");
+        }
+        else
+        {
+            echo("      <td><input type='checkbox' form='second' name='second' value='{$game["name"]}' \>
+                        </td>");
+        }
+    }
+    
+    echo("          </tr>");
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
         <title>Game roster</title>
         
         <?php require('header_boilerplate.html'); ?>
-        
-        <!--TODO: redirect if not logged in-->
         
         <script src="sortutil.js" ></script>
         
@@ -46,129 +174,36 @@
                         <th>
                         </th>
                     </tr>
-                    <!-- TODO: replace sample data with PHP -->
-                    <tr class="game">
-                        <td data-sortvalue="Minecraft (Vanilla)">
-                            <span class="shrinkable right">
-                                <span class="big">⛏️</span><span class="long">Minecraft (Vanilla)</span>
-                            </span>
-                        </td>
-                        <td data-sortvalue="9999">1-∞</td>
-                        <td>Sandbox</td>
-                        <td data-sortvalue="1">✔️</td>
-                        <td data-sortvalue="1">✔️</td>
-                        <td>
-                            <a href="editstatus.php?Minecraft (Vanilla)">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Barony">
-                            <span class="shrinkable right">
-                                <span class="big">🧌</span><span class="long">Barony</span>
-                            </span>
-                        </td>
-                        <td data-sortvalue="4">1-4</td>
-                        <td>Roguelike</td>
-                        <td data-sortvalue="1">✔️</td>
-                        <td data-sortvalue="1">✔️</td>
-                        <td>
-                            <a href="editstatus.php?Barony">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Golf with your Friends">
-                            <span class="shrinkable right">
-                                <span class="big">🏌️‍♀️</span><span class="long">Golf with your Friends</span>
-                            </span>
-                        ️</td>
-                        <td data-sortvalue="12">1-12</td>
-                        <td>Party</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                        <td>
-                            <a href="editstatus.php?Golf With Your Friends">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Duck Game">
-                            <span class="shrinkable right">
-                                <span class="big">🦆</span><span class="long">Duck Game</span>
-                            </span>
-                        </td>
-                        <td data-sortvalue="8">2-8</td>
-                        <td>Brawl</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                        <td>
-                            <a href="editstatus.php?Duck Game">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Root: A Game of Woodland Might and Right">
-                            <span class="shrinkable right">
-                                <span class="big">😾</span><span class="long">Root: A Game of Woodland Might and Right</span>
-                            </span>
-                        </td>
-                        <td data-sortvalue="6">2-6</td>
-                        <td>Board</td>
-                        <td>✔️</td>
-                        <td>✔️</td>
-                        <td>
-                            <a href="editstatus.php?Root: A Game of Woodland Might and Right">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="issue">
-                        <td data-sortvalue="Skullgirls">
-                            <span class="shrinkable right">
-                                <span class="big">💀</span><span class="long">Skullgirls</span>
-                            </span>
-                        </td>
-                        <td data-sortvalue="16">2-16</td>
-                        <td>Fighter</td> 
-                        <td data-sortvalue="1">✔️</td>
-                        <td data-sortvalue="0">
-                            <span class="hastip left">❌
-                                <span class="tip">You refuse to play Skullgirls.</span>
-                            </span>
-                        </td>
-                        <td>
-                            <a href="editstatus.php?Skullgirls">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr class="issue">
-                        <td data-sortvalue="Pummel Party">
-                            <span class="shrinkable right">
-                                <span class="big">🤛</span><span class="long">Pummel Party</span>
-                            </span>
-                        </td>
-                        <td data-sortvalue="8">2-8</td>
-                        <td>Board</td>
-                        <td data-sortvalue="1">✔️</td>
-                        <td data-sortvalue="0.25">
-                            <span class="hastip left">❗
-                                <span class="tip">You have had technical difficulty with Pummel Party.</span>
-                            </span>
-                        </td>
-                        <td>
-                            <a href="editstatus.php?Minecraft (Vanilla)">
-                                <button type="button" class="medium action">Edit</button>
-                            </a>
-                        </td>
-                    </tr>
+                    <?php
+
+//yikes what a monster of a query
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, games.min_players AS min, games.max_players AS max, games.ownership AS ownership, games.category AS genre, game_status.owned AS owned, game_status.status AS willing
+          FROM games JOIN game_status ON games.id = game_status.game_id
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL";
+
+$result = $db->query($query);
+
+$game = $result->fetch_assoc();
+while($game != null)
+{
+    buildRow($game);
+    
+    $game = $result->fetch_assoc();
+}
+                    ?>
                 </table>
-                <details class="tight flexcolumn">
+                <?php
+
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, games.min_players AS min, games.max_players AS max, games.ownership AS ownership, games.category AS genre, game_status.owned AS owned, game_status.status AS willing, games.nominated_by AS nominator
+          FROM games JOIN game_status ON games.id = game_status.game_id
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NOT NULL;";
+
+
+$result = $db->query($query);
+
+if($result->num_rows > 0)
+{
+    echo('      <details class="tight flexcolumn">
                     <summary class="title">Show nominated games</summary>
                     <table style="width: 100%;">
                         <tr class="tertiary header">
@@ -185,13 +220,13 @@
                                     <span class="long">Category<wbr />/Genre</span>
                                 </span>
                             </th>
-                            <th>
+                            <th class="sortable" data-sorttype="numberdesc">
                                 <span class="shrinkable down wide">
                                     <span class="short">Own?</span>
                                     <span class="long">Owned</span>
                                 </span>
                             </th>
-                            <th>
+                            <th class="sortable" data-sorttype="numberdesc">
                                 <span class="shrinkable down wide">
                                     <span class="short">Play?</span>
                                     <span class="long">Will Play</span>
@@ -205,124 +240,28 @@
                                     <span class="long">Second</span>
                                 </span>
                             </th>
-                        </tr>
-                        <!-- TODO: replace sample data with PHP -->
-                        <tr class="game">
-                            <td data-sortvalue="Terraria">
-                                <span class="shrinkable right">
-                                    <span class="big">🌳</span><span class="long">Terraria</span>
-                                </span>
-                            </td>
-                            <td data-sortvalue="9999">1-∞</td>
-                            <td>Sandbox</td>
-                            <td>✔️</td>
-                            <td>✔️</td>
-                            <td>
-                                <a href="editstatus.php?Terraria">
-                                    <button type="button" class="medium action">Edit</button>
-                                        
-                                </a>
-                            </td>
-                            <td>
-                                <span class="hastip left">
-                                    <input type="checkbox" form="second" name="second" value="Terraria" disabled \>
-                                    <span class="tip">You cannot second your own nomination.</span>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr class="game">
-                            <td data-sortvalue="Space Engineers">
-                                <span class="shrinkable right">
-                                    <span class="big">👩‍🚀</span><span class="long">Space Engineers</span>
-                                </span>
-                            </td>
-                            <td data-sortvalue="9999">1-∞</td>
-                            <td>Sandbox</td>
-                            <td>✔️</td>
-                            <td>✔️</td>
-                            <td>
-                                <a href="editstatus.php?Space Engineers">
-                                    <button type="button" class="medium action">Edit</button>
-                                </a>
-                            </td>
-                            <td><input type="checkbox" form="second" name="second" value="Space Engineers" \>
-                            </td>
-                        </tr>
-                        <tr class="issue">
-                            <td data-sortvalue="Civ VI Pirates">
-                                <span class="shrinkable right">
-                                    <span class="big">🏴‍☠️</span><span class="long">Civ VI Pirates</span>
-                                </span>
-                            </td>
-                            <td data-sortvalue="4">2-4</td>
-                            <td>Board</td>
-                            <td>✔️</td>
-                            <td>
-                                <span class="hastip left">❌
-                                    <span class="tip">You refuse to play Civ VI Pirates.</span>
-                                </span>
-                            </td>
-                            <td>
-                                <a href="editstatus.php?Civ VI Pirates">
-                                    <button type="button" class="medium action">Edit</button>
-                                </a>
-                            </td>
-                            <td><input type="checkbox" form="second" name="second" value="Civ VI Pirates" \>
-                            </td>
-                        </tr>
-                        <tr class="game">
-                            <td data-sortvalue="Jackbox">
-                                <span class="shrinkable right">
-                                    <span class="big">💩</span><span class="long">Jackbox</span>
-                                </span>
-                            </td>
-                            <td data-sortvalue="16">1-16</td>
-                            <td>Party</td>
-                            <td data-sortvalue="0.75">
-                                <span class="hastip left">⭕
-                                    <span class="tip">You do not own Jackbox, but only the host needs it.</span>
-                                </span>
-                            </td>
-                            <td>✔️</td>
-                            <td>
-                                <a href="editstatus.php?Jackbox">
-                                    <button type="button" class="medium action">Edit</button>
-                                </a>
-                            </td>
-                            <td><input type="checkbox" form="second" name="second" value="Jackbox" \>
-                            </td>
-                        </tr>
-                        <tr class="game">
-                            <td data-sortvalue="Codenames">
-                                <span class="shrinkable right">
-                                    <span class="big">🕵️</span><span class="long">Codenames</span>
-                                </span>
-                            </td>
-                            <td data-sortvalue="9999">2-∞</td>
-                            <td>Board</td>
-                            <td data-sortvalue="1">
-                                <span class="hastip left">➖
-                                    <span class="tip">Ownership is not required for Codenames.</span>
-                                </span>
-                            </td>
-                            <td>✔️</td>
-                            <td>
-                                <a href="editstatus.php?Codenames">
-                                    <button type="button" class="medium action">Edit</button>
-                                </a>
-                            </td>
-                            <td><input type="checkbox" form="second" name="second" value="Codenames" \>
-                            </td>
-                        </tr>
-                    </table>
+                        </tr>');
+    
+    
+    $game = $result->fetch_assoc();
+    while($game != null)
+    {
+        buildRow($game, true, $user);
+        
+        $game = $result->fetch_assoc();
+    }
+    
+    
+    echo('          </table>
                     <form id="second" 
                           action="second.php" 
                           method="post" 
                           class="primary footer">
                         <button class="big action" type="submit">Second selected</button>
                     </form>
-                </details>
-
+                </details>');
+}
+                ?> 
             </main>
         </div>
     </body>
