@@ -25,6 +25,32 @@ function displayMessage(string $messageTitle, string $messageBody, string $messa
     redirect("message.php", $resp_code);
 }
 
+//gods i wish i'd done this earlier
+//OH WELL,
+function message(string $messageTitle, string $messageBody, array $buttons, string $messageClass = "issue", $resp_code = 307)
+{
+    $message = "<p>
+                    {$messageBody}
+                </p>
+                <div class='flexrow'>";
+    
+    if(array_is_list($buttons))
+    {
+        foreach ($buttons as $button)
+        {
+            $message .= "<a href='{$button["href"]}'><button class='medium action'>{$button["text"]}</button></a>";
+        }
+    }
+    else
+    {
+        $message .= "<a href='{$buttons["href"]}'><button class='medium action'>{$buttons["text"]}</button></a>";
+    }
+    
+    $message .= "</div>";
+    
+    displayMessage($messageTitle, $message, $messageClass, $resp_code);
+}
+
 function redirect(string $location, $resp_code = 307)
 {
     //307 pretty much always works, for my purposes.
