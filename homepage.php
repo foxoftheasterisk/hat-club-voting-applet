@@ -45,7 +45,6 @@ else if($row["days"] >= 6)
             
             ?>
         
-            <!-- TODO: show different options if not yet voted -->
             <img src="fishhat.png" alt="The Fish Hat" class="splash">
             <main class="flexcolumn">
                 <?php

@@ -124,6 +124,7 @@ while($game != null)
                         ?>
                      </div>
                      <button class="big action" type="submit" onclick="submitAllForms(this)">Submit all</button>
+                     <!--TODO: link back to whichever you came from (gamestatus, vote)-->
                 </div>
             </main>
         </div>

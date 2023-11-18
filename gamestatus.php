@@ -240,31 +240,32 @@ if($result->num_rows > 0)
                             </th>
                             <th>
                             </th>
-                            <th>
+                            <!--<th>
                                 <span class="shrinkable left">
                                     <span class="short">2</span>
                                     <span class="long">Second</span>
                                 </span>
-                            </th>
+                            </th>-->
                         </tr>');
-    
+    //TODO: uncomment seconding row
     
     $game = $result->fetch_assoc();
     while($game != null)
     {
-        buildRow($game, true, $user);
+        //TODO: change to true
+        buildRow($game, false, $user);
         
         $game = $result->fetch_assoc();
     }
     
-    
+    //TODO: uncomment second button
     echo('          </table>
-                    <form id="second" 
+                    <!--<form id="second" 
                           action="second.php" 
                           method="post" 
                           class="primary footer">
                         <button class="big action" type="submit">Second selected</button>
-                    </form>
+                    </form>-->
                 </details>');
 }
                 ?> 
