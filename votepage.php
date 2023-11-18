@@ -196,7 +196,7 @@ function buildRow($game)
         <script src="votelimiter.js" ></script>
         
     </head>
-    <body onload="makeSortablesSortable()">
+    <body onload="makeSortablesSortable(); checkVoteLimit()">
         <div class="main">
             <a href="homepage.php">
                 <img src="fishhat.png" alt="The Fish Hat" class="cap" />
