@@ -257,7 +257,7 @@ while ($game != null)
                                 form="playerform"
                                 formaction="playgame.php"
                                 formmethod="POST" >
-                            Play!
+                            Played!
                         </button>
                     </div>
                     <!--technically, ids should be unique through the whole document
@@ -275,9 +275,9 @@ while ($game != null)
                                 class="medium action" 
                                 type="submit" 
                                 form="playerform"
-                                formaction="play.php"
+                                formaction="playgame.php"
                                 formmethod="POST" >
-                            Play!
+                            Played!
                         </button>
                     </div>
                 </div>
