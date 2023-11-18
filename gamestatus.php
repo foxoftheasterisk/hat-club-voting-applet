@@ -27,15 +27,21 @@ $result = $db->query($query);
 if($result->fetch_array()[0] != 0)
 {
     redirect("newgamestatus.php");
-    //welp this is the only recourse for debug, so: let it be
 }
 
 function buildRow($game, $isNominated = false, $user = null)
 {
     
-    //TODO: change class to issue when issues
-    echo("          <tr class='game'>
-                        <td data-sortvalue='{$game["name"]}'>
+    if($game["willing"] != "good" || (!$game["owned"] && $game["ownership"] == "all"))
+    {
+        echo ("     <tr class='issue'>");
+    }
+    else
+    {
+        echo("      <tr class='game'>");
+    }
+    
+    echo("              <td data-sortvalue='{$game["name"]}'>
                             <span class='shrinkable right'>
                                 <span class='big'>{$game["emoji"]}</span><span class='long'>{$game["name"]}</span>
                             </span>
@@ -92,8 +98,8 @@ function buildRow($game, $isNominated = false, $user = null)
             break;
         case "veto":
             echo("      <td data-sortvalue='0'>
-                            <span class='hastip left'>❌
-                                <span class='tip'>You refuse to play {$game["name"]}.</span>
+                            <span class='hastip left'>🚫
+                                <span class='tip'>You do not like to play {$game["name"]}.</span>
                             </span>
                         </td>");
             break;

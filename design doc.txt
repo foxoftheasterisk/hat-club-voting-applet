@@ -88,7 +88,7 @@ note: will need to refresh to update vote counts.
 
 playgame.php: sets current votes for current players for that game to 0.
 
-✔️ gamestatus.php: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little edit button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
+🔧 gamestatus.php: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little edit button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
 
 second.php: specialized page that just seconds nominations.
 
@@ -109,11 +109,11 @@ Game choosing algorithm:
 Input is the players attending
 In all cases, check basic conditions:
         * correct number of players
-        * no refusal to play (R: 1* votes)
 Special second category for possibly fixable issues?:
         * ownership conditions unfulfilled
         * technical difficulties
-   if so, i think they should have the chances of appearing decreased, AND automatically pop up another choice. also say what the issue(s) is. Chances decreased by 75% for each player with issue? multiplicative (so with two, 6.25% of the base chance. round... down?) (games that only the host needs to own count as one issue)
+        * no refusal to play (R: 1* votes)
+   if so, i think they should have the chances of appearing decreased, AND automatically pop up another choice. also say what the issue(s) is. Chances decreased by 75% for each player with issue? multiplicative (so with two, 6.25% of the base chance. round... down?) (games that only the host needs to own count as one issue if no one owns)
 TCM: collect votes, ignoring any older than six days.
 V: Eliminate vetoed games
           *unless every game gets vetoed in which case... ignore first vetoes?
