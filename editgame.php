@@ -209,8 +209,12 @@ while($row != null)
                         </div>
                         
                     </div>
-                    
-                    <button class="medium action" type="submit">Edit data</button> 
+                    <div class="flexrow">
+                        <a href="gamestatus.php">
+                            <button type='button' class='medium action'>Return to game status page</button>
+                        </a>
+                        <button class="medium action" type="submit">Confirm changes</button> 
+                    </div>
                 </form>
             </main>
         </div>

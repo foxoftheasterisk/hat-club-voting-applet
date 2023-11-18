@@ -163,11 +163,14 @@ if($game["ownership"] != "free")
                             ?>
                             <button class="medium action" type="submit">Submit</button>
                         </form>
-                        <form action='editgame.php' method='GET'>
+                        <form action='editgame.php' method='GET' class="flexcolumn">
                             <button type='submit' 
                                     class='medium action' 
                                     name='game' 
                                     value='<?=$gameid?>'>Edit global game data</button>
+                            <a href="gamestatus.php">
+                                <button type='button' class='medium action'>Return to game status page</button>
+                            </a>
                         </form>
                      </div>
                 </div>
