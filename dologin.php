@@ -27,7 +27,7 @@ if($result->num_rows == 0)
     //so this isn't exposed in source...
     $lobby = parse_ini_file("constants.ini", true)["lobby"];
     
-    if($password == $lobby['pass'])
+    if($password == $lobby['lobbypass'])
     {
         redirect("newplayer.php");
     }
