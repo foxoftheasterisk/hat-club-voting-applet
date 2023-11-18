@@ -21,12 +21,9 @@ $result = $db->query("SELECT COUNT(*) FROM players WHERE id='{$user}';");
 $row = $result->fetch_array();
 if($row[0] == 0)
 {
-    $message = '<p>
-                    Submitting user not found! Contact your admin.
-                </p>
-                <a href="homepage.php"><button class="medium action">Return to homepage</button></a>';
-    
-    displayMessage("Nomination failed!", $message);
+    $message = 'Submitting user not found! Contact your admin.';
+    $button = array("href"=>"homepage.php", "text" => "Return to homepage"); 
+    message("Nomination failed!", $message, $button);
 }
 
 //check that name exists

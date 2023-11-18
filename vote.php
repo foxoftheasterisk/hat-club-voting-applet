@@ -191,9 +191,8 @@ foreach ($votes as $vote)
 
 $message = "Votes accepted!";
 $button = array("href"=>"homepage.php", "text"=>"Return to homepage");
-message("Voting failed!", $message, $button);
+message("Voted!", $message, $button, "primary");
 
-//*/
 echo("End of file reached.");
 
 ?>
