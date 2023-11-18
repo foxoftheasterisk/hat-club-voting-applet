@@ -156,5 +156,5 @@ if($second)
 
 http_response_code(200);
 exit();
-//501: not implemented
+//200: OK
 ?>
