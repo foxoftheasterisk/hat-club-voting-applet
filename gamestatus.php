@@ -249,7 +249,7 @@ if($result->num_rows > 0)
                                 </span>
                             </th>-->
                         </tr>');
-    //TODO: uncomment seconding row
+    //TODO: uncomment seconding column
     
     $game = $result->fetch_assoc();
     while($game != null)
