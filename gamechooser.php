@@ -224,7 +224,7 @@ while ($game != null)
     if(count($issueList) > 0)
     {
         echo("              <p id='issues' style='display: none;'>");
-        foreach($issuelist as $issue)
+        foreach($issueList as $issue)
         {
             echo("              <span>{$issue}</span>");
         }
