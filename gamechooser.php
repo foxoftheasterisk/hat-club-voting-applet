@@ -50,7 +50,7 @@ $db = connectToDB();
 
 $selected = array();
 
-$query = "SELECT players.id, players.name, players.short_name, MIN(DATEDIFF(NOW(), game_status.last_voted_for)) AS time_since_vote
+$query = "SELECT players.id, players.name, players.short_name, MIN(DATEDIFF(CURDATE(), game_status.last_voted_for)) AS time_since_vote
           FROM players LEFT JOIN game_status ON players.id = game_status.player_id
           GROUP BY players.id";
 

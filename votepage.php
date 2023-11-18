@@ -228,7 +228,7 @@ function buildRow($game)
                     <?php
 
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(NOW(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(CURDATE(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
 //PHP decided to make its date functions fucking impossible to figure out
@@ -250,7 +250,7 @@ while($game != null)
                 <?php
 
 //this should capture all games that were not previously captured
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(NOW(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(CURDATE(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND NOT (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
 

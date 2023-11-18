@@ -95,7 +95,7 @@ for ($i = 0; $i < count($votes); $i++)
 
 $query = "SELECT game_id, current_vote
           FROM game_status
-          WHERE player_id='{$user}' AND DATEDIFF(NOW(), game_status.last_voted_for) < 6;";
+          WHERE player_id='{$user}' AND DATEDIFF(CURDATE(), game_status.last_voted_for) < 6;";
 //could be 7, but then we would get things where if you vote on Saturday one week and Friday the next,
 //it would interpret that as the same week.
 //ideally, this would actually look at the day of the week and reset on Saturday(/Sunday?)..
@@ -165,7 +165,7 @@ foreach ($changeable_votes as $vote)
 foreach ($votes as $vote)
 {
     $query = "UPDATE game_status
-              SET current_vote = current_vote + 1, historical_vote = historical_vote + 1, last_voted_for = NOW()
+              SET current_vote = current_vote + 1, historical_vote = historical_vote + 1, last_voted_for = CURDATE()
               WHERE player_id='{$user}' AND game_id='{$vote}';";
     
     try

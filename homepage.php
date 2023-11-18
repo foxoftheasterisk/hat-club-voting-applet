@@ -10,7 +10,7 @@ $db = connectToDB();
 
 $user = $db->real_escape_string($_COOKIE['user']);
 
-$query = "SELECT MIN(DATEDIFF(NOW(), last_voted_for)) AS days
+$query = "SELECT MIN(DATEDIFF(CURDATE(), last_voted_for)) AS days
           FROM game_status
           WHERE player_id='{$user}' AND last_voted_for IS NOT NULL";
 
