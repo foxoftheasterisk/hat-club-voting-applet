@@ -265,7 +265,8 @@ while($game != null)
 //this should capture all games that were not previously captured
 $query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(CURDATE(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
-          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND NOT (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND NOT (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
+          ORDER BY game_status.last_voted_for DESC, games.name";
 
 $result = $db->query($query);
 

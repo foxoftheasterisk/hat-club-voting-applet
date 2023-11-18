@@ -203,7 +203,8 @@ while($game != null)
 
 $query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, games.min_players AS min, games.max_players AS max, games.ownership AS ownership, games.category AS genre, game_status.owned AS owned, game_status.status AS willing, games.nominated_by AS nominator
           FROM games JOIN game_status ON games.id = game_status.game_id
-          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NOT NULL;";
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NOT NULL
+          ORDER BY games.name;";
 
 
 $result = $db->query($query);
