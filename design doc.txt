@@ -85,15 +85,15 @@ legend:
 
 🔧 gamechooser.php: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
 
-playgame.php: sets current votes for current players for that game to 0.
+✔️ playgame.php: sets current votes for current players for that game to 0.
 
 🔧 gamestatus.php: at top, button that leads to (R: choose game; TCM: Homepage). (R: redirects to new game status if needed.) in collapsible section (default open), lists all confirmed games and statuses (R: and ratings) along with global game data. each game also has little edit button. list sortable by various attributes. (R: link to nominate game page) in collapsed section, also lists all nominated games and allows you to second them, if you were not the one to nominate. at bottom, confirm changes button, which leads back to same page.
 
 second.php: specialized page that just seconds nominations.
 
-editgamestatus.php: form similar to newgamestatus, but only for one game. also provides link to edit game *data* for that game.
+✔️ editstatus.php: form similar to newgamestatus, but only for one game. also provides link to edit game *data* for that game.
 
-savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
+✔️ savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
 
 editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
 

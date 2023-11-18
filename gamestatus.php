@@ -106,9 +106,9 @@ function buildRow($game, $isNominated = false, $user = null)
     }
     
     echo("              <td>
-                            <a href='editstatus.php?{$game["name"]}'>
-                                <button type='button' class='medium action'>Edit</button>
-                            </a>
+                            <form action='editstatus.php' method='GET'>
+                                <button type='submit' class='medium action' name='game' value='{$game["id"]}'>Edit</button>
+                            </form>
                         </td>");
     
     if($isNominated)
