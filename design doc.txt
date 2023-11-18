@@ -95,9 +95,9 @@ second.php: specialized page that just seconds nominations.
 
 ✔️ savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
 
-editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
+✔️ editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
 
-savegame.php: updates global game data in database. Redirects to gamestatus.
+✔️ savegame.php: updates global game data in database. Redirects to gamestatus.
 
 🔧 nominate.php: provides form for you to fill out with game data, and a confirm button, which sends to creategame.php. also a homepage button at top if you changed your mind (or misclicked)
 

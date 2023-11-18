@@ -256,25 +256,33 @@ if(!isset($_POST['genre']))
 
 $cat = $_POST['genre'];
 
+$cat = $db->real_escape_string($cat);
+
 if($cat == "New")
 {
     if(!isset($_POST['newgenre']))
     {
-        $message = "<p>
-                        Genre set to \"New\", but no new genre submitted!
-                    </p>
-                    <div class='flexrow'>
-                        <a href='homepage.php'><button class='medium action'>Return to homepage</button></a>
-                        <a href='nominate.php'><button class='medium action'>Try again</button></a>
-                    </div>";
-        
-        displayMessage("Nomination failed!", $message);
+        $message = "Genre set to \"New\", but no new genre submitted!";
+        $button = array("href"=>"gamestatus.php", "text" => "Return to game status page"); 
+        message("Game edit failed!", $message, $button);
     }
     
-    $cat = $_POST['newgenre'];
+    $cat = $db->real_escape_string($_POST['newgenre']);
+    
+    $result = $db->query("SELECT DISTINCT category FROM games WHERE category='{$cat}';");
+    //i swear there is a point to this
+    
+    if($result->num_rows != 0)
+    {
+        $realcat = $result->fetch_array()[0];
+        
+        //because the database is case-insensitive, the case may be different between $cat and $realcat
+        //hence why both are stored.
+        $message = "Tried to create genre \"{$cat}\", but the genre \"{$realcat}\" already exists!";
+        $button = array("href"=>"gamestatus.php", "text" => "Return to game status page"); 
+        message("Game edit failed!", $message, $button);
+    }
 }
-
-$cat = $db->real_escape_string($cat);
 
 //all checks done!! now to do the thing!
 
