@@ -93,6 +93,7 @@ function buildRow($game)
     
     $name = str_replace("'", "&apos;", $game["name"]);
     $lastDisplay;
+    $lastShort;
     $lastValue;
     if($game["last"] == null)
     {
@@ -100,16 +101,22 @@ function buildRow($game)
         if($game["hist"] == 0)
         {
             $lastDisplay = "Never";
+            $lastShort = "✖️";
         }
         else
         {
             $lastDisplay = "Unknown";
+            $lastShort = "❔";
         }
     }
     else
     {
-        $lastValue = intval($game["last"]);
-        $lastDisplay = date("m/j/y", $lastValue);
+        //WHAT DO YOU MEAN IT'S A STRING
+        //i mean... of course it is i guess.
+        $lastDT = DateTime::createFromFormat("Y-m-d", $game["last"]);
+        $lastValue = $lastDT->format("Ymd");
+        $lastDisplay = $lastDT->format("n/j/y");
+        $lastShort = $lastDT->format("n/j");
     }
     
     
@@ -120,7 +127,12 @@ function buildRow($game)
                             </span>
                         </td>
                         <td>{$votes}</td>
-                        <td data-sortvalue='{$lastValue}'>{$lastDisplay}</td>
+                        <td data-sortvalue='{$lastValue}'>
+                            <span class='shrinkable right'>
+                                <span class='short'>{$lastShort}</span>
+                                <span class='long'>{$lastDisplay}</span>
+                            </span>
+                        </td>
                         <td>{$game["hist"]}</td>
                         <td>{$total_votes}</td>
                         <td data-sortvalue='{$issueval}'>");
@@ -230,7 +242,8 @@ function buildRow($game)
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
 $query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(CURDATE(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
-          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
+          ORDER BY game_status.last_voted_for DESC, games.name";
 //PHP decided to make its date functions fucking impossible to figure out
 //(or maybe it's just w3schools, anyway though)
 //SO I'M GETTING IT IN THE SQL. I KNOW HOW TO DO _THAT_
