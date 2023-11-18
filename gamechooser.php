@@ -111,6 +111,13 @@ while($row != null)
 $playerCount= count($selected);
 $playerCSV = implode(", ", $selected);
 
+if($playerCount == 0)
+{
+    //put something in playerCSV, so it doesn't crash the sql
+    
+    $playerCSV = "0";
+}
+
 //these queries keep getting longer and longer XD
 //in theory, I should probably make these queries be saved procedures (and then unexpose everything else)
 //...but that's a lot of effort in security that SHOULDN'T matter
