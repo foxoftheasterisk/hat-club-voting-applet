@@ -163,7 +163,7 @@ else
                             <select id="genre" class="action" name="genre" onchange="showHideNewGenre(this)" required>
                                 <?php
 
-$query = "SELECT DISTINCT category FROM games";
+$query = "SELECT DISTINCT category FROM games ORDER BY category";
 $result = $db->query($query);
 $row = $result->fetch_array();
 

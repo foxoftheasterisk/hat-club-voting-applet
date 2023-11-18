@@ -105,7 +105,7 @@ $db = connectToDB();
                                 <option></option>
                                 <?php
 
-$query = "SELECT DISTINCT category FROM games";
+$query = "SELECT DISTINCT category FROM games ORDER BY category";
 $result = $db->query($query);
 $row = $result->fetch_array();
 
