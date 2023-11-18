@@ -1,6 +1,6 @@
 <?php
 
-$MAX_VOTES = 5;
+$MAX_VOTES = parse_ini_file("constants.ini")["max_votes"];
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
