@@ -120,7 +120,7 @@ if($game["nominated_by"] != null)
                                 </span>
                             </span>
                             <span class='lowlevel'>
-                                <input type='checkbox' id='second {$game["id"]}' name='second' value='yes' /><label for='second {$game["id"]}' class='text'>Second nomination</label>
+                                <input type='checkbox' id='second' name='second' value='yes' /><label for='second' class='text'>Second nomination</label>
                             </span>");
     }
 }                           ?>
