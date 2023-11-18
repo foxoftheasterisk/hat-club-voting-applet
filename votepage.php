@@ -1,12 +1,157 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require('utils.php');
+if(!isset($_COOKIE['user']))
+{
+    redirect("login.php");
+}
+
+$db = connectToDB();
+
+$user = $db->real_escape_string($_COOKIE['user']);
+
+//redirect to newgamestatus if there are unfilled gamestatuses
+//(We can't just use COUNT actually since we need to subtract.
+//we could skip EXISTS, but the extra call probably makes it run faster, actually?
+//SQL is a language with a lot of back-end optimization.)
+$query = "SELECT IF( EXISTS( SELECT id 
+                             FROM games 
+                             EXCEPT
+                             SELECT games.id
+                             FROM games JOIN game_status ON games.id = game_status.game_id
+                             WHERE game_status.player_id = '{$user}' ) , 1, 0);";
+
+$result = $db->query($query);
+
+if($result->fetch_array()[0] != 0)
+{
+    redirect("newgamestatus.php");
+}
+
+function buildRow($game, $db)
+{
+    
+    $gameid = $game["id"];
+    
+    //first, run through everyone's game_status to find issues and count up votes
+    //(we have to do this first so we can color issue rows)
+    $issues = array();
+    $issueval = 0;
+    $votes = 0;
+    $total_votes = 0;
+    
+    $query = "SELECT game_status.current_vote AS votes, game_status.historical_vote AS hist, game_status.owned AS owned, game_status.status AS willing, players.name AS name
+              FROM game_status JOIN players ON game_status.player_id = players.id
+              WHERE game_status.game_id = '{$game["id"]}'";
+    
+    $result = $db->query($query);
+    $status = $result->fetch_assoc();
+    while($status != null)
+    {
+        $votes += $status["votes"];
+        $total_votes += $status["hist"];
+        
+        if($status["willing"] != "good")
+        {
+            array_push($issues, array("name" => $status["name"], "issue" => $status["willing"]));
+            switch($status["willing"])
+            {
+                case "veto":
+                    $issueval += 1;
+                case "tech":
+                    $issueval += 0.5;
+            }
+        }
+        
+        if($game["ownership"] == "all" && !$status["owned"])
+        {
+            array_push($issues, array("name" => $status["name"], "issue" => "unowned"));
+            $issueval += 1;
+        }
+        
+        $status = $result->fetch_assoc();
+    }
+    
+    //ok. now we can start writing.
+    
+    if(count($issues) == 0)
+    {
+        echo("      <tr class='game'>");
+    }
+    else
+    {
+        echo("      <tr class='issue'>");
+    }
+    
+    $name = str_replace("'", "&apos;", $game["name"]);
+    $lastDisplay;
+    $lastValue;
+    if($game["last"] == null)
+    {
+        $lastValue = 0;
+        if($game["hist"] == 0)
+        {
+            $lastDisplay = "Never";
+        }
+        else
+        {
+            $lastDisplay = "Unknown";
+        }
+    }
+    else
+    {
+        $lastValue = $game["last"];
+        $lastDisplay = date("m/j/y", $game["last"]);
+    }
+    
+    
+    
+    echo("              <td data-sortvalue='{$name}'>
+                            <span class='shrinkable right'>
+                                <span class='big'>{$game["emoji"]}</span><span class='long'>{$name}</span>
+                            </span>
+                        </td>
+                        <td>{$votes}</td>
+                        <td data-sortvalue='{$lastValue}'>{$lastDisplay}</td>
+                        <td>{$game["hist"]}</td>
+                        <td>{$total_votes}</td>
+                        <td data-sortvalue='{$issueval}'>");
+    
+    foreach ($issues as $issue)
+    {
+        echo("              <span class='hastip left'>");
+        switch($issue["issue"])
+        {
+            case "veto":
+                echo("          🚫<span class='tip'>{$issue["name"]} does not like to play {$name}.</span>");
+                break;
+            case "tech":
+                echo("          ❗<span class='tip'>{$issue["name"]} has had technical issues with {$name}.</span>");
+                break;
+            case "unowned":
+                echo("          ❌<span class='tip'>{$issue["name"]} does not own {$name}.</span>");
+                break;
+        }
+        echo("              </span>");
+    }
+    
+    echo("              </td>
+                        <td><input type='checkbox' form='vote' name='vote' value='{$game["id"]}' /></td>
+                    </tr>");
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
         <title>VOTE!</title>
         
         <?php require('header_boilerplate.html'); ?>
-
-        <!--TODO: redirect if not logged in-->
-        <!--actually, that should also be an include (or require?)-->
         
         <script src="sortutil.js" ></script>
         
@@ -44,128 +189,95 @@
                                 <span class="short">All</span>
                             </span>
                         </th>
+                        <th class="sortable" data-sorttype="number">
+                            <span class="shrinkable down">
+                                <span class="long">Issues</span>
+                                <span class="short">XX</span>
+                            </span>
+                        </th>
                         <th>Vote!</th>
                     </tr>
-                    <!-- TODO: replace sample data with PHP -->
-                    <tr class="issue">
-                        <td data-sortvalue="Minecraft (Vanilla)">
-                            <span class="shrinkable right">
-                                <span class="big">⛏️</span><span class="long">Minecraft (Vanilla)</span>
-                            </span>
-                        </td>
-                        <td>16</td>
-                        <td data-sortvalue="20231025">10/25/23</td> <!-- this will actually be a timestamp, probably, but it should work the same either way-->
-                        <td>8</td>
-                        <td>20</td>
-                        <td><input type="checkbox" form="vote" name="Minecraft (Vanilla)" /></td>
-                    </tr>
-                    <tr class="issue">
-                        <td data-sortvalue="Barony">
-                            <span class="shrinkable right">
-                                <span class="big">🧌</span><span class="long">Barony</span>
-                            </span>
-                        </td>
-                        <td>8</td>
-                        <td data-sortvalue="20231018">10/18/23</td>
-                        <td>4</td>
-                        <td>8</td>
-                        <td><input type="checkbox" form="vote" name="Barony" /></td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Golf with your Friends">
-                            <span class="shrinkable right">
-                                <span class="big">🏌️‍♀️</span><span class="long">Golf with your Friends</span>
-                            </span>
-                        ️</td>
-                        <td>11</td>
-                        <td data-sortvalue="20231018">10/18/23</td>
-                        <td>4</td>
-                        <td>50</td>
-                        <td><input type="checkbox" form="vote" name="Golf With Your Friends" /></td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Duck Game">
-                            <span class="shrinkable right">
-                                <span class="big">🦆</span><span class="long">Duck Game</span>
-                            </span>
-                        </td>
-                        <td>7</td>
-                        <td data-sortvalue="20231004">10/4/23</td>
-                        <td>2</td>
-                        <td>40</td>
-                        <td><input type="checkbox" form="vote" name="Duck Game" /></td>
-                    </tr>
-                    <tr class="game">
-                        <td data-sortvalue="Root: A Game of Woodland Might and Right">
-                            <span class="shrinkable right">
-                                <span class="big">😾</span><span class="long">Root: A Game of Woodland Might and Right</span>
-                            </span>
-                        </td>
-                        <td>13</td>
-                        <td data-sortvalue="20231025">10/25/23</td>
-                        <td>5</td>
-                        <td>25</td>
-                        <td><input type="checkbox" form="vote" name="Root: A Game of Woodland Might and Right" /></td>
-                    </tr>
+                    <?php
+
+//an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership
+          FROM games JOIN game_status ON games.id = game_status.game_id
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
+
+$result = $db->query($query);
+
+$game = $result->fetch_assoc();
+while($game != null)
+{
+    buildRow($game, $db);
+    
+    $game = $result->fetch_assoc();
+}
+
+                    ?>
                 </table>
-                <details class="tight flexcolumn">
-                    <summary class="title">Show games with personal issues</summary>
-                    <table style="width: 100%;">
-                        <tr class="tertiary header">
-                            <th class="sortable" data-sorttype="text">Game</th>
-                            <th class="sortable" data-sorttype="numberDesc">
-                                <span class="shrinkable down">
-                                    <span class="long">Current Votes</span>
-                                    <span class="short">Votes</span>
+                <?php
+
+//this should capture all games that were not previously captured
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership
+          FROM games JOIN game_status ON games.id = game_status.game_id
+          WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND NOT (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
+
+$result = $db->query($query);
+
+if($result->num_rows > 0)
+{
+    echo("      <details class='tight flexcolumn'>
+                    <summary class='title'>Show games with personal issues</summary>
+                    <table style='width: 100%'>
+                        <tr class='tertiary header'>
+                            <th class='sortable' data-sorttype='text'>Game</th>
+                            <th class='sortable' data-sorttype='numberDesc'>
+                                <span class='shrinkable down'>
+                                    <span class='long'>Current Votes</span>
+                                    <span class='short'>Votes</span>
                                 </span>
                             </th>
-                            <th class="sortable" data-sorttype="numberDesc">
-                                <span class="shrinkable down">
-                                    <span class="long">Last Voted</span>
-                                    <span class="short">Last</span>
+                            <th class='sortable' data-sorttype='numberDesc'>
+                                <span class='shrinkable down'>
+                                    <span class='long'>Last Voted</span>
+                                    <span class='short'>Last</span>
                                 </span>
                             </th>
-                            <th class="sortable" data-sorttype="numberDesc">
-                                <span class="shrinkable down">
-                                    <span class="long">Your Votes</span>
-                                    <span class="short">You</span>
+                            <th class='sortable' data-sorttype='numberDesc'>
+                                <span class='shrinkable down'>
+                                    <span class='long'>Your Votes</span>
+                                    <span class='short'>You</span>
                                 </span>
                             </th>
-                            <th class="sortable" data-sorttype="numberDesc">
-                                <span class="shrinkable down">
-                                    <span class="long">Total Votes</span>
-                                    <span class="short">All</span>
+                            <th class='sortable' data-sorttype='numberDesc'>
+                                <span class='shrinkable down'>
+                                    <span class='long'>Total Votes</span>
+                                    <span class='short'>All</span>
+                                </span>
+                            </th>
+                            <th class='sortable' data-sorttype='number'>
+                                <span class='shrinkable down'>
+                                    <span class='long'>Issues</span>
+                                    <span class='short'>XX</span>
                                 </span>
                             </th>
                             <th>Vote!</th>
-                        </tr>
-                        <!-- TODO: replace sample data with PHP -->
-                        <tr class="issue">
-                            <td data-sortvalue="Skullgirls">
-                                <span class="shrinkable right">
-                                    <span class="big">💀</span><span class="long">Skullgirls</span>
-                                </span>
-                            </td>
-                            <td>8</td>
-                            <td data-sortvalue="0">Never</td> 
-                            <td>0</td>
-                            <td>16</td>
-                            <td><input type="checkbox" form="vote" name="Skullgirls" /></td>
-                        </tr>
-                        <tr class="issue">
-                            <td data-sortvalue="Pummel Party">
-                                <span class="shrinkable right">
-                                    <span class="big">🤛</span><span class="long">Pummel Party</span>
-                                </span>
-                            </td>
-                            <td>6</td>
-                            <td data-sortvalue="20231018">10/18/23</td>
-                            <td>4</td>
-                            <td>14</td>
-                            <td><input type="checkbox" form="vote" name="Pummel Party" /></td>
-                        </tr>
-                    </table>
-                </details>
+                        </tr>");
+    
+    $game = $result->fetch_assoc();
+    while($game != null)
+    {
+        buildRow($game, $db);
+        
+        $game = $result->fetch_assoc();
+    }
+    
+    echo("          </table>
+                </details>");
+}
+
+                ?>
                 <form id="vote" 
                       action="vote.php" 
                       method="POST" 
