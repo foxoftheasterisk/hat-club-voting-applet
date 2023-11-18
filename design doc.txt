@@ -71,7 +71,7 @@ legend:
 
    all following pages redirect to login if not logged in:
 
-⌚ homepage.php: redirects to newgamestatus if needed. big vote button if you haven't yet this week. if you have, big choose game button. smaller buttons for edit vote, game status, nominate game/edit game data
+🔧 homepage.php: redirects to newgamestatus if needed. big vote button if you haven't yet this week. if you have, big choose game button. smaller buttons for edit vote, game status, nominate game/edit game data
     (or should gamestatus and votepage redirect, instead?)
 
 🔧 votepage.php: big table of games with vote checkmarks (V: and veto checkmarks). Javascript sortable by name, historical global votes, historical personal votes, (C: current votes); all in both directions. Starts with games voted for last week on top, with the rest sorted by historical personal followed by name. Games with status problems hidden to an openable section. checkmarks also javascript limited to the correct number (V: and not antonymical). also a column—maybe something more dramatic, like a red colored row—that shows if any player has a status issue with the game. if already voted this week, starts with votes checked. vote button at the bottom
@@ -83,8 +83,7 @@ legend:
 
 ✔️ creategamestatus.php: commits game status data sent to it to database, including seconding. No redirect needed.
 
-⌚ gamechooser.php: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
-note: will need to refresh to update vote counts.
+🔧 gamechooser.php: Homepage button at top. all player names listed with checkboxes, starts with all those who've voted in the last six days checked. collapsed section shows all valid games and weights for checked players (as emoji with tooltips); games with issues show in red. Button to choose game: rolls random game and adds to bottom of page, along with buttons "reroll" and "accept". clicking a game's Emoji will also add it to the bottom in the same way, so you can manual override. (Recommend not pushing "accept" until finishing session, or at least starting proper, to avoid clearing votes if game called off before properly played.) both return to the choose game page after pushing.
 
 playgame.php: sets current votes for current players for that game to 0.
 
@@ -94,13 +93,13 @@ second.php: specialized page that just seconds nominations.
 
 editgamestatus.php: form similar to newgamestatus, but only for one game. also provides link to edit game *data* for that game.
 
-editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
-
-🔧 nominate.php: provides form for you to fill out with game data, and a confirm button, which sends to creategame.php. also a homepage button at top if you changed your mind (or misclicked)
-
 savegamestatus.php: commits game status data sent to it to database. Redirects to gamestatus.
 
+editgame.php: similar to nominate, but for an existing game. Starts filled. sends data for savegame.php
+
 savegame.php: updates global game data in database. Redirects to gamestatus.
+
+🔧 nominate.php: provides form for you to fill out with game data, and a confirm button, which sends to creategame.php. also a homepage button at top if you changed your mind (or misclicked)
 
 ✔️ creategame.php: commits global game data (including nominator) to database. Redirects to newgamestatus.
 

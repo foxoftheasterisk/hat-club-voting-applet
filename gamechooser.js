@@ -6,6 +6,9 @@ function getNewWeights()
 
 function selectGame(game, output) 
 {
+    //this is wonky - if output is defined to be the wrong container, then that container gets hidden and redisplayed
+    //while the other container is unaffected
+    //I don't think it matters in context, but UGH
     if(game.classList.contains("issue")) 
     {
         document.getElementById("Output").style.display = "none";

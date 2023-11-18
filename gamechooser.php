@@ -1,5 +1,10 @@
 <?php
 
+$VETO_WEIGHT = 0.25;
+$TECH_WEIGHT = 0.5;
+$UNOWN_WEIGHT = 0.25;
+$NOHOST_WEIGHT = 0.25;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -43,13 +48,14 @@ $db = connectToDB();
 
 $selected = array();
 
-$query = "SELECT players.name, players.short_name, MIN(DATEDIFF(NOW(), game_status.last_voted_for)) AS time_since_vote
+$query = "SELECT players.id, players.name, players.short_name, MIN(DATEDIFF(NOW(), game_status.last_voted_for)) AS time_since_vote
           FROM players LEFT JOIN game_status ON players.id = game_status.player_id
           GROUP BY players.id";
 
 $result = $db->query($query);
 
 $row = $result->fetch_assoc();
+
 
 while($row != null)
 {
@@ -61,30 +67,30 @@ while($row != null)
     //but i'm matching it in file, ok?
     
     //escaping... well, this is why i made that test user.
-    $user = str_replace("'", "&apos;", $user);
-    $short = str_replace("'", "&apos;", $short);
+    $user = str_replace("<", "&lt;", $user);
+    $short = str_replace("<", "&lt;", $short);
     
     echo("          <span class='player'>
-                        <input type='checkbox' id='{$short}' name='{$user}' onchange='getNewWeights()'");
+                        <input type='checkbox' id='player {$row["id"]}' name='player[]' value='{$row["id"]}' onchange='getNewWeights()'");
     
-    if(empty($_GET))
+    if(!isset($_GET["player"]))
     {
         if($days != null && $days < 7)
         {
             echo("checked ");
-            array_push($selected, $user);
+            array_push($selected, $row["id"]);
         }
     }
     else
     {
-        if(isset($_GET[$row['name']]))
+        if(in_array($row["id"], $_GET["player"]))
         {
             echo("checked ");
-            array_push($selected, $user);
+            array_push($selected, $row["id"]);
         }
     }
     echo ("/>
-                        <label for='{$short}' class='shrinkable down'>
+                        <label for='player {$row["id"]}' class='shrinkable down'>
                             <span class='short'>{$short}</span>
                             <span class='long'>{$user}</span>
                         </label>
@@ -98,88 +104,180 @@ while($row != null)
                 <details class="toplevel secondary">
                     <summary>Show game weights</summary>
                     <span id="weightsBox" class="flexrowrev">
-                        <!--TODO: replace sample data with PHP-->
-                        <button class="game weight" 
-                                id="Root: A Game of Woodland Might and Right" 
-                                name="😾 Root: A Game of Woodland Might and Right" 
-                                value=13
-                                onclick="selectGame(this)"
-                                style="order: 13">
-                            😾 13
-                        </button>
-                        <button class="issue weight"
-                                id="Minecraft (Vanilla)"
-                                name="⛏️ Minecraft (Vanilla)"
-                                value=4
-                                onclick="selectGame(this)"
-                                style="order: 4">
-                            ⛏️ 4 <p id="issues" style="display: none;"><b>flame.leaf</b> does not enjoy playing <b>Minecraft (Vanilla)</b></p>
-                        </button>
-                        <button class="game weight" 
-                                id="Golf with your Friends" 
-                                name="🏌️‍♀️ Golf with your Friends" 
-                                value=11
-                                onclick="selectGame(this)"
-                                style="order: 11">
-                            🏌️‍♀️ 11
-                        </button>
-                        <button class="game weight" 
-                                id="Duck Game" 
-                                name="🦆 Duck Game" 
-                                value=7
-                                onclick="selectGame(this)"
-                                style="order: 7">
-                            🦆 7
-                        </button>
-                        <button class="issue weight"
-                                id="Skullgirls"
-                                name="💀 Skullgirls"
-                                value=2
-                                onclick="selectGame(this)"
-                                style="order: 2">
-                            💀 2 <p id="issues" style="display: none;"><b>the Fox of the Asterisk</b> does not enjoy playing <b>Skullgirls</b></p>
-                        </button>
-                        <button class="issue weight"
-                                id="Pummel Party"
-                                name="🤛 Pummel Party"
-                                value=1
-                                onclick="selectGame(this)"
-                                style="order: 1">
-                            🤛 1 <p id="issues" style="display: none;"><b>the Fox of the Asterisk</b> has had technical difficulties with <b>Pummel Party</b></p>
-                        </button>
+                        <?php
+
+$playerCount= count($selected);
+$playerCSV = implode(", ", $selected);
+
+//these queries keep getting longer and longer XD
+//in theory, I should probably make these queries be saved procedures (and then unexpose everything else)
+//...but that's a lot of effort in security that SHOULDN'T matter
+//(besides, at the very least that would come after confirming the queries are *correct*)
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, games.ownership AS ownership, SUM(game_status.current_vote) AS base_weight
+          FROM games JOIN game_status ON games.id = game_status.game_id
+          WHERE games.min_players <= $playerCount AND games.max_players >= $playerCount AND games.nominated_by IS NULL AND game_status.player_id IN ({$playerCSV})
+          GROUP BY games.id
+          HAVING SUM(game_status.current_vote) > 0;";
+
+$result = $db->query($query);
+
+$game = $result->fetch_assoc();
+while ($game != null)
+{
+    $gameName = str_replace("'", "&apos;", $game["name"]);
+    
+    //first, issue checking
+    $ownClause = "";
+    switch($game["ownership"])
+    {
+        case "all":
+            $ownClause = "OR game_status.owned = FALSE";
+            break;
+        case "one":
+            $ownClause = "OR game_status.owned = TRUE";
+            //we need to know that someone owns it to prevent an issue
+            break;
+    }        
+    
+    $query = "SELECT game_status.status AS willing, game_status.owned AS owned, players.name AS player
+              FROM game_status JOIN players ON game_status.player_id = players.id
+              WHERE (game_status.status <> 'good' {$ownClause}) AND game_status.game_id='{$game["id"]}' AND game_status.player_id IN ({$playerCSV});";
+              
+    $issres = $db->query($query);
+    
+    $weight = $game["base_weight"];
+    $issueList = array();
+    
+    $hasHost = false;  
+    //this variable doesn't matter except if the game needs hosting
+    //regardless, it needs to be declared out here.
+    
+    $issue = $issres->fetch_assoc();
+    while($issue != null)
+    {
+        
+        switch ($issue["willing"])
+        {
+            case "veto":
+                array_push($issueList, "🚫 <b>{$issue["player"]}</b> does not like to play <b>{$gameName}</b>! 🚫");
+                $weight *= $VETO_WEIGHT;
+                break;
+            case "tech":
+                array_push($issueList, "❗ <b>{$issue["player"]}</b> has had technical difficulties with <b>{$gameName}</b>! ❗");
+                $weight *= $TECH_WEIGHT;
+                break;
+        }
+        
+        
+        if($issue["owned"])
+        {
+            $hasHost = true;
+            //checking if we need to track this is probably costlier than just tracking it
+        }
+        else
+        {
+            if($game["ownership"] == "all")
+            {
+                array_push($issueList, "❌ <b>{$issue["player"]}</b> does not own <b>{$gameName}</b>! ❌");
+                $weight *= $UNOWN_WEIGHT;
+            }
+        }
+        $issue = $issres->fetch_assoc();
+        
+    }
+    
+    if($game["ownership"] == "one" && (!$hasHost))
+    {
+        array_push($issueList, "⭕ No one present can host <b>{$gameName}</b>! ⭕");
+        $weight *= $UNOWN_WEIGHT;
+    }
+    
+    $weight = floor($weight);
+    
+    if(($weight <= 0))
+    {
+        //this game got issue'd out of existence      
+        $game = $result->fetch_assoc();
+        continue;
+    }
+    
+    //time to print!
+    
+    if(count($issueList) == 0)
+    {
+        echo("          <button class='game weight'");
+    }
+    else
+    {
+        echo("          <button class='issue weight'");
+    }
+    
+    echo("                      id='{$game["id"]}'
+                                name='{$game["emoji"]} {$gameName}' 
+                                value='{$weight}'
+                                onclick='selectGame(this)'
+                                style='order: {$weight}'>
+                            {$game["emoji"]} {$weight}");
+    
+    if(count($issueList) > 0)
+    {
+        echo("              <p id='issues' style='display: none;'>");
+        foreach($issuelist as $issue)
+        {
+            echo("              <span>{$issue}</span>");
+        }
+        echo("              </p>");
+    }
+    
+    echo("              </button>");
+    
+    //after all those table rows, this seems downright simple.
+    
+    
+    
+    $game = $result->fetch_assoc();
+}
+
+                        ?>
                     </span>
                 </details>
                 <div class="flexrow">
-                    <form id="IssueOutput" 
-                          class="toplevel issue flexcolumn" 
-                          style="display:none;" 
-                          action="playgame.php" 
-                          method="POST">
+                    <div id="IssueOutput" 
+                         class="toplevel issue flexcolumn" 
+                         style="display:none;" >
                         <h3 id="title" class="title"></h3>
                         <p id="issues" class="text"></p>
                         <button id="button" 
                                 name="game" 
                                 value="none" 
                                 class="medium action" 
-                                type="submit" >
+                                type="submit" 
+                                form="playerform"
+                                formaction="playgame.php"
+                                formmethod="POST" >
                             Play!
                         </button>
-                    </form>
-                    <form id="Output" 
-                          class="toplevel game flexcolumn" 
-                          style="display: none;"
-                          action="playgame.php" 
-                          method="POST">
+                    </div>
+                    <!--technically, ids should be unique through the whole document
+                        however, htmlcollection's methods are very limited,
+                        and name cannot be used on all elements.
+                        so we're stuck doing illegal things!-->
+                    <div id="Output" 
+                         class="toplevel game flexcolumn" 
+                         style="display: none;" >
                         <h3 id="title" class="title"></h3>
                         <br />
                         <button id="button" 
                                 name="game" 
                                 value="none" 
                                 class="medium action" 
-                                type="submit" >
+                                type="submit" 
+                                form="playerform"
+                                formaction="play.php"
+                                formmethod="POST" >
                             Play!
                         </button>
-                    </form>
+                    </div>
                 </div>
                 <button class="big action" 
                         onclick="chooseGame()"
