@@ -117,7 +117,7 @@ function buildRow($game, $isNominated = false, $user = null)
         {
             echo("      <td>
                             <span class='hastip left'>
-                                <input type='checkbox' form='second' name='second' value='{$game["name"]}' disabled \>
+                                <input type='checkbox' form='second' name='second[]' value='{$game["name"]}' disabled \>
                                 <span class='tip'>You cannot second your own nomination!</span>
                             </span>
                         </td>");

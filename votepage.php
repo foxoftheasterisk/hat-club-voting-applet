@@ -104,8 +104,8 @@ function buildRow($game, $db)
     }
     else
     {
-        $lastValue = $game["last"];
-        $lastDisplay = date("m/j/y", $game["last"]);
+        $lastValue = intval($game["last"]);
+        $lastDisplay = date("m/j/y", $lastValue);
     }
     
     
@@ -139,8 +139,10 @@ function buildRow($game, $db)
         echo("              </span>");
     }
     
+    //TODO: start vote checkbox checked if voted for this week
+    //TODO: disable if vote cannot be changed (& count toward vote limiting)
     echo("              </td>
-                        <td><input type='checkbox' form='vote' name='vote' value='{$game["id"]}' /></td>
+                        <td><input type='checkbox' form='vote' name='vote[]' value='{$game["id"]}' /></td>
                     </tr>");
 }
 
@@ -154,6 +156,7 @@ function buildRow($game, $db)
         <?php require('header_boilerplate.html'); ?>
         
         <script src="sortutil.js" ></script>
+        <!--TODO: vote limiting in js-->
         
     </head>
     <body onload="makeSortablesSortable()">

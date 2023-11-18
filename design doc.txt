@@ -74,10 +74,10 @@ legend:
 ⌚ homepage.php: redirects to newgamestatus if needed. big vote button if you haven't yet this week. if you have, big choose game button. smaller buttons for edit vote, game status, nominate game/edit game data
     (or should gamestatus and votepage redirect, instead?)
 
-✔️ votepage.php: big table of games with vote checkmarks (V: and veto checkmarks). Javascript sortable by name, historical global votes, historical personal votes, (C: current votes); all in both directions. Starts with games voted for last week on top, with the rest sorted by historical personal followed by name. Games with status problems hidden to an openable section. checkmarks also javascript limited to the correct number (V: and not antonymical). also a column—maybe something more dramatic, like a red colored row—that shows if any player has a status issue with the game. if already voted this week, starts with votes checked. vote button at the bottom
+🔧 votepage.php: big table of games with vote checkmarks (V: and veto checkmarks). Javascript sortable by name, historical global votes, historical personal votes, (C: current votes); all in both directions. Starts with games voted for last week on top, with the rest sorted by historical personal followed by name. Games with status problems hidden to an openable section. checkmarks also javascript limited to the correct number (V: and not antonymical). also a column—maybe something more dramatic, like a red colored row—that shows if any player has a status issue with the game. if already voted this week, starts with votes checked. vote button at the bottom
 (C: votes for games with 0 current votes are unchangeable; this should occur only when editing votes after game played.)
 
-vote.php: if most recent vote more recent than last saturday, removes those votes; then adds new ones. Redirects to homepage with confirmation message.
+🔧 vote.php: if most recent vote more recent than last saturday, removes those votes; then adds new ones. Redirects to homepage with confirmation message.
 
 ✔️ newgamestatus.php: lists each game for which you have not established a status. If nomination, checkbox to second. Dropdown to choose status. (R: rating chooser.) At bottom, confirm button; submits all and returns to homepage (R: returns to game status instead).
 
