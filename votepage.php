@@ -1,5 +1,7 @@
 <?php
 
+$PENALTIES = parse_ini_file("constants.ini", true)["penalties"];
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -32,9 +34,9 @@ if($result->fetch_array()[0] != 0)
     redirect("newgamestatus.php");
 }
 
-function buildRow($game, $db)
+function buildRow($game)
 {
-    
+    global $db, $PENALTIES;
     $gameid = $game["id"];
     
     //first, run through everyone's game_status to find issues and count up votes
@@ -61,16 +63,16 @@ function buildRow($game, $db)
             switch($status["willing"])
             {
                 case "veto":
-                    $issueval += 1;
+                    $issueval += $PENALTIES["veto"];
                 case "tech":
-                    $issueval += 0.5;
+                    $issueval += $PENALTIES["tech"];
             }
         }
         
         if($game["ownership"] == "all" && !$status["owned"])
         {
             array_push($issues, array("name" => $status["name"], "issue" => "unowned"));
-            $issueval += 1;
+            $issueval += $PENALTIES["unowned"];
         }
         
         $status = $result->fetch_assoc();
@@ -212,7 +214,7 @@ $result = $db->query($query);
 $game = $result->fetch_assoc();
 while($game != null)
 {
-    buildRow($game, $db);
+    buildRow($game);
     
     $game = $result->fetch_assoc();
 }
@@ -271,7 +273,7 @@ if($result->num_rows > 0)
     $game = $result->fetch_assoc();
     while($game != null)
     {
-        buildRow($game, $db);
+        buildRow($game);
         
         $game = $result->fetch_assoc();
     }

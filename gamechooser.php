@@ -5,6 +5,8 @@ $TECH_WEIGHT = 0.5;
 $UNOWN_WEIGHT = 0.25;
 $NOHOST_WEIGHT = 0.25;
 
+$PENALTIES = parse_ini_file("constants.ini", true)["penalties"];
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -160,11 +162,11 @@ while ($game != null)
         {
             case "veto":
                 array_push($issueList, "🚫 <b>{$issue["player"]}</b> does not like to play <b>{$gameName}</b>! 🚫");
-                $weight *= $VETO_WEIGHT;
+                $weight /= $PENALTIES["veto"];
                 break;
             case "tech":
                 array_push($issueList, "❗ <b>{$issue["player"]}</b> has had technical difficulties with <b>{$gameName}</b>! ❗");
-                $weight *= $TECH_WEIGHT;
+                $weight /= $PENALTIES["tech"];
                 break;
         }
         
@@ -179,7 +181,7 @@ while ($game != null)
             if($game["ownership"] == "all")
             {
                 array_push($issueList, "❌ <b>{$issue["player"]}</b> does not own <b>{$gameName}</b>! ❌");
-                $weight *= $UNOWN_WEIGHT;
+                $weight /= $PENALTIES["unowned"];
             }
         }
         $issue = $issres->fetch_assoc();
@@ -189,7 +191,7 @@ while ($game != null)
     if($game["ownership"] == "one" && (!$hasHost))
     {
         array_push($issueList, "⭕ No one present can host <b>{$gameName}</b>! ⭕");
-        $weight *= $UNOWN_WEIGHT;
+        $weight /= $PENALTIES["no_host"];
     }
     
     $weight = floor($weight);
