@@ -1,6 +1,8 @@
 <?php
 
-$PENALTIES = parse_ini_file("constants.ini", true)["penalties"];
+$temp = parse_ini_file("constants.ini", true);
+$PENALTIES = $temp["penalties"];
+$MAX_VOTES = $temp["voting"]["max_votes"];
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -141,10 +143,29 @@ function buildRow($game)
         echo("              </span>");
     }
     
-    //TODO: start vote checkbox checked if voted for this week
-    //TODO: disable if vote cannot be changed (& count toward vote limiting)
     echo("              </td>
-                        <td><input type='checkbox' form='vote' name='vote[]' value='{$game["id"]}' /></td>
+                        <td>
+                            <input type='checkbox' 
+                                   form='vote' 
+                                   name='vote[]' 
+                                   value='{$game["id"]}' 
+                                   onchange='checkVoteLimit()' ");
+    
+    //TODO: update this to use better date tracking
+    if($game["days"] != null)
+    {
+        if($game["days"] < 6)
+        {
+            echo("                 checked ");
+            if($game["curr"] == 0)
+            {
+                echo("             disabled ");
+            }
+        }
+    }
+    
+    echo("                         />
+                        </td>
                     </tr>");
 }
 
@@ -157,8 +178,10 @@ function buildRow($game)
         
         <?php require('header_boilerplate.html'); ?>
         
+        <meta id="vote-limit" data-votes="<?php echo($MAX_VOTES);?>" />
+        
         <script src="sortutil.js" ></script>
-        <!--TODO: vote limiting in js-->
+        <script src="votelimiter.js" ></script>
         
     </head>
     <body onload="makeSortablesSortable()">
@@ -205,9 +228,12 @@ function buildRow($game)
                     <?php
 
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(NOW(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
+//PHP decided to make its date functions fucking impossible to figure out
+//(or maybe it's just w3schools, anyway though)
+//SO I'M GETTING IT IN THE SQL. I KNOW HOW TO DO _THAT_
 
 $result = $db->query($query);
 
@@ -224,7 +250,7 @@ while($game != null)
                 <?php
 
 //this should capture all games that were not previously captured
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(NOW(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND NOT (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))";
 
