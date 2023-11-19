@@ -1,3 +1,13 @@
+FEEDBACK & LIVE USE NOTES:
+*change wording on willingness in the case of unowned games?
+    "Willing to try," "Not interested", "Not compatible"
+*move nomination form -> gamestatus page
+*biggest frustration - newgamestatus always returning to homepage. Definitely have it refer back instead.
+
+BUGS:
+*vote page on phone - can't open "personal issues" section?
+    > it's not super important except that WHY
+
 T for "time-weighted votes"
 R for "ratings"
 C for "cumulative votes"
