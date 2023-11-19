@@ -1,5 +1,8 @@
 <?php
 
+$PENALTIES = parse_ini_file("constants.ini", true)["penalties"];
+$PENALTIES["no_host"] /= 2; //because, you can't host it, but maybe someone else can
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -31,6 +34,7 @@ if($result->fetch_array()[0] != 0)
 
 function buildRow($game, $isNominated = false, $user = null)
 {
+    global $PENALTIES;
     
     if($game["willing"] != "good" || (!$game["owned"] && $game["ownership"] == "all"))
     {
@@ -58,24 +62,24 @@ function buildRow($game, $isNominated = false, $user = null)
     
     if($game["owned"])
     {
-        echo("          <td data-sortvalue='1'>✔️</td>");
+        echo("          <td data-sortvalue='0'>✔️</td>");
     }
     else
     {
         switch($game["ownership"])
         {
             case "all":
-                echo("  <td data-sortvalue='0'>❌</td>");
+                echo("  <td data-sortvalue='{$PENALTIES["unowned"]}'>❌</td>");
                 break;
             case "one":
-                echo("  <td data-sortvalue='0.5'>
+                echo("  <td data-sortvalue='{$PENALTIES["no_host"]}'>
                             <span class='hastip left'>⭕
                                 <span class='tip'>You do not own {$game["name"]}, but only the host needs it.</span>
                             </span>
                         </td>");
                 break;
             case "free":
-                echo("  <td data-sortvalue='1'>
+                echo("  <td data-sortvalue='0'>
                             <span class='hastip left'>➖
                                 <span class='tip'>{$game["name"]} is a free game.</span>
                             </span>
@@ -87,17 +91,17 @@ function buildRow($game, $isNominated = false, $user = null)
     switch ($game["willing"])
     {
         case "good":
-            echo("      <td data-sortvalue='1'>✔️</td>");
+            echo("      <td data-sortvalue='0'>✔️</td>");
             break;
         case "tech":
-            echo("      <td data-sortvalue='0.5'>
+            echo("      <td data-sortvalue='{$PENALTIES["tech"]}'>
                             <span class='hastip left'>❗
                                 <span class='tip'>You have had technical difficulty with {$game["name"]}.</span>
                             </span>
                         </td>");
             break;
         case "veto":
-            echo("      <td data-sortvalue='0'>
+            echo("      <td data-sortvalue='{$PENALTIES["veto"]}'>
                             <span class='hastip left'>🚫
                                 <span class='tip'>You do not like to play {$game["name"]}.</span>
                             </span>
@@ -165,13 +169,13 @@ function buildRow($game, $isNominated = false, $user = null)
                                 <span class="long">Category<wbr />/Genre</span>
                             </span>
                         </th>
-                        <th class="sortable" data-sorttype="numberdesc">
+                        <th class="sortable" data-sorttype="number">
                             <span class="shrinkable down">
                                 <span class="short">Own?</span>
                                 <span class="long">Owned</span>
                             </span>
                         </th>
-                        <th class="sortable" data-sorttype="numberdesc">
+                        <th class="sortable" data-sorttype="number">
                             <span class="shrinkable down">
                                 <span class="short">Play?</span>
                                 <span class="long">Will Play</span>
@@ -228,13 +232,13 @@ if($result->num_rows > 0)
                                     <span class="long">Category<wbr />/Genre</span>
                                 </span>
                             </th>
-                            <th class="sortable" data-sorttype="numberdesc">
+                            <th class="sortable" data-sorttype="number">
                                 <span class="shrinkable down wide">
                                     <span class="short">Own?</span>
                                     <span class="long">Owned</span>
                                 </span>
                             </th>
-                            <th class="sortable" data-sorttype="numberdesc">
+                            <th class="sortable" data-sorttype="number">
                                 <span class="shrinkable down wide">
                                     <span class="short">Play?</span>
                                     <span class="long">Will Play</span>
