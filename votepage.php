@@ -164,10 +164,11 @@ function buildRow($game)
                                    value='{$game["id"]}' 
                                    onchange='checkVoteLimit()' ");
     
-    //TODO: update this to use better date tracking
-    if($game["days"] != null)
+    //i don't think it would ever be null, in the current implementation... but it doesn't hurt to check.
+    if($game["voted_this_week"] != null)
     {
-        if($game["days"] < 6)
+        
+        if($game["voted_this_week"] == 1)
         {
             echo("                 checked ");
             if($game["curr"] == 0)
@@ -241,10 +242,10 @@ function buildRow($game)
                     <?php
 
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(CURDATE(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(game_status.last_voted_for, 0), 1, 0) AS 'voted_this_week', game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
-          ORDER BY game_status.last_voted_for DESC, games.name";
+          ORDER BY game_status.last_voted_for DESC, game_status.historical_vote DESC, games.name";
 //PHP decided to make its date functions fucking impossible to figure out
 //(or maybe it's just w3schools, anyway though)
 //SO I'M GETTING IT IN THE SQL. I KNOW HOW TO DO _THAT_
@@ -264,10 +265,10 @@ while($game != null)
                 <?php
 
 //this should capture all games that were not previously captured
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, DATEDIFF(CURDATE(), game_status.last_voted_for) AS days, game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(game_status.last_voted_for, 0), 1, 0) AS 'voted_this_week', game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND NOT (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
-          ORDER BY game_status.last_voted_for DESC, games.name";
+          ORDER BY game_status.last_voted_for DESC, game_status.historical_vote DESC, games.name";
 
 $result = $db->query($query);
 

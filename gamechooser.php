@@ -50,7 +50,7 @@ $db = connectToDB();
 
 $selected = array();
 
-$query = "SELECT players.id, players.name, players.short_name, MIN(DATEDIFF(CURDATE(), game_status.last_voted_for)) AS time_since_vote
+$query = "SELECT players.id, players.name, players.short_name, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(MAX(game_status.last_voted_for), 0), 1, 0) AS 'voted_this_week'
           FROM players LEFT JOIN game_status ON players.id = game_status.player_id
           GROUP BY players.id";
 
@@ -63,7 +63,7 @@ while($row != null)
 {
     $user = $row['name'];
     $short = $row['short_name'];
-    $days = $row['time_since_vote'];
+    $voted = $row['voted_this_week'];
     
     //the whitespace on the final page might be weird
     //but i'm matching it in file, ok?
@@ -77,7 +77,7 @@ while($row != null)
     
     if(!isset($_GET["player"]))
     {
-        if($days != null && $days < 7)
+        if($voted != null && $voted == 1)
         {
             echo("checked ");
             array_push($selected, $row["id"]);

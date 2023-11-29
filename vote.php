@@ -95,14 +95,9 @@ for ($i = 0; $i < count($votes); $i++)
 
 $query = "SELECT game_id, current_vote
           FROM game_status
-          WHERE player_id='{$user}' AND DATEDIFF(CURDATE(), game_status.last_voted_for) < 6;";
-//could be 7, but then we would get things where if you vote on Saturday one week and Friday the next,
-//it would interpret that as the same week.
-//ideally, this would actually look at the day of the week and reset on Saturday(/Sunday?)..
-//...which is achievable, but i don't want to figure it out right now.
-//TODO: that.
-
-//anyway, for now if you consistently vote on either Friday or Saturday, it'll be fine.
+          WHERE player_id='{$user}' AND YEARWEEK(CURDATE(), 0) = YEARWEEK(last_voted_for, 0);";
+//having it roll over on Sunday was much easier than expected. 
+//(rolling over on a day other than Sunday or Monday would be more difficult. however.)
 
 $result = $db->query($query);
 
