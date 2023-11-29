@@ -32,6 +32,13 @@ function checkVoteLimit()
         }
     }
     
+    let display = document.getElementById("current-votes");
+    if (display != null)
+    {
+        display.innerHTML = (max_votes - voteCount);
+    }
+    
+    
     if(areDisabled != shouldBeDisabled)
     {
         for (let box of checkboxes)

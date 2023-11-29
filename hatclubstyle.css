@@ -180,7 +180,7 @@ button.small {
 }
 
 .flexrowrev {
-    flex-flow: row-reverse wrap;
+    flex-flow: row-reverse wrap-reverse;
 }
 
 .flexcolumn {

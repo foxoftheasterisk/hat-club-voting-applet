@@ -264,7 +264,7 @@ while ($game != null)
                                 form="playerform"
                                 formaction="playgame.php"
                                 formmethod="POST" >
-                            Played!
+                            Reset votes
                         </button>
                     </div>
                     <!--technically, ids should be unique through the whole document
@@ -284,7 +284,7 @@ while ($game != null)
                                 form="playerform"
                                 formaction="playgame.php"
                                 formmethod="POST" >
-                            Played!
+                            Reset votes
                         </button>
                     </div>
                 </div>

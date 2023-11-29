@@ -114,7 +114,7 @@ if($result == false)
     message("Play submission failed!", $message, $button);
 }
 
-$message = "Confirmed: You played {$gameVals["emoji"]} {$gameVals["name"]}.";
+$message = "Confirmed: You played {$gameVals["emoji"]} {$gameVals["name"]}; votes reset.";
 $button = array("href"=>"gamechooser.php", "text" => "Return to game chooser"); 
 message("Game Played!", $message, $button, "primary");
 

@@ -44,7 +44,7 @@ function buildRow($game)
     //first, run through everyone's game_status to find issues and count up votes
     //(we have to do this first so we can color issue rows)
     $issues = array();
-    $issueval = 0;
+    $issueval = 1;
     $votes = 0;
     $total_votes = 0;
     
@@ -65,16 +65,16 @@ function buildRow($game)
             switch($status["willing"])
             {
                 case "veto":
-                    $issueval += $PENALTIES["veto"];
+                    $issueval *= $PENALTIES["veto"];
                 case "tech":
-                    $issueval += $PENALTIES["tech"];
+                    $issueval *= $PENALTIES["tech"];
             }
         }
         
         if($game["ownership"] == "all" && !$status["owned"])
         {
             array_push($issues, array("name" => $status["name"], "issue" => "unowned"));
-            $issueval += $PENALTIES["unowned"];
+            $issueval *= $PENALTIES["unowned"];
         }
         
         $status = $result->fetch_assoc();
@@ -97,16 +97,17 @@ function buildRow($game)
     $lastValue;
     if($game["last"] == null)
     {
-        $lastValue = 0;
         if($game["hist"] == 0)
         {
             $lastDisplay = "Never";
             $lastShort = "✖️";
+            $lastValue = 0;
         }
         else
         {
             $lastDisplay = "Unknown";
             $lastShort = "❔";
+            $lastValue = 1;
         }
     }
     else
@@ -326,8 +327,9 @@ if($result->num_rows > 0)
                 <form id="vote" 
                       action="vote.php" 
                       method="POST" 
-                      class="primary footer">
+                      class="primary footer flexrow">
                     <button class="big action" type="submit">Vote!</button>
+                    <h3> <span id="current-votes"></span>/<?=$MAX_VOTES?> remaining</h3>
                 </form>
             </main>
         </div>
