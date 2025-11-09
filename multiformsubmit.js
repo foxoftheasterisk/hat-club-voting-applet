@@ -1,5 +1,5 @@
 
-async function submitAllForms(submitButton) {
+async function submitAllForms(submitButton, source) {
     let buttonText = submitButton.innerHTML;
     submitButton.innerHTML = "Submitting..."
     submitButton.disabled = true;
@@ -65,6 +65,6 @@ async function submitAllForms(submitButton) {
     }
     else
     {
-        setTimeout(function() {window.location.href = "homepage.php";}, 2000);
+        setTimeout(function() {window.location.href = source + ".php";}, 2000);
     }
 }

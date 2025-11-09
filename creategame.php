@@ -297,7 +297,7 @@ if($result === TRUE)
                     Successfully nominated {$emoji} {$name}!
                 </p>
                 <div class='flexrow'>
-                    <a href='newgamestatus.php'><button class='medium action'>Continue to status</button></a>
+                    <a href='newgamestatus.php?source=gamestatus'><button class='medium action'>Continue to status</button></a>
                 </div>";
     
     displayMessage("Game nominated!", $message, "primary");

@@ -12,6 +12,18 @@ if(!isset($_COOKIE['user']))
 
 $db = connectToDB();
 
+$source;
+
+if(isset($_GET["source"]))
+{
+    $source = $_GET["source"];
+}
+else
+{
+    $source = "homepage";
+}
+//*/
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -31,7 +43,8 @@ $db = connectToDB();
             </a>
             <main class="main">
                 <div class="toplevel primary">
-                    <h3 class="title">New/nominated games require status:</h3>
+                    <h3 class="title">New/nominated games require status<?php
+                            if($source == "votepage"){ echo(" before voting"); }?>:</h3>
                     <div class="flexrow">
                         <?php
 
@@ -121,10 +134,9 @@ while($game != null)
     $game = $result->fetch_assoc();
 }
 
-                        ?>
-                     </div>
-                     <button class="big action" type="submit" onclick="submitAllForms(this)">Submit all</button>
-                     <!--TODO: link back to whichever you came from (gamestatus, vote)-->
+echo("              </div>
+                    <button class='big action' type='submit' onclick='submitAllForms(this, \"{$source}\")'>Submit all</button>");
+                    ?>
                 </div>
             </main>
         </div>

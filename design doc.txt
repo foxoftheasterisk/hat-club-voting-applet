@@ -1,12 +1,9 @@
 HIGH PRIORITY:
 *change wording on willingness in the case of unowned games?
     > "Would try (if bought)", "Not interested", "Not compatible"
-*make vote edit rollover Saturday instead of "after 5 days"
 
 OTHER TODOS:
 *move nomination form -> gamestatus page
-*biggest frustration - newgamestatus always returning to homepage. Definitely have it refer back instead.
-    > also add text "need status *before voting*"
 *keep weights box open after checking/unchecking players
 *add "previous vote" to gamestatus so edited votes don't result in "unknown"?
     > easy except the part where we have to change the database

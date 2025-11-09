@@ -33,7 +33,7 @@ $result = $db->query($query);
 
 if($result->fetch_array()[0] != 0)
 {
-    redirect("newgamestatus.php");
+    redirect("newgamestatus.php?source=votepage");
 }
 
 function buildRow($game)
