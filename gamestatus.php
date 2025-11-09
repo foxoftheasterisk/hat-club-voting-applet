@@ -36,16 +36,22 @@ function buildRow($game, $isNominated = false, $user = null)
 {
     global $PENALTIES;
     
+    $class;
     if($game["willing"] != "good" || (!$game["owned"] && $game["ownership"] == "all"))
     {
-        echo ("     <tr class='issue'>");
+        $class = "issue";
+    }
+    else if(!$game["owned"] && $game["ownership"] == "one")
+    {
+        $class = "smallissue";
     }
     else
     {
-        echo("      <tr class='game'>");
+        $class = "game";
     }
     
-    echo("              <td data-sortvalue='{$game["name"]}'>
+    echo("          <tr class='{$class}'>
+                        <td data-sortvalue='{$game["name"]}'>
                             <span class='shrinkable right'>
                                 <span class='big'>{$game["emoji"]}</span><span class='long'>{$game["name"]}</span>
                             </span>
@@ -74,7 +80,7 @@ function buildRow($game, $isNominated = false, $user = null)
             case "one":
                 echo("  <td data-sortvalue='{$PENALTIES["no_host"]}'>
                             <span class='hastip left'>⭕
-                                <span class='tip'>You do not own {$game["name"]}, but only the host needs it.</span>
+                                <span class='tip'>You cannot host {$game["name"]}, but you can play it.</span>
                             </span>
                         </td>");
                 break;
