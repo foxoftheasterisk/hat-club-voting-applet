@@ -66,8 +66,10 @@ function buildRow($game)
             {
                 case "veto":
                     $issueval *= $PENALTIES["veto"];
+                    break;
                 case "tech":
                     $issueval *= $PENALTIES["tech"];
+                    break;
             }
         }
         
