@@ -2,6 +2,12 @@
 
 function connectToDB(string $filename = '/run/secrets/sql-credentials.ini') : mysqli {
     $credentials = parse_ini_file($filename);
+    
+    if($credentials === false)
+    {
+        echo('SQL credentials not found.');
+        die('SQL credentials not found.');
+    }
 
     $connection = new mysqli($credentials['url'], $credentials['user'], $credentials['pass']);
     
