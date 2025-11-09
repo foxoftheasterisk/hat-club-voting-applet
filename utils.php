@@ -16,7 +16,7 @@ function connectToDB(string $filename = '/run/secrets/sql-credentials.ini') : my
         die('Connection failed. Error: ' . $conn->connect_error);
     }
     
-    $connection->select_db($credentials['user']);
+    $connection->select_db($credentials['database']);
     
     return $connection;
 }
