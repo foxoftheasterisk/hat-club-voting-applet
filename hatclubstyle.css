@@ -385,17 +385,17 @@ tr.game:nth-child(odd) {
 }
 
 .smallissue {
-    background-color: sandyBrown;
-    border-color: #895C37;
+    background-color: orange;
+    border-color: #CC8100;
 }
 
 tr.smallissue:nth-child(odd) {
-    background-color: #F2B380;
+    background-color: #FFB238;
 }
 
 button.smallissue:hover {
-    background-color: #F2AE76;
-    border-color: sandyBrown;
+    background-color: #FFB238;
+    border-color: orange;
 }
 
 .issue {
