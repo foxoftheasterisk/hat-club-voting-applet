@@ -32,5 +32,4 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 
-/lobbypass.ini
 /constants.ini
