@@ -82,14 +82,22 @@ function buildRow($game)
     
     //ok. now we can start writing.
     
+    
+    $class;
     if(count($issues) == 0)
     {
-        echo("      <tr class='game'>");
+        $class = "game";
+    }
+    else if(count($issues) == 1)
+    {
+        $class = "smallissue";
     }
     else
     {
-        echo("      <tr class='issue'>");
+        $class = "issue";
     }
+    
+    echo("          <tr class='{$class}'>");
     
     $name = str_replace("'", "&apos;", $game["name"]);
     $lastDisplay;
@@ -127,15 +135,18 @@ function buildRow($game)
                                 <span class='big'>{$game["emoji"]}</span><span class='long'>{$name}</span>
                             </span>
                         </td>
-                        <td>{$votes}</td>
+                        <td data-sortvalue='{$game["curr"]}'>
+                            {$game["curr"]} / {$game["hist"]}
+                        </td>
                         <td data-sortvalue='{$lastValue}'>
                             <span class='shrinkable right'>
                                 <span class='short'>{$lastShort}</span>
                                 <span class='long'>{$lastDisplay}</span>
                             </span>
                         </td>
-                        <td>{$game["hist"]}</td>
-                        <td>{$total_votes}</td>
+                        <td data-sortvalue='{$votes}'>
+                            {$votes} / {$total_votes}
+                        </td>
                         <td data-sortvalue='{$issueval}'>");
     
     foreach ($issues as $issue)
@@ -183,6 +194,40 @@ function buildRow($game)
                     </tr>");
 }
 
+function buildHeader($rank)
+{
+    echo("          <tr class='{$rank} header'>
+                        <th class='sortable' data-sorttype='text'>Game</th>
+                        <th class='sortable' data-sorttype='numberDesc'>
+                            <span class='shrinkable down'>
+                                <span class='long'>Your Votes</span>
+                                <span class='short'>You</span>
+                            </span>
+                        </th>
+                        <th class='sortable' data-sorttype='numberDesc'>
+                            <span class='shrinkable down'>
+                                <span class='long'>Last Voted</span>
+                                <span class='short'>Last</span>
+                            </span>
+                        </th>
+                        <th class='sortable' data-sorttype='numberDesc'>
+                            <span class='shrinkable down'>
+                                <span class='long'>Total Votes</span>
+                                <span class='short'>All</span>
+                            </span>
+                        </th>
+                        <th class='sortable' data-sorttype='number'>
+                            <span class='shrinkable down'>
+                                <span class='long'>Issues</span>
+                                <span class='short'>XX</span>
+                            </span>
+                        </th>
+                        <th>Vote!</th>
+                    </tr>
+                    ");
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -205,44 +250,12 @@ function buildRow($game)
             </a>
             <main class="toplevel secondary tight flexcolumn">
                 <table>
-                    <tr class="primary header">
-                        <th class="sortable" data-sorttype="text">Game</th>
-                        <th class="sortable" data-sorttype="numberDesc">
-                            <span class="shrinkable down">
-                                <span class="long">Current Votes</span>
-                                <span class="short">Votes</span>
-                            </span>
-                        </th>
-                        <th class="sortable" data-sorttype="numberDesc">
-                            <span class="shrinkable down">
-                                <span class="long">Last Voted</span>
-                                <span class="short">Last</span>
-                            </span>
-                        </th>
-                        <th class="sortable" data-sorttype="numberDesc">
-                            <span class="shrinkable down">
-                                <span class="long">Your Votes</span>
-                                <span class="short">You</span>
-                            </span>
-                        </th>
-                        <th class="sortable" data-sorttype="numberDesc">
-                            <span class="shrinkable down">
-                                <span class="long">Total Votes</span>
-                                <span class="short">All</span>
-                            </span>
-                        </th>
-                        <th class="sortable" data-sorttype="number">
-                            <span class="shrinkable down">
-                                <span class="long">Issues</span>
-                                <span class="short">XX</span>
-                            </span>
-                        </th>
-                        <th>Vote!</th>
-                    </tr>
                     <?php
 
+buildHeader("primary");
+
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(game_status.last_voted_for, 0), 1, 0) AS 'voted_this_week', game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.current_vote AS curr, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(game_status.last_voted_for, 0), 1, 0) AS 'voted_this_week', game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
           ORDER BY game_status.last_voted_for DESC, game_status.historical_vote DESC, games.name";
@@ -276,41 +289,8 @@ if($result->num_rows > 0)
 {
     echo("      <details class='tight flexcolumn'>
                     <summary class='title'>Show games with personal issues</summary>
-                    <table style='width: 100%'>
-                        <tr class='tertiary header'>
-                            <th class='sortable' data-sorttype='text'>Game</th>
-                            <th class='sortable' data-sorttype='numberDesc'>
-                                <span class='shrinkable down'>
-                                    <span class='long'>Current Votes</span>
-                                    <span class='short'>Votes</span>
-                                </span>
-                            </th>
-                            <th class='sortable' data-sorttype='numberDesc'>
-                                <span class='shrinkable down'>
-                                    <span class='long'>Last Voted</span>
-                                    <span class='short'>Last</span>
-                                </span>
-                            </th>
-                            <th class='sortable' data-sorttype='numberDesc'>
-                                <span class='shrinkable down'>
-                                    <span class='long'>Your Votes</span>
-                                    <span class='short'>You</span>
-                                </span>
-                            </th>
-                            <th class='sortable' data-sorttype='numberDesc'>
-                                <span class='shrinkable down'>
-                                    <span class='long'>Total Votes</span>
-                                    <span class='short'>All</span>
-                                </span>
-                            </th>
-                            <th class='sortable' data-sorttype='number'>
-                                <span class='shrinkable down'>
-                                    <span class='long'>Issues</span>
-                                    <span class='short'>XX</span>
-                                </span>
-                            </th>
-                            <th>Vote!</th>
-                        </tr>");
+                    <table style='width: 100%'>");
+    buildHeader("tertiary");
     
     $game = $result->fetch_assoc();
     while($game != null)
