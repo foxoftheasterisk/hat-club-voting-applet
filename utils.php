@@ -9,14 +9,12 @@ function connectToDB(string $filename = '/run/secrets/sql-credentials.ini') : my
         die('SQL credentials not found.');
     }
 
-    $connection = new mysqli($credentials['url'], $credentials['user'], $credentials['pass']);
+    $connection = new mysqli($credentials['url'], $credentials['user'], $credentials['pass'], $credentials[database]);
     
     if ($connection->connect_error) {
         echo('Connection failed. Error: ' . $conn->connect_error);
         die('Connection failed. Error: ' . $conn->connect_error);
     }
-    
-    $connection->select_db($credentials['database']);
     
     return $connection;
 }
