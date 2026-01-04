@@ -1,14 +1,11 @@
-HIGH PRIORITY:
-*change wording on willingness in the case of unowned games?
-    > "Would try (if bought)", "Not interested", "Not compatible"
-
-OTHER TODOS:
+TODOS:
 *move nomination form -> gamestatus page
 *keep weights box open after checking/unchecking players
 *add "previous vote" to gamestatus so edited votes don't result in "unknown"?
     > easy except the part where we have to change the database
 *vote page on phone - can't open "personal issues" section?
     > it's not super important (bc why would you vote for those) except that WHY
+*add last played (to vote page and/or game status)
 *(Anything unlisted but in page documentation)
 
 T for "time-weighted votes"
