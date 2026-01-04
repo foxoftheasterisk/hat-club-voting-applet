@@ -50,7 +50,7 @@ $db = connectToDB();
 
 $selected = array();
 
-$query = "SELECT players.id, players.name, players.short_name, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(MAX(game_status.last_voted_for), 0), 1, 0) AS 'voted_this_week'
+$query = "SELECT players.id, players.name, players.short_name, IsThisWeek(MAX(game_status.last_voted_for)) AS 'voted_this_week'
           FROM players LEFT JOIN game_status ON players.id = game_status.player_id
           GROUP BY players.id";
 

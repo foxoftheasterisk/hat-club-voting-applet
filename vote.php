@@ -95,9 +95,7 @@ for ($i = 0; $i < count($votes); $i++)
 
 $query = "SELECT game_id, current_vote
           FROM game_status
-          WHERE player_id='{$user}' AND YEARWEEK(CURDATE(), 0) = YEARWEEK(last_voted_for, 0);";
-//having it roll over on Sunday was much easier than expected. 
-//(rolling over on a day other than Sunday or Monday would be more difficult. however.)
+          WHERE player_id='{$user}' AND IsThisWeek(last_voted_for);";
 
 $result = $db->query($query);
 

@@ -19,7 +19,7 @@ $db = connectToDB();
 $user = $db->real_escape_string($_COOKIE['user']);
 
 //redirect to newgamestatus if there are unfilled gamestatuses
-//(We can't just use COUNT actually since we need to subtract.
+//(We can't just use COUNT since we need to subtract.
 //we could skip EXISTS, but the extra call probably makes it run faster, actually?
 //SQL is a language with a lot of back-end optimization.)
 $query = "SELECT IF( EXISTS( SELECT id 
@@ -257,7 +257,7 @@ function buildHeader($rank)
 buildHeader("primary");
 
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.current_vote AS curr, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IF(YEARWEEK(CURDATE(), 0) = YEARWEEK(game_status.last_voted_for, 0), 1, 0) AS 'voted_this_week', game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.current_vote AS curr, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IsThisWeek(game_status.last_voted_for) AS 'voted_this_week', game_status.current_vote AS curr
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
           ORDER BY game_status.last_voted_for DESC, game_status.historical_vote DESC, games.name";
