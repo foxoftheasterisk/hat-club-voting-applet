@@ -122,7 +122,7 @@ if($playerCount == 0)
 //in theory, I should probably make these queries be saved procedures (and then unexpose everything else)
 //...but that's a lot of effort in security that SHOULDN'T matter
 //(besides, at the very least that would come after confirming the queries are *correct*)
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, games.ownership AS ownership, SUM(game_status.current_vote) AS base_weight
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, games.ownership AS ownership, SUM(game_status.current_vote) + (SUM(IsThisWeek(game_status.last_voted_for)) * 3) AS base_weight
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE games.min_players <= $playerCount AND games.max_players >= $playerCount AND games.nominated_by IS NULL AND game_status.player_id IN ({$playerCSV})
           GROUP BY games.id
