@@ -49,8 +49,12 @@ function buildRow($game)
     $total_votes = 0;
     
     $query = "SELECT game_status.current_vote AS votes, game_status.historical_vote AS hist, game_status.owned AS owned, game_status.status AS willing, players.name AS name
-              FROM game_status JOIN players ON game_status.player_id = players.id
-              WHERE game_status.game_id = '{$game["id"]}'";
+              FROM game_status JOIN players ON game_status.player_id = players.id 
+              WHERE game_status.game_id = '{$game["id"]}' 
+              AND EXISTS (SELECT 1 
+                          FROM game_status AS inner_gs 
+                          WHERE inner_gs.player_id = game_status.player_id 
+                          AND inner_gs.last_voted_for > DATE_SUB(CURDATE(), INTERVAL 28 DAY))";
     
     $result = $db->query($query);
     $status = $result->fetch_assoc();
@@ -257,7 +261,7 @@ function buildHeader($rank)
 buildHeader("primary");
 
 //an (INNER) JOIN should not exclude any games, since we already redirect if any games are missing
-$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.current_vote AS curr, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IsThisWeek(game_status.last_voted_for) AS 'voted_this_week', game_status.current_vote AS curr
+$query = "SELECT games.id AS id, games.name AS name, games.emoji AS emoji, game_status.current_vote AS curr, game_status.historical_vote AS hist, game_status.last_voted_for AS last, games.ownership AS ownership, IsThisWeek(game_status.last_voted_for) AS 'voted_this_week'
           FROM games JOIN game_status ON games.id = game_status.game_id
           WHERE game_status.player_id ='{$user}' AND games.nominated_by IS NULL AND (game_status.status='good' AND NOT (game_status.owned = 0 AND games.ownership = 'all'))
           ORDER BY game_status.last_voted_for DESC, game_status.historical_vote DESC, games.name";
